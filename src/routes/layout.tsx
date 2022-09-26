@@ -1,11 +1,10 @@
-import { component$ } from '@builder.io/qwik';
-import { Menu } from '../components/menu/menu';
+import { component$, Slot } from '@builder.io/qwik';
 
 export default component$(() => {
 	return (
 		<>
 			<main>
-				<Menu />
+				<Slot />
 			</main>
 		</>
 	);
