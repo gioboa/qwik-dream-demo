@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { component$, useResource$, useStore } from '@builder.io/qwik';
+import { component$, Resource, useResource$, useStore } from '@builder.io/qwik';
 
 export const Menu = component$(() => {
 	const github = useStore({
@@ -23,39 +23,40 @@ export const Menu = component$(() => {
 
 	console.log('Render');
 	return (
-		<>
-			<header
-				class={`bg-gradient-to-r from-blue-700 to-indigo-900 shadow-lg transform shadow-xl sticky top-0 z-10 animate-dropIn`}
-			>
-				<div className='max-w-6xl mx-auto p-4 flex items-center space-x-4'>
-					<h1 className='text-white w-10'>
-						<a href='/'>
-							<img
-								src={`/cube-logo-small.webp`}
-								width={40}
-								height={31}
-								alt='Vendure logo'
-							/>
-						</a>
-					</h1>
-					<div className='flex space-x-4 hidden sm:block'>
-						{[
-							{ id: 1, slug: 'Electronics', name: 'Electronics' },
-							{ id: 2, slug: 'Home & Garden', name: 'Home & Garden' },
-							{ id: 3, slug: 'Sports & Outdoor', name: 'Sports & Outdoor' },
-						].map((collection) => (
-							<a
-								className='text-sm md:text-base text-gray-200 hover:text-white'
-								href={'/collections/' + collection.slug}
-								key={collection.id}
-							>
-								{collection.name}
+		<div>
+			<>
+				<header
+					class={`bg-gradient-to-r from-blue-700 to-indigo-900 shadow-lg transform shadow-xl sticky top-0 z-10 animate-dropIn`}
+				>
+					<div className='max-w-6xl mx-auto p-4 flex items-center space-x-4'>
+						<h1 className='text-white w-10'>
+							<a href='/'>
+								<img
+									src={`/cube-logo-small.webp`}
+									width={40}
+									height={31}
+									alt='Vendure logo'
+								/>
 							</a>
-						))}
-					</div>
-					<div className='flex-1 md:pr-8'>{/* <SearchBar /> */}</div>
-					<div className=''>
-						{/* <button
+						</h1>
+						<div className='flex space-x-4 hidden sm:block'>
+							{[
+								{ id: 1, slug: 'Electronics', name: 'Electronics' },
+								{ id: 2, slug: 'Home & Garden', name: 'Home & Garden' },
+								{ id: 3, slug: 'Sports & Outdoor', name: 'Sports & Outdoor' },
+							].map((collection) => (
+								<a
+									className='text-sm md:text-base text-gray-200 hover:text-white'
+									href={'/collections/' + collection.slug}
+									key={collection.id}
+								>
+									{collection.name}
+								</a>
+							))}
+						</div>
+						<div className='flex-1 md:pr-8'>{/* <SearchBar /> */}</div>
+						<div className=''>
+							{/* <button
 								className='relative w-9 h-9 bg-white bg-opacity-20 rounded text-white p-1'
 								onClick$={() => (appState.showCart = !appState.showCart)}
 							>
@@ -68,39 +69,45 @@ export const Menu = component$(() => {
 									''
 								)}
 							</button> */}
+						</div>
 					</div>
-				</div>
-			</header>
-			{/* <Cart /> */}
-		</>
-		// 	<span>
-		// 		GitHub username:
-		// 		<input
-		// 			value={github.org}
-		// 			onKeyUp$={(ev) =>
-		// 				(github.org = (ev.target as HTMLInputElement).value)
-		// 			}
-		// 		/>
-		// 	</span>
-		// 	<div>
-		// 		<Resource
-		// 			value={reposResource}
-		// 			onPending={() => <>Loading...</>}
-		// 			onRejected={(error) => <>Error: {error.message}</>}
-		// 			onResolved={(repos) => (
-		// 				<ul>
-		// 					{repos.map((repo) => (
-		// 						<li>
-		// 							<a href={`https://github.com/${github.org}/${repo}`}>
-		// 								{repo}
-		// 							</a>
-		// 						</li>
-		// 					))}
-		// 				</ul>
-		// 			)}
-		// 		/>
-		// 	</div>
-		// </div>
+				</header>
+				{/* <Cart /> */}
+			</>
+			<div class='mb-4 px-20 pt-10'>
+				<label class='block text-gray-700 text-sm font-bold mb-2'>
+					GitHub username:
+				</label>
+				<input
+					class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+					id='username'
+					type='text'
+					placeholder='Username'
+					value={github.org}
+					onKeyUp$={(ev) =>
+						(github.org = (ev.target as HTMLInputElement).value)
+					}
+				/>
+			</div>
+			<div class='px-20'>
+				<Resource
+					value={reposResource}
+					onPending={() => <>Loading...</>}
+					onRejected={(error) => <>Error: {error.message}</>}
+					onResolved={(repos) => (
+						<ul>
+							{repos.map((repo) => (
+								<li>
+									<a href={`https://github.com/${github.org}/${repo}`}>
+										{repo}
+									</a>
+								</li>
+							))}
+						</ul>
+					)}
+				/>
+			</div>
+		</div>
 	);
 });
 
