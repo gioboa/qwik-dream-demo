@@ -8,13 +8,11 @@ type MenuItem = {
 };
 
 export const Menu = component$(() => {
-	const trigger = useStore({ value: 0 });
+	const trigger = useStore({ value: '' });
 	const menuResource = useResource$<MenuItem[]>(({ track }) => {
 		track(trigger, 'value');
 		return getMenu();
 	});
-
-	setTimeout(() => (trigger.value = Math.random()), 20);
 
 	return (
 		<>
@@ -95,7 +93,15 @@ export const Menu = component$(() => {
 					</div>
 				</div>
 			</header>
-			{/* <Cart /> */}
+			<input
+				class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+				type='text'
+				placeholder='fill me to trigger useResource$'
+				value={trigger.value}
+				onKeyUp$={(ev) =>
+					(trigger.value = (ev.target as HTMLInputElement).value)
+				}
+			/>
 		</>
 	);
 });
