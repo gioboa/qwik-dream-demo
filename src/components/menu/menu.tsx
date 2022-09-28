@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { component$, Resource, useResource$ } from '@builder.io/qwik';
+import { component$, Resource, useResource$, useStore } from '@builder.io/qwik';
 
 type MenuItem = {
 	slug: string;
@@ -8,7 +8,13 @@ type MenuItem = {
 };
 
 export const Menu = component$(() => {
-	const menuResource = useResource$<MenuItem[]>(() => getMenu());
+	const trigger = useStore({ value: 0 });
+	const menuResource = useResource$<MenuItem[]>(({ track }) => {
+		track(trigger, 'value');
+		return getMenu();
+	});
+
+	setTimeout(() => (trigger.value = Math.random()), 20);
 
 	return (
 		<>
