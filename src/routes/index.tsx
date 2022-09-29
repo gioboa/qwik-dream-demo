@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { component$, Resource, useResource$, useStore } from '@builder.io/qwik';
 import { QwikIcon } from '~/components/icons/QwikIcon';
+import { RepoLink } from '~/components/repo-link/RepoLink';
 
 type MenuItem = {
 	slug: string;
@@ -90,7 +91,8 @@ export default component$(() => {
 				</div>
 			</header>
 			<input
-				class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+				class='shadow appearance-none border rounded w-full py-2 px-3 m-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+				style='width: 50%'
 				type='text'
 				placeholder='fill me to trigger useResource$'
 				value={trigger.value}
@@ -98,6 +100,7 @@ export default component$(() => {
 					(trigger.value = (ev.target as HTMLInputElement).value)
 				}
 			/>
+			<RepoLink />
 		</>
 	);
 });
