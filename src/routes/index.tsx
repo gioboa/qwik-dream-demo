@@ -106,41 +106,9 @@ export default component$(() => {
 });
 
 export async function getMenu(): Promise<MenuItem[]> {
-	// put your DB access here, we are hard coding a response for simplicity.
-	return [
-		{
-			name: 'Electronics',
-			slug: 'electronics',
-			subMenus: [
-				{ name: 'Computers', slug: 'computers' },
-				{ name: 'Camera photo', slug: 'camera-photo' },
-			],
-		},
-		{
-			name: 'Home & Garden',
-			slug: 'home-garden',
-			subMenus: [
-				{ name: 'Furniture', slug: 'furniture' },
-				{ name: 'Plants', slug: 'plants' },
-			],
-		},
-		{
-			name: 'Sports & Outdoor',
-			slug: 'sports-outdoor',
-			subMenus: [],
-		},
-		{
-			name: 'Equipment',
-			slug: 'equipment',
-			subMenus: [],
-		},
-		{
-			name: 'Footwear',
-			slug: 'footwear',
-			subMenus: [
-				{ name: 'Nike', slug: 'nike' },
-				{ name: 'Adidas', slug: 'adidas' },
-			],
-		},
-	];
+	const endPoint = 'https://mocki.io/v1/a80ad7e4-f320-4946-85a5-3976a67d322f';
+	console.log('fetch', endPoint);
+	const response = await fetch(endPoint);
+	console.log('is fetch ok?', response.ok);
+	return response.ok ? await response.json() : Promise.reject(response.status);
 }
