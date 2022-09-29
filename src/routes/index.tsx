@@ -1,5 +1,5 @@
-import { component$, Resource } from '@builder.io/qwik';
-import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
+/* eslint-disable no-console */
+import { component$, Resource, useResource$, useStore } from '@builder.io/qwik';
 import { QwikIcon } from '~/components/icons/QwikIcon';
 
 type MenuItem = {
@@ -9,7 +9,11 @@ type MenuItem = {
 };
 
 export default component$(() => {
-	const menuResource = useEndpoint<MenuItem[]>();
+	const trigger = useStore({ value: '' });
+	const menuResource = useResource$<MenuItem[]>(({ track }) => {
+		track(trigger, 'value');
+		return getMenu();
+	});
 
 	return (
 		<>
@@ -28,7 +32,7 @@ export default component$(() => {
 						onRejected={(error) => <>Error: {error.message}</>}
 						onResolved={(menu) => (
 							<div className='flex space-x-4 hidden sm:block'>
-								{(menu || []).map((item) => (
+								{menu.map((item) => (
 									<div class='group inline-block relative'>
 										<a
 											class='text-gray-200 hover:text-white py-2 px-4 inline-flex items-center'
@@ -85,11 +89,20 @@ export default component$(() => {
 					</div>
 				</div>
 			</header>
+			<input
+				class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+				type='text'
+				placeholder='fill me to trigger useResource$'
+				value={trigger.value}
+				onKeyUp$={(ev) =>
+					(trigger.value = (ev.target as HTMLInputElement).value)
+				}
+			/>
 		</>
 	);
 });
 
-export const onGet: RequestHandler<MenuItem[]> = async () => {
+export async function getMenu(): Promise<MenuItem[]> {
 	// put your DB access here, we are hard coding a response for simplicity.
 	return [
 		{
@@ -127,4 +140,4 @@ export const onGet: RequestHandler<MenuItem[]> = async () => {
 			],
 		},
 	];
-};
+}
