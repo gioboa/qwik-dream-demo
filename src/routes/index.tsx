@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import { component$, Resource, useResource$, useStore } from '@builder.io/qwik';
+import { component$, Resource } from '@builder.io/qwik';
+import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
 import { QwikIcon } from '~/components/icons/QwikIcon';
 import { RepoLink } from '~/components/repo-link/RepoLink';
 
@@ -10,11 +11,7 @@ type MenuItem = {
 };
 
 export default component$(() => {
-	const trigger = useStore({ value: '' });
-	const menuResource = useResource$<MenuItem[]>(({ track }) => {
-		track(trigger, 'value');
-		return getMenu();
-	});
+	const menuData = useEndpoint<typeof onGet>();
 
 	return (
 		<>
@@ -28,7 +25,7 @@ export default component$(() => {
 						</a>
 					</h1>
 					<Resource
-						value={menuResource}
+						value={menuData}
 						onPending={() => <>Loading...</>}
 						onRejected={(error) => <>Error: {error.message}</>}
 						onResolved={(menu) => (
@@ -90,25 +87,15 @@ export default component$(() => {
 					</div>
 				</div>
 			</header>
-			<input
-				class='shadow appearance-none border rounded w-full py-2 px-3 m-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-				style='width: 50%'
-				type='text'
-				placeholder='fill me to trigger useResource$'
-				value={trigger.value}
-				onKeyUp$={(ev) =>
-					(trigger.value = (ev.target as HTMLInputElement).value)
-				}
-			/>
 			<RepoLink />
 		</>
 	);
 });
 
-export async function getMenu(): Promise<MenuItem[]> {
+export const onGet: RequestHandler<MenuItem[]> = async ({}) => {
 	const endPoint = 'https://mocki.io/v1/a80ad7e4-f320-4946-85a5-3976a67d322f';
 	console.log('fetch', endPoint);
 	const response = await fetch(endPoint);
 	console.log('is fetch ok?', response.ok);
 	return response.ok ? await response.json() : Promise.reject(response.status);
-}
+};
