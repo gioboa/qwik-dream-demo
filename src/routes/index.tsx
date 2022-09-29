@@ -97,5 +97,7 @@ export const onGet: RequestHandler<MenuItem[]> = async ({}) => {
 	console.log('fetch', endPoint);
 	const response = await fetch(endPoint);
 	console.log('is fetch ok?', response.ok);
-	return response.ok ? await response.json() : Promise.reject(response.status);
+	return response.ok
+		? await response.json()
+		: [{ name: 'fetch error', slug: 'error' }];
 };
