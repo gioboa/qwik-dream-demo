@@ -1,0 +1,48 @@
+{
+	"name": "qwik-dream-menu",
+	"description": "Qwik Dream Menu",
+	"type": "module",
+	"engines": {
+		"node": ">=15.0.0"
+	},
+	"private": true,
+	"author": {
+		"name": "Giorgio Boa",
+		"email": "giorgiob.boa@gmail.com",
+		"url": "https://github.com/gioboa"
+	},
+	"scripts": {
+		"dev": "npm run dev.ssr",
+		"dev.ssr": "node --inspect node_modules/vite/bin/vite.js --mode ssr",
+		"build": "npm run build.client && npm run build.ssr",
+		"build.client": "vite build",
+		"build.ssr": "vite build --ssr src/entry.ssr.tsx",
+		"build.preview": "vite build --ssr src/entry.preview.tsx",
+		"preview": "qwik build preview && vite preview --open",
+		"lint": "eslint \"src/**/*.ts*\"",
+		"start": "npx wrangler dev",
+		"deploy": "npx wrangler publish",
+		"typecheck": "tsc --incremental --noEmit"
+	},
+	"devDependencies": {
+		"@builder.io/qwik": "0.0.113",
+		"@builder.io/qwik-city": "0.0.111",
+		"@types/eslint": "8.4.6",
+		"@types/node": "latest",
+		"@typescript-eslint/eslint-plugin": "5.38.1",
+		"@typescript-eslint/parser": "5.38.1",
+		"autoprefixer": "^10.4.12",
+		"eslint": "8.24.0",
+		"eslint-plugin-qwik": "0.9.0",
+		"node-fetch": "3.2.10",
+		"postcss": "^8.4.16",
+		"prettier": "2.7.1",
+		"tailwindcss": "^3.1.8",
+		"typescript": "4.8.4",
+		"vite": "3.1.4",
+		"vite-tsconfig-paths": "3.5.1"
+	},
+	"dependencies": {
+		"cross-fetch": "^3.1.5"
+	}
+}
