@@ -41,8 +41,5 @@
 		"typescript": "4.8.4",
 		"vite": "3.1.4",
 		"vite-tsconfig-paths": "3.5.1"
-	},
-	"dependencies": {
-		"cross-fetch": "^3.1.5"
 	}
 }

@@ -1,5 +1,4 @@
-import { component$, Resource } from '@builder.io/qwik';
-import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
+import { component$ } from '@builder.io/qwik';
 import { QwikIcon } from '~/components/icons/QwikIcon';
 import { RepoLink } from '~/components/repo-link/RepoLink';
 
@@ -10,8 +9,35 @@ type MenuItem = {
 };
 
 export default component$(() => {
-	const menuData = useEndpoint<typeof onGet>();
-
+	// const menuData = useEndpoint<typeof onGet>();
+	const menu = [
+		{
+			name: 'Electronics',
+			slug: 'electronics',
+			subMenus: [
+				{ name: 'Computers', slug: 'computers' },
+				{ name: 'Camera photo', slug: 'camera-photo' },
+			],
+		},
+		{
+			name: 'Home & Garden',
+			slug: 'home-garden',
+			subMenus: [
+				{ name: 'Furniture', slug: 'furniture' },
+				{ name: 'Plants', slug: 'plants' },
+			],
+		},
+		{ name: 'Sports & Outdoor', slug: 'sports-outdoor', subMenus: [] },
+		{ name: 'Equipment', slug: 'equipment', subMenus: [] },
+		{
+			name: 'Footwear',
+			slug: 'footwear',
+			subMenus: [
+				{ name: 'Nike', slug: 'nike' },
+				{ name: 'Adidas', slug: 'adidas' },
+			],
+		},
+	];
 	return (
 		<>
 			<header
@@ -23,51 +49,51 @@ export default component$(() => {
 							<QwikIcon />
 						</a>
 					</h1>
-					<Resource
+					{/* <Resource
 						value={menuData}
 						// onPending={() => <>Loading...</>}
 						onRejected={(error) => <>Error: {error.message}</>}
-						onResolved={(menu) => (
-							<div className='flex space-x-4 hidden sm:block'>
-								{menu.map((item) => (
-									<div class='group inline-block relative'>
-										<a
-											class='text-gray-200 hover:text-white py-2 px-4 inline-flex items-center'
-											href={'/collections/' + item.slug}
+						onResolved={(menu) => ( */}
+					<div className='flex space-x-4 hidden sm:block'>
+						{menu.map((item) => (
+							<div class='group inline-block relative'>
+								<a
+									class='text-gray-200 hover:text-white py-2 px-4 inline-flex items-center'
+									href={'/collections/' + item.slug}
+								>
+									{item.name}
+									{!!item.subMenus?.length && (
+										<svg
+											class='fill-current h-6 w-6 pt-1'
+											xmlns='http://www.w3.org/2000/svg'
+											viewBox='0 0 20 20'
 										>
-											{item.name}
-											{!!item.subMenus?.length && (
-												<svg
-													class='fill-current h-6 w-6 pt-1'
-													xmlns='http://www.w3.org/2000/svg'
-													viewBox='0 0 20 20'
-												>
-													<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
-												</svg>
-											)}
-										</a>
-										<div class='absolute hidden text-gray-200 hover:text-white pt-1 group-hover:block right-0 left-0'>
-											{!!item.subMenus?.length &&
-												item.subMenus.map((subItem, i, list) => (
-													<a
-														class={`${
-															i === 0
-																? 'rounded-t'
-																: i === list.length - 1
-																? 'rounded-b'
-																: ''
-														} bg-blue-700 hover:bg-indigo-900 py-2 px-4 block whitespace-no-wrap`}
-														href={'/collections/' + subItem.slug}
-													>
-														{subItem.name}
-													</a>
-												))}
-										</div>
-									</div>
-								))}
+											<path d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z' />
+										</svg>
+									)}
+								</a>
+								<div class='absolute hidden text-gray-200 hover:text-white pt-1 group-hover:block right-0 left-0'>
+									{!!item.subMenus?.length &&
+										item.subMenus.map((subItem, i, list) => (
+											<a
+												class={`${
+													i === 0
+														? 'rounded-t'
+														: i === list.length - 1
+														? 'rounded-b'
+														: ''
+												} bg-blue-700 hover:bg-indigo-900 py-2 px-4 block whitespace-no-wrap`}
+												href={'/collections/' + subItem.slug}
+											>
+												{subItem.name}
+											</a>
+										))}
+								</div>
 							</div>
-						)}
-					/>
+						))}
+					</div>
+					{/* )}
+					/> */}
 					<div className='flex-1 md:pr-8'>{/* <SearchBar /> */}</div>
 					<div className=''>
 						{/* <button
@@ -91,12 +117,12 @@ export default component$(() => {
 	);
 });
 
-export const onGet: RequestHandler<MenuItem[]> = async ({}) => {
-	const endPoint = 'https://mocki.io/v1/a80ad7e4-f320-4946-85a5-3976a67d322f';
-	console.log('fetch', endPoint);
-	const response = await fetch(endPoint);
-	console.log('is fetch ok?', response.ok);
-	return response.ok
-		? await response.json()
-		: [{ name: 'fetch error', slug: 'error' }];
-};
+// export const onGet: RequestHandler<MenuItem[]> = async ({}) => {
+// 	const endPoint = 'https://mocki.io/v1/a80ad7e4-f320-4946-85a5-3976a67d322f';
+// 	console.log('fetch', endPoint);
+// 	const response = await fetch(endPoint);
+// 	console.log('is fetch ok?', response.ok);
+// 	return response.ok
+// 		? await response.json()
+// 		: [{ name: 'fetch error', slug: 'error' }];
+// };
