@@ -113,13 +113,38 @@ a.mindblow {
   font-size: 20px;
   width: fit-content;
   border-bottom: 4px solid black;
-  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🤯</text></svg>")
-      16 0,
-    auto; /*!emojicursor.app*/
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🤯</text></svg>") 16 0,
+    auto;
+  /*!emojicursor.app*/
 }
 
 a.mindblow:hover {
   border-bottom-width: 0px;
   margin-bottom: 4px;
   transform: translateY(4px);
+}
+
+.remote-component {
+  border: 2px dashed transparent;
+  position: relative;
+}
+
+*[data-seams=""] .remote-component {
+  border-color: var(--qwik-light-blue);
+}
+
+*[data-seams=""] .remote-component>.hosted-label {
+  display: block;
+}
+
+.remote-component>.hosted-label {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--qwik-dark-purple);
+  margin: 0;
+  color: white;
+  padding: 1rem;
+  z-index: 1;
 }
