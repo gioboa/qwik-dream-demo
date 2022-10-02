@@ -18,6 +18,9 @@ export default function (opts: RenderToStreamOptions) {
   return renderToStream(<Root />, {
     manifest,
     ...opts,
+    streaming: {
+      inOrder: { strategy: 'auto' }
+    },
     prefetchStrategy: {
       implementation: {
         linkInsert: null,
