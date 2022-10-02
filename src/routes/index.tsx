@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { component$, Resource } from '@builder.io/qwik';
 import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
 import { QwikIcon } from '~/components/icons/QwikIcon';

@@ -5,7 +5,7 @@ export const RepoLink = component$(() => {
 		<a
 			class='p-4 flex items-center space-x-4 font-medium text-gray-500 hover:text-gray-700'
 			target='_blank'
-			href='https://github.com/gioboa/qwik-dream-demo'
+			href='https://github.com/gioboa/qwik-dream-menu'
 		>
 			<svg fill='currentColor' viewBox='0 0 24 24' class='h-6 w-6'>
 				<path
@@ -14,7 +14,7 @@ export const RepoLink = component$(() => {
 					clip-rule='evenodd'
 				></path>
 			</svg>
-			<span>github.com/gioboa/qwik-dream-demo</span>
+			<span>github.com/gioboa/qwik-dream-menu</span>
 		</a>
 	);
 });
