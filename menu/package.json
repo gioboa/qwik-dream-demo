@@ -17,9 +17,9 @@
 		"fmt": "prettier --write .",
 		"fmt.check": "prettier --check .",
 		"lint": "eslint \"src/**/*.ts*\"",
-		"preview": "qwik build preview && vite preview --open",
+		"preview": "qwik build preview && vite preview --port 5001",
 		"serve": "wrangler pages dev ./dist",
-		"start": "vite --open --mode ssr",
+		"start": "vite --open --mode ssr --port 5001",
 		"qwik": "qwik"
 	},
 	"devDependencies": {

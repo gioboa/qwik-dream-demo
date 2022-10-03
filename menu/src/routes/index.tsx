@@ -87,16 +87,14 @@ export default component$(() => {
 					</div>
 				</div>
 			</header>
-			<RepoLink />
+			{/* <RepoLink /> */}
 		</>
 	);
 });
 
 export const onGet: RequestHandler<MenuItem[]> = async ({}) => {
 	const endPoint = 'https://mocki.io/v1/a80ad7e4-f320-4946-85a5-3976a67d322f';
-	console.log('fetch', endPoint);
 	const response = await fetch(endPoint);
-	console.log('is fetch ok?', response.ok);
 	return response.ok
 		? await response.json()
 		: [{ name: 'fetch error', slug: 'error' }];

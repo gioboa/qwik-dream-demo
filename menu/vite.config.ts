@@ -5,6 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(() => {
 	return {
+		server: { host: true, cors: false },
 		ssr: { target: 'webworker' },
 		plugins: [qwikCity(), qwikVite(), tsconfigPaths()],
 	};
