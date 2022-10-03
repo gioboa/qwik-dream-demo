@@ -1,6 +1,6 @@
 {
-	"name": "qwik-dream-menu",
-	"description": "Qwik dream menu",
+	"name": "qwik-dream-hero",
+	"description": "Qwik dream hero",
 	"engines": {
 		"node": ">=15.0.0"
 	},

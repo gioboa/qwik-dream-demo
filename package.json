@@ -1,0 +1,17 @@
+{
+	"name": "qwik-dream-demo",
+	"version": "1.0.0",
+	"description": "Qwik dream demo",
+	"scripts": {
+		"install:deps": "npm --prefix ./menu install"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gioboa/qwik-dream-demo.git"
+	},
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/gioboa/qwik-dream-demo/issues"
+	},
+	"homepage": "https://github.com/gioboa/qwik-dream-demo#readme"
+}
