@@ -14,9 +14,12 @@ import { renderToStream, RenderToStreamOptions } from '@builder.io/qwik/server';
 import { manifest } from '@qwik-client-manifest';
 import Root from './root';
 
+const base = '/menu/build/';
+
 export default function (opts: RenderToStreamOptions) {
 	return renderToStream(<Root />, {
 		manifest,
+		base,
 		...opts,
 		prefetchStrategy: {
 			implementation: {
@@ -24,6 +27,10 @@ export default function (opts: RenderToStreamOptions) {
 				workerFetchInsert: null,
 				prefetchEvent: 'always',
 			},
+		},
+		containerTagName: 'div',
+		qwikLoader: {
+			include: 'never',
 		},
 	});
 }

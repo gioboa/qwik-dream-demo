@@ -15,14 +15,14 @@ export default component$(({ name, path }: Props) => {
 					const reader = res.body as unknown as Readable;
 					reader.setEncoding('utf8');
 					reader.on('data', (chunk) => {
-						chunk = String(chunk)
-							.replace('q-base:"/build/"', `q-base:"/container/build/${name}/"`)
-							.replace('src="/', `src="${path}/`)
-							.replace('href="/', `href="${path}/`)
-							.replace(
-								'<link rel="stylesheet" href="/',
-								`<link rel="stylesheet" href="${path}/`
-							);
+						chunk = String(chunk).replace(
+							'<link rel="stylesheet" href="/',
+							`<link rel="stylesheet" href="${path}/`
+						);
+						// .replace('q:base="/build/"', `q:base="${path}/build/"`)
+						// .replace('src="/', `src="${path}/`)
+						// .replace('href="/', `href="${path}/`)
+
 						stream.write(chunk);
 					});
 
