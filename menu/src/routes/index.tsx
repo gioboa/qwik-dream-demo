@@ -2,7 +2,6 @@
 import { component$, Resource } from '@builder.io/qwik';
 import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
 import { QwikIcon } from '~/components/icons/QwikIcon';
-import { RepoLink } from '~/components/repo-link/RepoLink';
 
 type MenuItem = {
 	slug: string;
@@ -87,7 +86,6 @@ export default component$(() => {
 					</div>
 				</div>
 			</header>
-			{/* <RepoLink /> */}
 		</>
 	);
 });

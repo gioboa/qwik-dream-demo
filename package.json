@@ -3,9 +3,10 @@
 	"version": "1.0.0",
 	"description": "Qwik dream demo",
 	"scripts": {
-		"install:deps": "npm --prefix ./host install && npm --prefix ./menu install && npm --prefix ./hero install",
+		"install:deps": "npm --prefix ./host install && npm --prefix ./menu install && npm --prefix ./hero install && npm --prefix ./reviews install ",
 		"preview:menu": "npm --prefix ./menu run preview",
 		"preview:hero": "npm --prefix ./hero run preview",
+		"preview:reviews": "npm --prefix ./reviews run preview",
 		"start:host": "npm --prefix ./host run start"
 	},
 	"repository": {

@@ -17,6 +17,11 @@ export default defineConfig(() => {
 					changeOrigin: true,
 					rewrite: (path) => path.replace(/^\/hero/, ''),
 				},
+				'^/reviews/.*': {
+					target: 'http://localhost:5003',
+					changeOrigin: true,
+					rewrite: (path) => path.replace(/^\/reviews/, ''),
+				},
 			},
 		},
 		plugins: [qwikCity(), qwikVite(), tsconfigPaths()],
