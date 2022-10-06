@@ -2,9 +2,9 @@ import {
 	component$,
 	Slot,
 	useContextProvider,
-	useStore
+	useStore,
 } from '@builder.io/qwik';
-import { AppState, GlobalAppState } from './constants';
+import { AppState, GlobalAppState } from '../constants/state';
 
 export default component$(() => {
 	const store = useStore<AppState>({
@@ -15,7 +15,9 @@ export default component$(() => {
 		<main data-seams={store.showSeams}>
 			<Slot />
 			<footer>
-				<button onClick$={() => store.showSeams = !store.showSeams}>Show Seams</button>
+				<button onClick$={() => (store.showSeams = !store.showSeams)}>
+					Show Seams
+				</button>
 			</footer>
 		</main>
 	);
