@@ -14,7 +14,9 @@ export default component$(() => {
 	return (
 		<main data-seams={store.showSeams}>
 			<Slot />
-			<button onClick$={() => store.showSeams = !store.showSeams}>Show Seams</button>
+			<footer>
+				<button onClick$={() => store.showSeams = !store.showSeams}>Show Seams</button>
+			</footer>
 		</main>
 	);
 });
