@@ -1,5 +1,5 @@
 export const remotes = {
-	menu: 'http://localhost:5001',
-	hero: 'http://localhost:5002',
-	reviews: 'http://localhost:5003',
+	menu: 'https://qwik-dream-menu.pages.dev',
+	hero: 'https://qwik-dream-hero.pages.dev',
+	reviews: 'https://qwik-dream-reviews.pages.dev',
 };
