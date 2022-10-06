@@ -9,6 +9,7 @@ export interface Props {
 export default component$(({ name, path }: Props) => {
 	return (
 		<div class='remote-component'>
+			<p class="remote-label">{path}</p>
 			<SSRStream>
 				{async (stream) => {
 					const res = await fetch(path);

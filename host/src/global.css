@@ -1,0 +1,25 @@
+.remote-component {
+  position: relative;
+  outline: 2px dashed transparent;
+}
+
+[data-seams=""]>.remote-component {
+  outline-color: purple;
+}
+
+.remote-component>.remote-label {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: 0;
+  z-index: 99;
+  padding: .5rem;
+  pointer-events: none;
+  background-color: black;
+  color: white;
+  transition: opacity 200ms linear;
+}
+
+[data-seams=""]>.remote-component>.remote-label {
+  opacity: 1;
+}
