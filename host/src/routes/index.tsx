@@ -9,7 +9,7 @@ export default component$(() => {
 		<>
 			<RemoteSsr name='menu' path={getTargetFromRemoteName('menu')} />
 			<RemoteSsr name='hero' path={getTargetFromRemoteName('hero')} />
-			<div style='height: 1000px;background-color: red;' />
+			<div class='product_placeholder' />
 			<Reviews />
 		</>
 	);

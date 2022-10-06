@@ -23,3 +23,8 @@
 [data-seams=""]>.remote-component>.remote-label {
   opacity: 1;
 }
+
+.product_placeholder {
+  height: 1000px;
+  background: repeating-linear-gradient(-55deg, rgb(24, 182, 246), rgb(24, 182, 246) 10px, rgb(24, 117, 246) 10px, rgb(24, 117, 246) 20px);
+}
