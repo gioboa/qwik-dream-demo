@@ -1,21 +1,46 @@
 {
-	"name": "qwik-dream-demo",
-	"version": "1.0.0",
-	"description": "Qwik dream demo",
-	"scripts": {
-		"install:deps": "npm --prefix ./host install && npm --prefix ./menu install && npm --prefix ./hero install && npm --prefix ./reviews install ",
-		"preview:menu": "npm --prefix ./menu run preview",
-		"preview:hero": "npm --prefix ./hero run preview",
-		"preview:reviews": "npm --prefix ./reviews run preview",
-		"start:host": "npm --prefix ./host run start"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/gioboa/qwik-dream-demo.git"
-	},
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/gioboa/qwik-dream-demo/issues"
-	},
-	"homepage": "https://github.com/gioboa/qwik-dream-demo#readme"
+  "name": "qwik-dream-demo",
+  "version": "1.0.0",
+  "description": "Qwik dream demo",
+  "private": true,
+  "scripts": {
+    "start:all": "nx run-many --target=start --all",
+    "start:host": "nx start host",
+    "preview:menu": "nx preview menu",
+    "preview:hero": "nx preview hero",
+    "preview:reviews": "nx preview reviews"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gioboa/qwik-dream-demo.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gioboa/qwik-dream-demo/issues"
+  },
+  "homepage": "https://github.com/gioboa/qwik-dream-demo#readme",
+  "devDependencies": {
+    "@builder.io/qwik": "0.0.113",
+		"@builder.io/qwik-city": "0.0.111",
+    "@nrwl/js": "^14.8.3",
+    "@nrwl/nx-cloud": "latest",
+    "@nrwl/workspace": "14.8.3",
+    "@nrwl/cli": "14.8.3",
+		"@types/eslint": "8.4.6",
+		"@types/node": "latest",
+		"@typescript-eslint/eslint-plugin": "5.38.1",
+		"@typescript-eslint/parser": "5.38.1",
+    "nx": "14.4.3",
+    "prettier": "2.7.1",
+    "typescript": "4.8.4",
+		"autoprefixer": "^10.4.12",
+		"eslint": "8.24.0",
+		"eslint-plugin-qwik": "0.9.0",
+		"node-fetch": "3.2.10",
+		"postcss": "^8.4.16",
+		"tailwindcss": "^3.1.8",
+		"vite": "3.1.4",
+		"vite-tsconfig-paths": "3.5.1",
+		"wrangler": "2.1.9"
+  }
 }
