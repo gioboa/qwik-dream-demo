@@ -13,12 +13,10 @@ export default component$(() => {
 	useContextProvider(GlobalAppState, store);
 	return (
 		<main data-seams={store.showSeams}>
+			<button onClick$={() => (store.showSeams = !store.showSeams)}>
+				Show Seams
+			</button>
 			<Slot />
-			<footer>
-				<button onClick$={() => (store.showSeams = !store.showSeams)}>
-					Show Seams
-				</button>
-			</footer>
 		</main>
 	);
 });
