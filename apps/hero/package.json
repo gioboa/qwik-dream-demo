@@ -22,7 +22,5 @@
 		"start": "vite --open --mode ssr --port 5002",
 		"qwik": "qwik"
 	},
-	"devDependencies": {
-		
-	}
+	"devDependencies": {}
 }

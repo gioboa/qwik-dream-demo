@@ -1,5 +1,4 @@
 import { component$, SSRStream } from '@builder.io/qwik';
-import { Readable } from 'stream';
 
 export interface Props {
 	name: string;
@@ -7,29 +6,24 @@ export interface Props {
 }
 
 export default component$(({ name, path }: Props) => {
+	const decoder = new TextDecoder();
 	return (
 		<div class='remote-component'>
-			<p class="remote-label">{path}</p>
+			<p class='remote-label'>{path}</p>
 			<SSRStream>
 				{async (stream) => {
-					const res = await fetch(path);
-					const reader = res.body as unknown as Readable;
-					reader.setEncoding('utf8');
-					reader.on('data', (chunk) => {
-						chunk = String(chunk).replace(
+					const fragment = await fetch(path);
+					const reader = fragment.body!.getReader();
+					let fragmentChunk = await reader.read();
+					while (!fragmentChunk.done) {
+						const rawHtml = decoder.decode(fragmentChunk.value);
+						const withStyleWorkaround = rawHtml.replace(
 							'<link rel="stylesheet" href="/',
 							`<link rel="stylesheet" href="${path}/`
 						);
-						// .replace('q:base="/build/"', `q:base="${path}/build/"`)
-						// .replace('src="/', `src="${path}/`)
-						// .replace('href="/', `href="${path}/`)
-
-						stream.write(chunk);
-					});
-
-					return new Promise((resolve) => {
-						reader.on('end', resolve);
-					});
+						stream.write(withStyleWorkaround);
+						fragmentChunk = await reader.read();
+					}
 				}}
 			</SSRStream>
 		</div>
