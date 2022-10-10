@@ -1,6 +1,6 @@
 import { component$, useClientEffect$, useRef } from '@builder.io/qwik';
 
-export const Reviews = component$(() => {
+export default component$(() => {
 	const reviewsRef = useRef();
 	useClientEffect$(async () => {
 		const response = await fetch('/reviews/');

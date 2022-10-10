@@ -1,33 +1,28 @@
 /* eslint-disable no-console */
 import { component$, Resource } from '@builder.io/qwik';
 import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
-import Hero from '~/components/hero/Hero';
-
-export type HeroSlide = {
-	title: string;
-	subTitle: string;
-	imageUrl: string;
-};
+import { ProductType } from '~/types';
+import Product from '../components/product/Product';
 
 export default component$(() => {
-	const heroData = useEndpoint<typeof onGet>();
+	const productData = useEndpoint<typeof onGet>();
 
 	return (
 		<Resource
-			value={heroData}
+			value={productData}
 			// onPending={() => <>Loading...</>}
 			onRejected={(error) => <>Error: {error.message}</>}
-			onResolved={(slides) => (
-				<div class='py-8'>
-					<Hero slides={slides} />
+			onResolved={(product) => (
+				<div class='px-16'>
+					<Product product={product} />
 				</div>
 			)}
 		/>
 	);
 });
 
-export const onGet: RequestHandler<HeroSlide[]> = async ({}) => {
-	const endPoint = 'https://mocki.io/v1/d69531ee-0548-4a9d-a554-7fa0df3c237d';
+export const onGet: RequestHandler<ProductType> = async ({}) => {
+	const endPoint = 'https://mocki.io/v1/f85b9e7a-f0a3-4592-8be3-3123ebaabb6c';
 	const response = await fetch(endPoint);
 	return response.ok
 		? await response.json()

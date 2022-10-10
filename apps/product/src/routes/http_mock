@@ -1,0 +1,153 @@
+{
+	"id": "31",
+	"name": "Hi-Top Basketball Shoe",
+	"description": "Boasting legendary performance since 2008, the Hyperdunkz Basketball Shoe needs no gimmicks to stand out. Air units deliver best-in-class cushioning, while a dynamic lacing system keeps your foot snug and secure, so you can focus on your game and nothing else.",
+	"collections": [
+		{
+			"id": "8",
+			"slug": "sports-outdoor",
+			"name": "Sports & Outdoor",
+			"breadcrumbs": [
+				{
+					"id": "1",
+					"name": "__root_collection__",
+					"slug": "__root_collection__"
+				},
+				{
+					"id": "8",
+					"name": "Sports & Outdoor",
+					"slug": "sports-outdoor"
+				}
+			]
+		},
+		{
+			"id": "10",
+			"slug": "footwear",
+			"name": "Footwear",
+			"breadcrumbs": [
+				{
+					"id": "1",
+					"name": "__root_collection__",
+					"slug": "__root_collection__"
+				},
+				{
+					"id": "8",
+					"name": "Sports & Outdoor",
+					"slug": "sports-outdoor"
+				},
+				{
+					"id": "10",
+					"name": "Footwear",
+					"slug": "footwear"
+				}
+			]
+		},
+		{
+			"id": "11",
+			"slug": "shoe",
+			"name": "shoe",
+			"breadcrumbs": [
+				{
+					"id": "1",
+					"name": "__root_collection__",
+					"slug": "__root_collection__"
+				},
+				{
+					"id": "11",
+					"name": "shoe",
+					"slug": "shoe"
+				}
+			]
+		}
+	],
+	"facetValues": [
+		{
+			"facet": {
+				"id": "1",
+				"code": "category",
+				"name": "category"
+			},
+			"id": "17",
+			"code": "sports-outdoor",
+			"name": "Sports & Outdoor"
+		},
+		{
+			"facet": {
+				"id": "2",
+				"code": "brand",
+				"name": "brand"
+			},
+			"id": "21",
+			"code": "nike",
+			"name": "Nike"
+		},
+		{
+			"facet": {
+				"id": "1",
+				"code": "category",
+				"name": "category"
+			},
+			"id": "23",
+			"code": "footwear",
+			"name": "Footwear"
+		},
+		{
+			"facet": {
+				"id": "3",
+				"code": "color",
+				"name": "color"
+			},
+			"id": "28",
+			"code": "white",
+			"name": "white"
+		}
+	],
+	"featuredAsset": {
+		"id": "31",
+		"preview": "https://demo.vendure.io/assets/preview/3c/xavier-teo-469050-unsplash__preview.jpg"
+	},
+	"assets": [
+		{
+			"id": "31",
+			"preview": "https://demo.vendure.io/assets/preview/3c/xavier-teo-469050-unsplash__preview.jpg"
+		}
+	],
+	"variants": [
+		{
+			"id": "51",
+			"name": "Hi-Top Basketball Shoe Size 40",
+			"priceWithTax": 16800,
+			"currencyCode": "USD",
+			"sku": "AO7893-40",
+			"stockLevel": "IN_STOCK",
+			"featuredAsset": null
+		},
+		{
+			"id": "52",
+			"name": "Hi-Top Basketball Shoe Size 42",
+			"priceWithTax": 16800,
+			"currencyCode": "USD",
+			"sku": "AO7893-42",
+			"stockLevel": "IN_STOCK",
+			"featuredAsset": null
+		},
+		{
+			"id": "53",
+			"name": "Hi-Top Basketball Shoe Size 44",
+			"priceWithTax": 16800,
+			"currencyCode": "USD",
+			"sku": "AO7893-44",
+			"stockLevel": "IN_STOCK",
+			"featuredAsset": null
+		},
+		{
+			"id": "54",
+			"name": "Hi-Top Basketball Shoe Size 46",
+			"priceWithTax": 16800,
+			"currencyCode": "USD",
+			"sku": "AO7893-46",
+			"stockLevel": "IN_STOCK",
+			"featuredAsset": null
+		}
+	]
+}

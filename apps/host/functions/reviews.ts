@@ -1,12 +1,12 @@
 import { remotes } from '../src/constants/remotes';
-import { getTargetFromRemoteName } from '../src/utils';
 
 export async function onRequest() {
-	const res = await fetch(remotes.reviews);
+	const remoteTarget = remotes.reviews;
+	const res = await fetch(remoteTarget);
 	const rawHtml = await res.text();
 	const withStyleWorkaround = rawHtml.replace(
 		'<link rel="stylesheet" href="/',
-		`<link rel="stylesheet" href="${getTargetFromRemoteName('reviews')}/`
+		`<link rel="stylesheet" href="${remoteTarget}/`
 	);
 	return new Response(withStyleWorkaround);
 }

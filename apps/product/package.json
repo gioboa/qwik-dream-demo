@@ -1,6 +1,6 @@
 {
-	"name": "qwik-dream-reviews",
-	"description": "Qwik dream reviews",
+	"name": "qwik-dream-product",
+	"description": "Qwik dream product",
 	"engines": {
 		"node": ">=15.0.0"
 	},
@@ -17,10 +17,12 @@
 		"fmt": "prettier --write .",
 		"fmt.check": "prettier --check .",
 		"lint": "eslint \"src/**/*.ts*\"",
-		"preview": "qwik build preview && vite preview --port 5004",
+		"preview": "qwik build preview && vite preview --port 5003",
 		"serve": "wrangler pages dev ./dist",
-		"start": "vite --open --mode ssr --port 5004",
+		"start": "vite --open --mode ssr --port 5003",
 		"qwik": "qwik"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"@tailwindcss/forms": "^0.5.3"
+	}
 }

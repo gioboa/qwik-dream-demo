@@ -1,7 +1,7 @@
 import { $, component$, useRef, useStore, useWatch$ } from '@builder.io/qwik';
 import { HeroSlide } from '~/routes';
 
-export const Hero = component$<{ slides: HeroSlide[] }>(({ slides }) => {
+export default component$<{ slides: HeroSlide[] }>(({ slides }) => {
 	const carouselRef = useRef();
 	const state = useStore({ currentIndex: 0 });
 
@@ -100,10 +100,7 @@ export const Hero = component$<{ slides: HeroSlide[] }>(({ slides }) => {
 											{slide.subTitle}
 										</h3>
 									</div>
-									<div class='flex flex-col mt-6 space-y-3 lg:space-y-0 lg:flex-row justify-around'>
-										<a class='block px-6 py-2.5 text-sm font-medium tracking-wider text-center text-white transition-colors duration-300 transform bg-special-blue rounded-md'>
-											npm create qwik@latest
-										</a>
+									<div class='flex mt-6 space-y-3 lg:space-y-0 lg:flex-row justify-around'>
 										<a class='block px-6 py-2.5 text-sm font-medium tracking-wider text-center text-white transition-colors duration-300 transform bg-gray-800 rounded-md lg:mx-4 hover:bg-gray-600'>
 											Explore the docs
 										</a>

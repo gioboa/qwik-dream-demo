@@ -1,6 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 
-export const QwikIcon = component$(() => {
+export default component$(() => {
 	return (
 		<svg
 			width='180'
