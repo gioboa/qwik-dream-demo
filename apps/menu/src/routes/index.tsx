@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { component$, Resource } from '@builder.io/qwik';
+import { component$, Resource, useClientEffect$ } from '@builder.io/qwik';
 import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
 import QwikIcon from '~/components/icons/QwikIcon';
 
@@ -11,6 +11,9 @@ type MenuItem = {
 
 export default component$(() => {
 	const menuData = useEndpoint<typeof onGet>();
+	useClientEffect$(() => {
+		console.log('menu is working');
+	});
 
 	return (
 		<>

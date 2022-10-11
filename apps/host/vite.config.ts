@@ -2,14 +2,12 @@ import { qwikCity } from '@builder.io/qwik-city/vite';
 import { qwikVite } from '@builder.io/qwik/optimizer';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { remotes } from './src/constants/remotes';
+import { remotes } from '../../libs/shared/remotes';
 
 let proxy = {};
-Object.entries(remotes).forEach(([name, remoteUrl]) => {
+Object.values(remotes).forEach(({ name, url }) => {
 	proxy[`^/${name}/.*`] = {
-		target: remoteUrl,
-		changeOrigin: true,
-		rewrite: (path) => path.replace(new RegExp(`^\/${name}`), ''),
+		target: url.replace(`${name}/`, ''),
 	};
 });
 

@@ -4,7 +4,7 @@ import {
 	useContextProvider,
 	useStore,
 } from '@builder.io/qwik';
-import { AppState, GlobalAppState } from '../constants/state';
+import { AppState, GlobalAppState } from '../store';
 
 export default component$(() => {
 	const store = useStore<AppState>({

@@ -1,10 +1,6 @@
-import { remotes } from '../../src/constants/remotes';
+import { getTargetUrl } from '../../../../libs/shared/cloudflare.utils';
+import { remotes } from '../../../../libs/shared/remotes';
 
 export async function onRequest({ request }) {
-	const remoteTarget = remotes.menu;
-	const newUrl = request.url.replace(
-		'https://qwik-dream-demo.pages.dev/menu',
-		remoteTarget
-	);
-	return await fetch(newUrl);
+	return await fetch(getTargetUrl(request, remotes.menu));
 }

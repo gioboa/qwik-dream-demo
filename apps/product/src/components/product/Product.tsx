@@ -84,7 +84,7 @@ export default component$(({ product }: { product: ProductType }) => {
 							</select>
 						</div>
 					)}
-					<div className='mt-10 flex flex-col sm:flex-row sm:items-center'>
+					<div className='mt-10 flex sm:flex-row sm:items-center'>
 						<Price
 							priceWithTax={mutable(selectedVariant()?.priceWithTax)}
 							forcedClassName='text-3xl text-gray-900 mr-4'

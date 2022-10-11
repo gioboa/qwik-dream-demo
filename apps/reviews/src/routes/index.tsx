@@ -13,7 +13,7 @@ export default component$(() => {
 			// onPending={() => <>Loading...</>}
 			onRejected={(error) => <>Error: {error.message}</>}
 			onResolved={(reviews) => (
-				<div className='max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-6xl lg:px-8'>
+				<div className='p-16'>
 					<h2 className='text-lg font-medium text-gray-900'>Recent reviews</h2>
 					<div className='mt-6 pb-10 border-t border-gray-200 divide-y divide-gray-200 space-y-10'>
 						{reviews.map((review) => (

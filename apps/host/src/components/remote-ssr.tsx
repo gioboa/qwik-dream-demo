@@ -1,11 +1,10 @@
 import { component$, SSRStream } from '@builder.io/qwik';
 
 export interface Props {
-	name: string;
 	path: string;
 }
 
-export default component$(({ name, path }: Props) => {
+export default component$(({ path }: Props) => {
 	const decoder = new TextDecoder();
 	return (
 		<div class='remote-component'>
@@ -17,11 +16,7 @@ export default component$(({ name, path }: Props) => {
 					let fragmentChunk = await reader.read();
 					while (!fragmentChunk.done) {
 						const rawHtml = decoder.decode(fragmentChunk.value);
-						const withStyleWorkaround = rawHtml.replace(
-							'<link rel="stylesheet" href="/',
-							`<link rel="stylesheet" href="${path}/`
-						);
-						stream.write(withStyleWorkaround);
+						stream.write(rawHtml);
 						fragmentChunk = await reader.read();
 					}
 				}}

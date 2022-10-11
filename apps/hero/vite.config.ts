@@ -1,12 +1,4 @@
-import { qwikCity } from '@builder.io/qwik-city/vite';
-import { qwikVite } from '@builder.io/qwik/optimizer';
-import { defineConfig } from 'vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import { remotes } from '../../libs/shared/remotes';
+import { customDefineConfig } from '../../libs/shared/vite.utils';
 
-export default defineConfig(() => {
-	return {
-		server: { host: true, cors: false },
-		ssr: { target: 'webworker' },
-		plugins: [qwikCity(), qwikVite(), tsconfigPaths()],
-	};
-});
+export default customDefineConfig(remotes.hero.name);
