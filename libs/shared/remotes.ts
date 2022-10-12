@@ -9,6 +9,10 @@ export const remotes = {
 		name: 'reviews',
 		url: 'https://qwik-dream-reviews.pages.dev/reviews/',
 	},
+	cart: {
+		name: 'reviews',
+		url: 'https://qwik-dream-reviews.pages.dev/cart/',
+	},
 };
 
 export const host = { name: 'host', url: 'https://qwik-dream-demo.pages.dev/' };
