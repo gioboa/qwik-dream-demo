@@ -2,10 +2,10 @@ import { component$, SSRStream } from '@builder.io/qwik';
 import type { RemoteData } from '../../../../libs/shared/remotes';
 
 export interface Props {
-	path: string;
+	remote: RemoteData;
 }
 
-export default component$((props: { remote: RemoteData }) => {
+export default component$((props: Props) => {
 	const { url } = props.remote;
 	const decoder = new TextDecoder();
 	return (
