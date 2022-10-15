@@ -5,12 +5,13 @@
 	"private": true,
 	"scripts": {
 		"start": "run-p preview:apps start:host",
-		"preview:apps": "run-p preview:menu preview:hero preview:reviews",
+		"preview:apps": "run-p preview:menu preview:hero preview:product preview:reviews",
 		"start:all": "nx run-many --target=start --all",
 		"start:host": "nx start host",
 		"preview:menu": "nx preview menu",
 		"preview:hero": "nx preview hero",
-		"preview:reviews": "nx preview reviews"
+		"preview:reviews": "nx preview reviews",
+		"preview:product": "nx preview product"
 	},
 	"repository": {
 		"type": "git",
