@@ -6,9 +6,9 @@ export interface Props {
 }
 
 export default component$((props: Props) => {
-	const { url, port } = props.remote;
+	const { url, port, name } = props.remote;
 	const mfe_url = import.meta.env.DEV
-		? `http://localhost:${port}/`
+		? `http://localhost:${port}/${name}/`
 		: url
 		;
 	const decoder = new TextDecoder();
