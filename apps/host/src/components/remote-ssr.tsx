@@ -7,7 +7,6 @@ export interface Props {
 
 export default component$((props: Props) => {
 	const { url, port } = props.remote;
-	console.log(import.meta.env);
 	const mfe_url = import.meta.env.DEV
 		? `http://localhost:${port}/`
 		: url
