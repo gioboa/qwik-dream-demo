@@ -8,6 +8,7 @@ export default component$(() => {
 	return (
 		<>
 			<RemoteSsr path={remotes.menu.url} />
+			<RemoteSsr path={"http://localhost::5005"} />
 			<RemoteSsr path={remotes.hero.url} />
 			<RemoteSsr path={remotes.product.url} />
 			<Reviews />

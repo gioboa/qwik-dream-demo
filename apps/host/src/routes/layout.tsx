@@ -2,7 +2,7 @@ import {
 	component$,
 	Slot,
 	useContextProvider,
-	useStore,
+	useStore
 } from '@builder.io/qwik';
 import { AppState, GlobalAppState } from '../store';
 
