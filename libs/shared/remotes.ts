@@ -16,6 +16,10 @@ export const remotes: Record<string, RemoteData> = {
 		url: 'https://qwik-dream-reviews.pages.dev/reviews/',
 		port: 5004
 	},
+	cart: {
+		name: 'reviews',
+		url: 'https://qwik-dream-reviews.pages.dev/cart/',
+	},
 };
 
 export const host = { name: 'host', url: 'https://qwik-dream-demo.pages.dev/' };
