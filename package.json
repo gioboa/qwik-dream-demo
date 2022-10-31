@@ -5,12 +5,18 @@
 	"private": true,
 	"scripts": {
 		"start": "run-p preview:apps start:host",
-		"preview:apps": "run-p preview:menu preview:hero preview:reviews preview:cart",
+		"preview:apps": "run-p preview:menu preview:hero preview:product preview:reviews preview:cart",
 		"start:all": "nx run-many --target=start --all",
 		"start:host": "nx start host",
+		"start:apps": "run-p start:menu start:hero start:product start:reviews",
 		"preview:menu": "nx preview menu",
 		"preview:hero": "nx preview hero",
 		"preview:reviews": "nx preview reviews",
+		"preview:product": "nx preview product",
+		"start:menu": "nx start menu",
+		"start:hero": "nx start hero",
+		"start:reviews": "nx start reviews",
+		"start:product": "nx start product"
 		"preview:cart": "nx preview cart",
 		"start:cart": "nx start cart"
 	},
@@ -24,8 +30,8 @@
 	},
 	"homepage": "https://github.com/gioboa/qwik-dream-demo#readme",
 	"devDependencies": {
-		"@builder.io/qwik": "0.10.0",
-		"@builder.io/qwik-city": "0.0.112",
+		"@builder.io/qwik": "^0.11.1",
+		"@builder.io/qwik-city": "^0.0.112",
 		"@nrwl/cli": "14.8.3",
 		"@nrwl/js": "^14.8.3",
 		"@nrwl/nx-cloud": "latest",

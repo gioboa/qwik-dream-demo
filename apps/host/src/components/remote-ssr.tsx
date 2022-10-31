@@ -1,17 +1,23 @@
 import { component$, SSRStream } from '@builder.io/qwik';
+import type { RemoteData } from '../../../../libs/shared/remotes';
 
 export interface Props {
-	path: string;
+	remote: RemoteData;
 }
 
-export default component$(({ path }: Props) => {
+export default component$((props: Props) => {
+	const { url, port, name } = props.remote;
+	const mfe_url = import.meta.env.DEV
+		? `http://localhost:${port}/${name}/`
+		: url
+		;
 	const decoder = new TextDecoder();
 	return (
 		<div class='remote-component'>
-			<p class='remote-label'>{path}</p>
+			<p class='remote-label'>{mfe_url}</p>
 			<SSRStream>
 				{async (stream) => {
-					const fragment = await fetch(path);
+					const fragment = await fetch(mfe_url);
 					const reader = fragment.body!.getReader();
 					let fragmentChunk = await reader.read();
 					while (!fragmentChunk.done) {

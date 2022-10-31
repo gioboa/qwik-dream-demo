@@ -1,5 +1,5 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/typescript-node
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/typescript-node
 {
 	"name": "Node.js & TypeScript",
 	"build": {
@@ -11,7 +11,6 @@
 			"VARIANT": "18-bullseye"
 		}
 	},
-
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.
@@ -22,13 +21,16 @@
 			]
 		}
 	},
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
+	"forwardPorts": [
+		5001,
+		5002,
+		5003,
+		5004,
+		5005
+	],
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "yarn install",
-
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "node"
 }
