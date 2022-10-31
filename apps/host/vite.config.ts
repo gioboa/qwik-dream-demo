@@ -4,10 +4,10 @@ import { defineConfig, ServerOptions } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { remotes } from '../../libs/shared/remotes';
 
-let proxy: ServerOptions["proxy"] = {};
+let proxy: ServerOptions['proxy'] = {};
 Object.values(remotes).forEach(({ name, url }) => {
 	proxy![`^/${name}/.*`] = {
-		target: url.replace(`${name}/`, ''),
+		target: url.replace(`/${name}/`, ''),
 	};
 });
 
