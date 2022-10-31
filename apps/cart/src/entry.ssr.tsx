@@ -15,15 +15,19 @@ import { manifest } from '@qwik-client-manifest';
 import Root from './root';
 
 export default function (opts: RenderToStreamOptions) {
-  return renderToStream(<Root />, {
-    manifest,
-    ...opts,
-    prefetchStrategy: {
-      implementation: {
-        linkInsert: null,
-        workerFetchInsert: null,
-        prefetchEvent: 'always',
-      },
-    },
-  });
+	return renderToStream(<Root />, {
+		manifest,
+		...opts,
+		prefetchStrategy: {
+			implementation: {
+				linkInsert: null,
+				workerFetchInsert: null,
+				prefetchEvent: 'always',
+			},
+		},
+		containerTagName: 'div',
+		qwikLoader: {
+			include: 'never',
+		},
+	});
 }

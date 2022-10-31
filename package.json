@@ -16,7 +16,7 @@
 		"start:menu": "nx start menu",
 		"start:hero": "nx start hero",
 		"start:reviews": "nx start reviews",
-		"start:product": "nx start product"
+		"start:product": "nx start product",
 		"preview:cart": "nx preview cart",
 		"start:cart": "nx start cart"
 	},

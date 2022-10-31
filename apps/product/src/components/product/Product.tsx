@@ -22,7 +22,7 @@ export default component$(({ product }: { product: ProductType }) => {
 		quantity: 0,
 	});
 
-	useClientEffect$(async () => {
+	useClientEffect$(async (e) => {
 		window.scrollTo(0, 0);
 	});
 
@@ -44,7 +44,7 @@ export default component$(({ product }: { product: ProductType }) => {
 					<span className='rounded-md overflow-hidden'>
 						<div className='w-full h-full object-center object-cover rounded-lg'>
 							<img
-								src={product.featuredAsset.preview + '?w=800'}
+								src={product.featuredAsset.preview + '?h=300'}
 								alt={product.name}
 								className='w-full h-full object-center object-cover rounded-lg'
 								width='800'
@@ -103,6 +103,7 @@ export default component$(({ product }: { product: ProductType }) => {
 								onClick$={async () => {
 									if (state.quantity < 8) {
 										state.quantity += 1;
+										document.dispatchEvent(new CustomEvent('onAddItem'));
 									}
 								}}
 							>

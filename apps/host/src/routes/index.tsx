@@ -7,10 +7,10 @@ import { remotes } from '../../../../libs/shared/remotes';
 export default component$(() => {
 	return (
 		<>
-			<RemoteSsr path={remotes.menu.url} />
-			<RemoteSsr path={"http://localhost::5005"} />
-			<RemoteSsr path={remotes.hero.url} />
-			<RemoteSsr path={remotes.product.url} />
+			<RemoteSsr remote={remotes.menu} />
+			<RemoteSsr remote={remotes.cart} />
+			<RemoteSsr remote={remotes.hero} />
+			<RemoteSsr remote={remotes.product} />
 			<Reviews />
 		</>
 	);
