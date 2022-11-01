@@ -20,7 +20,7 @@ export default component$<{
 					<div className='ml-4 flex-1 flex flex-col'>
 						<div>
 							<div className='flex justify-between text-base font-medium text-gray-900'>
-								<h3>Hi-Top Basketball Shoe Size 46</h3>
+								<h3>Hi-Top Basketball Shoe</h3>
 								<Price priceWithTax={ITEM_PRICE} forcedClassName='ml-4'></Price>
 							</div>
 						</div>
