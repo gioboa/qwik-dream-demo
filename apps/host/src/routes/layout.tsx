@@ -2,13 +2,13 @@ import {
 	component$,
 	Slot,
 	useContextProvider,
-	useStore
+	useStore,
 } from '@builder.io/qwik';
 import { AppState, GlobalAppState } from '../store';
 
 export default component$(() => {
 	const store = useStore<AppState>({
-		showSeams: true,
+		showSeams: false,
 	});
 	useContextProvider(GlobalAppState, store);
 	return (
