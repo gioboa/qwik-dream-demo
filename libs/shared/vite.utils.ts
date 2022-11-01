@@ -4,11 +4,11 @@ import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { type RemoteData } from './remotes';
 
-export const customDefineConfig = ({ name, port }: RemoteData) =>
+export const customDefineConfig = ({ name }: RemoteData) =>
 	defineConfig(() => {
 		return {
 			basePathName: `/${name}/build`,
-			server: { host: true, cors: false, port },
+			server: { host: true, cors: false },
 			ssr: { target: 'webworker' },
 			plugins: [
 				qwikCity({ basePathname: `/${name}/` }),

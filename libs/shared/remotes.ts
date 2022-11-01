@@ -1,34 +1,26 @@
 export interface RemoteData {
 	name: string;
 	url: string;
-	port: number;
 }
 export const remotes: Record<string, RemoteData> = {
 	menu: {
 		name: 'menu',
-		url: 'https://qwik-dream-menu.pages.dev/menu/',
-		port: 5001,
+		url: 'http://localhost:5003/menu/',
 	},
 	hero: {
 		name: 'hero',
-		url: 'https://qwik-dream-hero.pages.dev/hero/',
-		port: 5002,
+		url: 'http://localhost:5002/hero/',
 	},
 	product: {
 		name: 'product',
-		url: 'https://qwik-dream-product.pages.dev/product/',
-		port: 5003,
+		url: 'http://localhost:5004/product/',
 	},
 	reviews: {
 		name: 'reviews',
-		url: 'https://qwik-dream-reviews.pages.dev/reviews/',
-		port: 5004,
+		url: 'http://localhost:5005/reviews/',
 	},
 	cart: {
 		name: 'cart',
-		url: 'https://qwik-dream-cart.pages.dev/cart/',
-		port: 5005,
+		url: 'http://localhost:5001/cart/',
 	},
 };
-
-export const host = { name: 'host', url: 'https://qwik-dream-demo.pages.dev/' };

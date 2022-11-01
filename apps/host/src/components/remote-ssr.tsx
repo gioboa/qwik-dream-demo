@@ -6,17 +6,14 @@ export interface Props {
 }
 
 export default component$((props: Props) => {
-	const { url, port, name } = props.remote;
-	const mfeUrl = import.meta.env.DEV
-		? `http://localhost:${port}/${name}/`
-		: url;
+	const { url } = props.remote;
 	const decoder = new TextDecoder();
 	return (
 		<div class='remote-component'>
-			<p class='remote-label'>{mfeUrl}</p>
+			<p class='remote-label'>{url}</p>
 			<SSRStream>
 				{async (stream) => {
-					const fragment = await fetch(mfeUrl);
+					const fragment = await fetch(url);
 					const reader = fragment.body!.getReader();
 					let fragmentChunk = await reader.read();
 					while (!fragmentChunk.done) {

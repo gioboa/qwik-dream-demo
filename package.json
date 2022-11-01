@@ -4,21 +4,7 @@
 	"description": "Qwik dream demo",
 	"private": true,
 	"scripts": {
-		"start": "run-p preview:apps start:host",
-		"preview:apps": "run-p preview:menu preview:hero preview:product preview:reviews preview:cart",
-		"start:all": "nx run-many --target=start --all",
-		"start:host": "nx start host",
-		"start:apps": "run-p start:menu start:hero start:product start:reviews",
-		"preview:menu": "nx preview menu",
-		"preview:hero": "nx preview hero",
-		"preview:reviews": "nx preview reviews",
-		"preview:product": "nx preview product",
-		"start:menu": "nx start menu",
-		"start:hero": "nx start hero",
-		"start:reviews": "nx start reviews",
-		"start:product": "nx start product",
-		"preview:cart": "nx preview cart",
-		"start:cart": "nx start cart"
+		"start": "echo 'nx wannabe'"
 	},
 	"repository": {
 		"type": "git",
