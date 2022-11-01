@@ -1,9 +1,4 @@
-import {
-	component$,
-	mutable,
-	useClientEffect$,
-	useStore,
-} from '@builder.io/qwik';
+import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
 import { ProductType } from '~/types';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import CheckIcon from '../icons/CheckIcon';
@@ -44,9 +39,9 @@ export default component$(({ product }: { product: ProductType }) => {
 					<span className='rounded-md overflow-hidden'>
 						<div className='w-full h-full object-center object-cover rounded-lg'>
 							<img
-								src={product.featuredAsset.preview + '?h=300'}
+								src={product.featuredAsset.preview + '?w=600'}
 								alt={product.name}
-								className='w-full h-full object-center object-cover rounded-lg'
+								className='w-full h-96 object-center object-cover rounded-lg'
 								width='800'
 							/>
 						</div>
@@ -86,7 +81,7 @@ export default component$(({ product }: { product: ProductType }) => {
 					)}
 					<div className='mt-10 flex sm:flex-row sm:items-center'>
 						<Price
-							priceWithTax={mutable(selectedVariant()?.priceWithTax)}
+							priceWithTax={selectedVariant()?.priceWithTax}
 							forcedClassName='text-3xl text-gray-900 mr-4'
 						></Price>
 						<div className='flex sm:flex-col1 align-baseline'>
@@ -103,7 +98,7 @@ export default component$(({ product }: { product: ProductType }) => {
 								onClick$={async () => {
 									if (state.quantity < 8) {
 										state.quantity += 1;
-										document.dispatchEvent(new CustomEvent('onAddItem'));
+										document.dispatchEvent(new CustomEvent('additem'));
 									}
 								}}
 							>

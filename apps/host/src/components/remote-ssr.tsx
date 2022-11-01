@@ -10,7 +10,6 @@ export default component$((props: Props) => {
 	const mfeUrl = import.meta.env.DEV
 		? `http://localhost:${port}/${name}/`
 		: url;
-	console.log(mfeUrl);
 	const decoder = new TextDecoder();
 	return (
 		<div class='remote-component'>
