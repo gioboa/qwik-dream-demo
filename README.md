@@ -4,7 +4,9 @@ node v18.10.0 required
 
 ## Startup project
 
-From the root, run these commands in different terminals:
+From the root install all the dependencies `npm run install`
+<br>
+Then run these commands in different terminals:
 
 - cd apps/cart && npm run preview
 - cd apps/hero && npm run preview
