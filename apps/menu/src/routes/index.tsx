@@ -2,6 +2,8 @@
 import { component$, Resource, useClientEffect$ } from '@builder.io/qwik';
 import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
 import QwikIcon from '~/components/icons/QwikIcon';
+import { remotes } from '../../../../libs/shared/remotes';
+import { forcedDelay } from '../../../../libs/shared/utils';
 
 type MenuItem = {
 	slug: string;
@@ -95,6 +97,7 @@ export default component$(() => {
 
 export const onGet: RequestHandler<MenuItem[]> = async ({}) => {
 	const endPoint = 'https://mocki.io/v1/a80ad7e4-f320-4946-85a5-3976a67d322f';
+	await forcedDelay(remotes.menu.secondsOfDelay);
 	const response = await fetch(endPoint);
 	return response.ok
 		? await response.json()
