@@ -28,5 +28,12 @@ export default function (opts: RenderToStreamOptions) {
 		qwikLoader: {
 			include: 'always',
 		},
+		streaming: {
+			inOrder: {
+				strategy: 'auto',
+				maximunInitialChunk: 0,
+				maximunChunk: 0,
+			},
+		},
 	});
 }
