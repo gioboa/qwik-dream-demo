@@ -5,6 +5,7 @@ import { ProductType } from '~/types';
 import { remotes } from '../../../../libs/shared/remotes';
 import { forcedDelay } from '../../../../libs/shared/utils';
 import Product from '../components/product/Product';
+import { graphQlQuery } from "../../../../libs/shared/graphql-api";
 
 export default component$(() => {
 	const productData = useEndpoint<typeof onGet>();
@@ -24,10 +25,59 @@ export default component$(() => {
 });
 
 export const onGet: RequestHandler<ProductType> = async ({}) => {
-	const endPoint = 'https://mocki.io/v1/f85b9e7a-f0a3-4592-8be3-3123ebaabb6c';
 	await forcedDelay(remotes.product.secondsOfDelay);
-	const response = await fetch(endPoint);
-	return response.ok
-		? await response.json()
-		: [{ name: 'fetch error', slug: 'error' }];
+	const response = await graphQlQuery(`
+		  query product($slug: String, $id: ID) {
+    product(slug: $slug, id: $id) {
+      ...DetailedProduct
+    }
+  }
+
+  fragment DetailedProduct on Product {
+    id
+    name
+    description
+    collections {
+      id
+      slug
+      name
+      breadcrumbs {
+        id
+        name
+        slug
+      }
+    }
+    facetValues {
+      facet {
+        id
+        code
+        name
+      }
+      id
+      code
+      name
+    }
+    featuredAsset {
+      id
+      preview
+    }
+    assets {
+      id
+      preview
+    }
+    variants {
+      id
+      name
+      priceWithTax
+      currencyCode
+      sku
+      stockLevel
+      featuredAsset {
+        id
+        preview
+      }
+    }
+  }
+	`, { slug: 'runx-running-shoe' });
+	return response.data.product;
 };
