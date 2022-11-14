@@ -1,15 +1,28 @@
-import { $, component$, useStore } from '@builder.io/qwik';
-import CartContents from '~/components/cart-contents/CartContents';
-import CartPrice from '~/components/cart-totals/CartPrice';
-import CloseIcon from '~/components/icons/CloseIcon';
-import ShoppingBagIcon from '~/components/icons/ShoppingBagIcon';
-import { ITEM_PRICE } from '~/utils';
+import { $, component$, useClientEffect$, useOnDocument, useStore } from "@builder.io/qwik";
+import CartContents from "~/components/cart-contents/CartContents";
+import CartPrice from "~/components/cart-totals/CartPrice";
+import CloseIcon from "~/components/icons/CloseIcon";
+import ShoppingBagIcon from "~/components/icons/ShoppingBagIcon";
+import { orderChangeEventId, sessionTokenReceivedEventId } from "../../../../libs/shared/custom-events";
+import { graphQlQuery, setSessionToken } from "../../../../libs/shared/graphql-api";
+import { ACTIVE_ORDER } from "~/routes/cart.graphql";
 
 export default component$(() => {
 	const state = useStore({
 		isOpen: false,
-		quantity: 0,
+		cart: undefined as any
 	});
+	useClientEffect$(() => {
+		// Fetch the active order on resume
+		graphQlQuery(ACTIVE_ORDER).then(result => state.cart = result.data.activeOrder);
+	})
+	useOnDocument(sessionTokenReceivedEventId, $((event) => {
+		setSessionToken((event as any).detail.sessionToken);
+	}));
+	useOnDocument(orderChangeEventId, $(() => {
+		console.log(`received orderChangeEvent`, state);
+		graphQlQuery(ACTIVE_ORDER).then(result => state.cart = result.data.activeOrder);
+	}));
 
 	const toggleMenu = $(async () => {
 		state.isOpen = !state.isOpen;
@@ -19,20 +32,17 @@ export default component$(() => {
 		<>
 			{!state.isOpen ? (
 				<div
-					document:onAdditem$={() => {
-						state.quantity++;
-					}}
-					className='fixed z-50'
-					style='right: 20px;top: -60px;position: absolute;'
+					className="fixed z-50"
+					style="right: 20px;top: -60px;position: absolute;"
 				>
 					<button
-						className='w-9 h-9 bg-white bg-opacity-20 rounded text-white p-1'
+						className="w-9 h-9 bg-white bg-opacity-20 rounded text-white p-1"
 						onClick$={toggleMenu}
 					>
 						<ShoppingBagIcon />
-						{!!state.quantity && (
-							<div className='absolute rounded-full -top-2 -right-2 bg-primary-600 w-6 h-6'>
-								{state.quantity}
+						{!!state.cart?.totalQuantity && (
+							<div className="absolute rounded-full -top-2 -right-2 bg-primary-600 w-6 h-6">
+								{state.cart?.totalQuantity}
 							</div>
 						)}
 					</button>
@@ -61,8 +71,8 @@ export default component$(() => {
 											</div>
 										</div>
 										<div className='mt-8'>
-											{!!state.quantity ? (
-												<CartContents quantity={state.quantity} />
+											{!!state.cart?.totalQuantity ? (
+												<CartContents cart={state.cart} />
 											) : (
 												<div className='flex items-center justify-center h-48 text-xl text-gray-400'>
 													Your cart is empty
@@ -70,14 +80,14 @@ export default component$(() => {
 											)}
 										</div>
 									</div>
-									{!!state.quantity && (
+									{!!state.cart?.totalQuantity && (
 										<div className='border-t border-gray-200 py-6 px-4 sm:px-6'>
 											<div className='flex justify-between text-base font-medium text-gray-900'>
 												<p>Subtotal</p>
 												<p>
 													<CartPrice
 														forcedClassName={'subTotalWithTax'}
-														amount={ITEM_PRICE * state.quantity}
+														amount={state.cart?.totalWithTax}
 													/>
 												</p>
 											</div>

@@ -1,10 +1,13 @@
-import { component$, useClientEffect$, useStore } from '@builder.io/qwik';
+import { $, component$, useClientEffect$, useStore } from "@builder.io/qwik";
 import { ProductType } from '~/types';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import CheckIcon from '../icons/CheckIcon';
 import HeartIcon from '../icons/HeartIcon';
 import Price from '../price/Price';
 import StockLevelLabel from '../stock-level-label/StockLevelLabel';
+import { graphQlQuery } from "../../../../../libs/shared/graphql-api";
+import { ADD_ITEM_TO_ORDER } from "~/components/product/Product.graphql";
+import { orderChangeEventId } from "../../../../../libs/shared/custom-events";
 
 export default component$(({ product }: { product: ProductType }) => {
 	const state = useStore<{
@@ -24,6 +27,12 @@ export default component$(({ product }: { product: ProductType }) => {
 	const findVariantById = (id: string) =>
 		product.variants.find((v) => v.id === id);
 	const selectedVariant = () => findVariantById(state.selectedVariantId);
+	const addItemToOrder = $(() =>
+		graphQlQuery(ADD_ITEM_TO_ORDER, { productVariantId: state.selectedVariantId, quantity: 1 })
+      .then(() => {
+				console.log(`dispatching orderChangeEvent`);
+				document.dispatchEvent(new CustomEvent(orderChangeEventId));
+			}));
 	return (
 		<>
 			<h2 className='text-3xl sm:text-5xl font-light tracking-tight text-gray-900 my-8'>
@@ -95,12 +104,7 @@ export default component$(({ product }: { product: ProductType }) => {
 								} transition-colors border border-transparent rounded-md py-3 px-8 flex items-center 
 									justify-center text-base font-medium text-white focus:outline-none 
 									focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary-500 sm:w-full`}
-								onClick$={async () => {
-									if (state.quantity < 8) {
-										state.quantity += 1;
-										document.dispatchEvent(new CustomEvent('additem'));
-									}
-								}}
+								onClick$={() => addItemToOrder()}
 							>
 								{state.quantity ? (
 									<span className='flex items-center'>
