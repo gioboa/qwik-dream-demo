@@ -25,8 +25,8 @@ export default component$(() => {
 	);
 });
 
-export const onGet: RequestHandler<ProductType> = async ({}) => {
-	// await forcedDelay(remotes.product.secondsOfDelay);
+export const onGet: RequestHandler<ProductType> = async () => {
+	await forcedDelay(remotes.product.secondsOfDelay);
 	const response = await graphQlQuery(`
 		  query product($slug: String, $id: ID) {
     product(slug: $slug, id: $id) {
