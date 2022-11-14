@@ -7,7 +7,7 @@ export function setSessionToken(value: string) {
   window.localStorage.setItem(SESSION_TOKEN_KEY, value);
 }
 
-export function graphQlQuery(query: string, variables?: Record<string, any>): Promise<any> {
+export function graphQlQuery(query: string, variables?: Record<string, any>): Promise<{ data: any; }> {
   const endPoint = 'https://readonlydemo.vendure.io/shop-api';
 
   const headers: HeadersInit = {
