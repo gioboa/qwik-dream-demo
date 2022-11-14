@@ -4,5 +4,3 @@ export const formatPrice = (value: number, currency: any) => {
 		currency,
 	}).format(value / 100);
 };
-
-export const ITEM_PRICE = 16800;
