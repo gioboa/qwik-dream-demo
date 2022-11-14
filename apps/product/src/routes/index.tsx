@@ -5,7 +5,7 @@ import { ProductType } from "~/types";
 import { remotes } from "../../../../libs/shared/remotes";
 import { forcedDelay } from "../../../../libs/shared/utils";
 import Product from "../components/product/Product";
-import { graphQlQuery } from "../../../../libs/shared/graphql-api";
+import { graphQlQuery } from "../../../../libs/shared/graphql-client";
 import { PRODUCT_DETAIL_FRAGMENT } from "../../../../libs/shared/fragments.graphql";
 
 export default component$(() => {

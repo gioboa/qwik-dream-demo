@@ -4,7 +4,7 @@ import { useEndpoint } from "@builder.io/qwik-city";
 import QwikIcon from "~/components/icons/QwikIcon";
 import { remotes } from "../../../../libs/shared/remotes";
 import { forcedDelay } from "../../../../libs/shared/utils";
-import { graphQlQuery } from "../../../../libs/shared/graphql-api";
+import { graphQlQuery } from "../../../../libs/shared/graphql-client";
 import { arrayToTree } from "~/utils/array-to-tree";
 
 

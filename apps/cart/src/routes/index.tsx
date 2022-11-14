@@ -8,7 +8,7 @@ import {
 	orderChangeEventId,
 	sessionTokenReceivedEventId
 } from "../../../../libs/shared/custom-events";
-import { graphQlQuery, setSessionToken } from "../../../../libs/shared/graphql-api";
+import { graphQlQuery, setSessionToken } from "../../../../libs/shared/graphql-client";
 import { ACTIVE_ORDER } from "~/routes/cart.graphql";
 
 export function updateActiveOrder(state: { cart: any }) {
