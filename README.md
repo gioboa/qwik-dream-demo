@@ -4,7 +4,7 @@ node v18.10.0 required
 
 ## Startup project
 
-From the root install all the dependencies `npm run install`
+From the root install all the dependencies `npm install`
 <br>
 Then run these commands in different terminals:
 
