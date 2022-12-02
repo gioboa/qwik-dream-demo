@@ -2,7 +2,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "implicitDependencies": ["hero", "reviews", "menu"],
   "targets": {
-    "run-with-remotes": {
+    "preview-with-remotes": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
