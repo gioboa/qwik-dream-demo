@@ -8,10 +8,12 @@ export default component$(() => {
 	return (
 		<>
 			<RemoteSsr remote={remotes.menu} />
-			<RemoteSsr remote={remotes.cart} />
-			<RemoteSsr remote={remotes.hero} />
-			<RemoteSsr remote={remotes.product} />
-			<Reviews />
+			<main>
+				<RemoteSsr remote={remotes.cart} />
+				<RemoteSsr remote={remotes.hero} />
+				<RemoteSsr remote={remotes.product} />
+				<Reviews />
+			</main>
 		</>
 	);
 });
