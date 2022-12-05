@@ -10,14 +10,7 @@
     "cloudflare:deploy:menu": "cd ./apps/menu && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-menu",
     "cloudflare:deploy:product": "cd ./apps/product && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-product",
     "cloudflare:deploy:reviews": "cd ./apps/reviews && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-reviews",
-    "deploy:all": "run-s cloudflare:deploy:* --print-label",
-    "cloudflare:preview:cart": "cd ./apps/cart && npm run preview",
-    "cloudflare:preview:hero": "cd ./apps/hero && npm run preview",
-    "cloudflare:preview:host": "cd ./apps/host && npm run preview",
-    "cloudflare:preview:menu": "cd ./apps/menu && npm run preview",
-    "cloudflare:preview:product": "cd ./apps/product && npm run preview",
-    "cloudflare:preview:reviews": "cd ./apps/reviews && npm run preview",
-    "preview:all": "run-s cloudflare:preview:* --print-label"
+    "deploy:all": "run-s cloudflare:deploy:* --print-label"
   },
   "repository": {
     "type": "git",
