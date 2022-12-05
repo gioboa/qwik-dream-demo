@@ -1,22 +1,4 @@
 {
-	"name": "qwik-dream-demo",
-	"version": "1.0.0",
-	"description": "Qwik dream demo",
-	"private": true,
-	"scripts": {
-		"start": "echo 'nx wannabe'"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/gioboa/qwik-dream-demo.git"
-	},
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/gioboa/qwik-dream-demo/issues"
-	},
-	"homepage": "https://github.com/gioboa/qwik-dream-demo#readme",
-	"devDependencies": {
-		"@builder.io/qwik": "^0.11.1",
   "name": "qwik-dream-demo",
   "version": "1.0.0",
   "description": "Qwik dream demo",

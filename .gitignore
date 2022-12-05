@@ -2,3 +2,4 @@ node_modules
 **/dist/**/*
 **/server/**/*
 .idea
+pnpm-lock.yaml
