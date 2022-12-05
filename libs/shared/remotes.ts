@@ -6,6 +6,7 @@ export interface RemoteData {
 	extraStyles?: Record<string, string|number>;
 	hideLabel?: true;
 }
+
 export const remotes: Record<string, RemoteData> = {
 	menu: {
 		name: 'menu',
@@ -33,7 +34,7 @@ export const remotes: Record<string, RemoteData> = {
 	},
 	cart: {
 		name: 'cart',
-		url: 'http://localhost:5001/cart/',
+		url: 'http://localhost:5006/cart/',
 		secondsOfDelay: 0,
 		seamsColor: '',
 		extraStyles: { 'z-index': 10 },
