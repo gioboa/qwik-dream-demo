@@ -2,10 +2,10 @@
 import { component$, Resource, useClientEffect$ } from "@builder.io/qwik";
 import { useEndpoint } from "@builder.io/qwik-city";
 import QwikIcon from "~/components/icons/QwikIcon";
+import { arrayToTree } from "~/utils/array-to-tree";
+import { graphQlQuery } from "../../../../libs/shared/graphql-client";
 import { remotes } from "../../../../libs/shared/remotes";
 import { forcedDelay } from "../../../../libs/shared/utils";
-import { graphQlQuery } from "../../../../libs/shared/graphql-client";
-import { arrayToTree } from "~/utils/array-to-tree";
 
 
 export default component$(() => {
@@ -17,7 +17,7 @@ export default component$(() => {
 	return (
 		<>
 			<header
-				class={`bg-gradient-to-r from-blue-700 to-indigo-900 shadow-lg transform shadow-xl sticky top-0 z-10 animate-dropIn`}
+				class={`bg-gradient-to-r from-blue-700 to-indigo-900 shadow-lg transform shadow-xl sticky top-0 -z-[1] animate-dropIn`}
 			>
 				<div className="max-w-6xl mx-auto p-4 flex items-center space-x-4">
 					<h1 className="text-white w-10">
