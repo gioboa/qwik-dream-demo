@@ -6,12 +6,12 @@ export interface Props {
 }
 
 export default component$((props: Props) => {
-	const { url } = props.remote;
+	const { url, seamsColor, extraStyles, hideLabel } = props.remote;
 	const decoder = new TextDecoder();
 	return (
 		<SSRStreamBlock>
-			<div class='remote-component'>
-				<p class='remote-label'>{url}</p>
+			<div class='remote-component' style={{'--seams-color': seamsColor, ...(extraStyles ?? {}) }}>
+				{!hideLabel && <a target='blank' href={url} class='remote-label'>{url}</a>}
 				<SSRStream>
 					{async (stream) => {
 						const fragment = await fetch(url);
