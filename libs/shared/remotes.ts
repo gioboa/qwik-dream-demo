@@ -3,7 +3,7 @@ export interface RemoteData {
 	url: string;
 	secondsOfDelay: number;
 	seamsColor: string;
-	extraStyles?: Record<string, string|number>;
+	extraStyles?: Record<string, string | number>;
 	hideLabel?: true;
 }
 

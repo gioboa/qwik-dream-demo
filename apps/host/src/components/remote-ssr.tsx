@@ -10,10 +10,14 @@ export default component$((props: Props) => {
 	const decoder = new TextDecoder();
 	return (
 		<SSRStreamBlock>
-			<div class='remote-component' style={{'--seams-color': seamsColor, ...(extraStyles ?? {}) }}>
-				{!hideLabel && <a target='blank' href={url} class='remote-label'>{url}</a>}
+			<div class="remote-component" style={{ '--seams-color': seamsColor, ...(extraStyles ?? {}) }}>
+				{!hideLabel && (
+					<a target="blank" href={url} class="remote-label">
+						{url}
+					</a>
+				)}
 				<SSRStream>
-					{async (stream) => {
+					{async stream => {
 						const fragment = await fetch(url);
 						const reader = fragment.body!.getReader();
 						let fragmentChunk = await reader.read();

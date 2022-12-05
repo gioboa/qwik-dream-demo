@@ -5,7 +5,7 @@
   isolation: isolate;
 }
 
-[data-seams]>.remote-component {
+[data-seams]>main>.remote-component {
   --seams-color: #bc0000;
   outline-color: var(--seams-color);
 }
@@ -30,6 +30,6 @@
   text-decoration: underline;
 }
 
-[data-seams]>.remote-component>.remote-label {
+[data-seams]>main>.remote-component>.remote-label {
   opacity: 1;
 }
