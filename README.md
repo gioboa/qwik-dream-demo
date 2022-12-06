@@ -15,4 +15,4 @@ Then run these commands in different terminals:
 - cd apps/product && npm run preview
 - cd apps/reviews && npm run preview
 
-At http://localhost:5000 you can open the host and see the working application
+At http://localhost:5001 you can open the host and see the working application
