@@ -1,4 +1,5 @@
 {
+	"name": "host",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"implicitDependencies": ["hero", "reviews", "menu"],
 	"targets": {
@@ -6,12 +7,36 @@
 			"executor": "nx:run-commands",
 			"options": {
 				"commands": [
-					{ "command": "nx preview cart", "color": "blue", "prefix": "CART    |" },
-					{ "command": "nx preview hero", "color": "cyan", "prefix": "HERO    |" },
-					{ "command": "nx preview host", "color": "green", "prefix": "HOST    |" },
-					{ "command": "nx preview menu", "color": "magenta", "prefix": "MENU    |" },
-					{ "command": "nx preview product", "color": "red", "prefix": "PRODUCT |" },
-					{ "command": "nx preview reviews", "color": "yellow", "prefix": "REVIEWS |" }
+					{
+						"command": "nx preview cart",
+						"color": "blue",
+						"prefix": "CART    |"
+					},
+					{
+						"command": "nx preview hero",
+						"color": "cyan",
+						"prefix": "HERO    |"
+					},
+					{
+						"command": "nx preview host",
+						"color": "green",
+						"prefix": "HOST    |"
+					},
+					{
+						"command": "nx preview menu",
+						"color": "magenta",
+						"prefix": "MENU    |"
+					},
+					{
+						"command": "nx preview product",
+						"color": "red",
+						"prefix": "PRODUCT |"
+					},
+					{
+						"command": "nx preview reviews",
+						"color": "yellow",
+						"prefix": "REVIEWS |"
+					}
 				],
 				"parallel": true
 			}
