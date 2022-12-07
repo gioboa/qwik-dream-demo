@@ -1,53 +1,54 @@
 {
-  "name": "qwik-dream-demo",
-  "version": "1.0.0",
-  "engines": {
-    "node": ">=18"
-  },
-  "description": "Qwik dream demo",
-  "private": true,
-  "scripts": {
-    "cloudflare:deploy:cart": "cd ./apps/cart && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-cart",
-    "cloudflare:deploy:hero": "cd ./apps/hero && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-hero",
-    "cloudflare:deploy:host": "cd ./apps/host && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-demo",
-    "cloudflare:deploy:menu": "cd ./apps/menu && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-menu",
-    "cloudflare:deploy:product": "cd ./apps/product && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-product",
-    "cloudflare:deploy:reviews": "cd ./apps/reviews && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-reviews",
-    "deploy:all": "run-s cloudflare:deploy:* --print-label"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gioboa/qwik-dream-demo.git"
-  },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gioboa/qwik-dream-demo/issues"
-  },
-  "homepage": "https://github.com/gioboa/qwik-dream-demo#readme",
-  "devDependencies": {
-    "@builder.io/qwik": "^0.11.1",
-    "@builder.io/qwik-city": "^0.0.112",
-    "@nrwl/cli": "14.8.3",
-    "@nrwl/js": "14.8.3",
-    "@nrwl/nx-cloud": "latest",
-    "@nrwl/workspace": "14.8.3",
-    "@tailwindcss/forms": "^0.5.3",
-    "@types/eslint": "8.4.6",
-    "@types/node": "latest",
-    "@typescript-eslint/eslint-plugin": "5.38.1",
-    "@typescript-eslint/parser": "5.38.1",
-    "autoprefixer": "^10.4.12",
-    "eslint": "8.24.0",
-    "eslint-plugin-qwik": "0.9.0",
-    "node-fetch": "3.2.10",
-    "npm-run-all": "^4.1.5",
-    "nx": "14.8.3",
-    "postcss": "^8.4.16",
-    "prettier": "2.7.1",
-    "tailwindcss": "^3.1.8",
-    "typescript": "4.8.4",
-    "vite": "3.1.4",
-    "vite-tsconfig-paths": "3.5.1",
-    "wrangler": "2.1.9"
-  }
+	"name": "qwik-dream-demo",
+	"version": "1.0.0",
+	"engines": {
+		"node": ">=18"
+	},
+	"description": "Qwik dream demo",
+	"private": true,
+	"scripts": {
+		"cloudflare:deploy:cart": "cd ./apps/cart && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-cart",
+		"cloudflare:deploy:hero": "cd ./apps/hero && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-hero",
+		"cloudflare:deploy:host": "cd ./apps/host && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-demo",
+		"cloudflare:deploy:menu": "cd ./apps/menu && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-menu",
+		"cloudflare:deploy:product": "cd ./apps/product && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-product",
+		"cloudflare:deploy:reviews": "cd ./apps/reviews && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-reviews",
+		"deploy:all": "run-s cloudflare:deploy:* --print-label"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/gioboa/qwik-dream-demo.git"
+	},
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/gioboa/qwik-dream-demo/issues"
+	},
+	"homepage": "https://github.com/gioboa/qwik-dream-demo#readme",
+	"devDependencies": {
+		"@builder.io/qwik": "^0.15.2",
+		"@builder.io/qwik-city": "^0.0.128",
+		"@builder.io/sdk-qwik": "^0.0.36",
+		"@nrwl/cli": "15.3.0",
+		"@nrwl/js": "15.3.0",
+		"@nrwl/nx-cloud": "latest",
+		"@nrwl/workspace": "15.3.0",
+		"@tailwindcss/forms": "^0.5.3",
+		"@types/eslint": "8.4.10",
+		"@types/node": "latest",
+		"@typescript-eslint/eslint-plugin": "5.45.1",
+		"@typescript-eslint/parser": "5.45.1",
+		"autoprefixer": "^10.4.13",
+		"eslint": "8.29.0",
+		"eslint-plugin-qwik": "0.15.2",
+		"node-fetch": "3.3.0",
+		"npm-run-all": "^4.1.5",
+		"nx": "15.3.0",
+		"postcss": "^8.4.19",
+		"prettier": "2.8.1",
+		"tailwindcss": "^3.2.4",
+		"typescript": "4.9.3",
+		"vite": "3.2.5",
+		"vite-tsconfig-paths": "4.0.1",
+		"wrangler": "2.6.1"
+	}
 }
