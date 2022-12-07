@@ -54,7 +54,7 @@ export default component$(() => {
 	});
 
 	return (
-		<>
+		<div>
 			{!state.isOpen ? (
 				<div className="fixed z-50" style="right: 20px;top: -60px;position: absolute;">
 					<button
@@ -127,6 +127,6 @@ export default component$(() => {
 					</div>
 				</div>
 			)}
-		</>
+		</div>
 	);
 });

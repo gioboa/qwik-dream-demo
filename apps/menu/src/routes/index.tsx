@@ -26,7 +26,7 @@ export default component$(() => {
 					</h1>
 					<Resource
 						value={menuData}
-						// onPending={() => <div>Loading...</div>}
+						onPending={() => <div>Loading...</div>}
 						onRejected={error => <div>Error: {error.message}</div>}
 						onResolved={root => (
 							<div class="flex space-x-4 hidden sm:block">

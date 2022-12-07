@@ -12,8 +12,8 @@ export default component$(() => {
 	return (
 		<Resource
 			value={reviewsData}
-			// onPending={() => <>Loading...</>}
-			onRejected={error => <>Error: {error.message}</>}
+			onPending={() => <div>Loading...</div>}
+			onRejected={error => <div>Error: {error.message}</div>}
 			onResolved={reviews => (
 				<div className="p-16">
 					<h2 className="text-lg font-medium text-gray-900">Recent reviews</h2>
