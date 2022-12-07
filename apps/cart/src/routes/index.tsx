@@ -1,43 +1,53 @@
-import { $, component$, useClientEffect$, useOnDocument, useStore } from "@builder.io/qwik";
-import CartContents from "~/components/cart-contents/CartContents";
-import CartPrice from "~/components/cart-totals/CartPrice";
-import CloseIcon from "~/components/icons/CloseIcon";
-import ShoppingBagIcon from "~/components/icons/ShoppingBagIcon";
+import { $, component$, useClientEffect$, useOnDocument, useStore } from '@builder.io/qwik';
+import CartContents from '~/components/cart-contents/CartContents';
+import CartPrice from '~/components/cart-totals/CartPrice';
+import CloseIcon from '~/components/icons/CloseIcon';
+import ShoppingBagIcon from '~/components/icons/ShoppingBagIcon';
+import { ACTIVE_ORDER } from '~/routes/cart.graphql';
 import {
 	cartQuantitiesChangedEventId,
 	orderChangeEventId,
-	sessionTokenReceivedEventId
-} from "../../../../libs/shared/custom-events";
-import { graphQlQuery, setSessionToken } from "../../../../libs/shared/graphql-client";
-import { ACTIVE_ORDER } from "~/routes/cart.graphql";
+	sessionTokenReceivedEventId,
+} from '../../../../libs/shared/custom-events';
+import { graphQlQuery, setSessionToken } from '../../../../libs/shared/graphql-client';
 
 export function updateActiveOrder(state: { cart: any }) {
-	return graphQlQuery(ACTIVE_ORDER)
-		.then(({ data }) => {
-			state.cart = data.activeOrder;
-			const productVariantQuantities = data.activeOrder.lines.reduce((result: any, line: any) => ({
+	return graphQlQuery(ACTIVE_ORDER).then(({ data }) => {
+		state.cart = data.activeOrder;
+		const productVariantQuantities = (data.activeOrder?.lines || []).reduce(
+			(result: any, line: any) => ({
 				...result,
-				[line.productVariant.id]: line.quantity
-			}), {});
-			document.dispatchEvent(new CustomEvent(cartQuantitiesChangedEventId, { detail: productVariantQuantities }));
-		});
+				[line.productVariant.id]: line.quantity,
+			}),
+			{},
+		);
+		document.dispatchEvent(
+			new CustomEvent(cartQuantitiesChangedEventId, { detail: productVariantQuantities }),
+		);
+	});
 }
 
 export default component$(() => {
 	const state = useStore({
 		isOpen: false,
-		cart: undefined as any
+		cart: undefined as any,
 	});
 	useClientEffect$(() => {
 		// Fetch the active order on resume
 		updateActiveOrder(state);
 	});
-	useOnDocument(sessionTokenReceivedEventId, $((event) => {
-		setSessionToken((event as any).detail.sessionToken);
-	}));
-	useOnDocument(orderChangeEventId, $(() => {
-		updateActiveOrder(state);
-	}));
+	useOnDocument(
+		sessionTokenReceivedEventId,
+		$(event => {
+			setSessionToken((event as any).detail.sessionToken);
+		}),
+	);
+	useOnDocument(
+		orderChangeEventId,
+		$(() => {
+			updateActiveOrder(state);
+		}),
+	);
 
 	const toggleMenu = $(async () => {
 		state.isOpen = !state.isOpen;
@@ -46,10 +56,7 @@ export default component$(() => {
 	return (
 		<>
 			{!state.isOpen ? (
-				<div
-					className="fixed z-50"
-					style="right: 20px;top: -60px;position: absolute;"
-				>
+				<div className="fixed z-50" style="right: 20px;top: -60px;position: absolute;">
 					<button
 						className="w-9 h-9 bg-white bg-opacity-20 rounded text-white p-1"
 						onClick$={toggleMenu}
@@ -71,9 +78,7 @@ export default component$(() => {
 								<div class="h-full flex flex-col bg-white shadow-xl overflow-y-scroll">
 									<div class="flex-1 py-6 overflow-y-auto px-4 sm:px-6">
 										<div class="flex items-start justify-between">
-											<h2 class="text-lg font-medium text-gray-900">
-												Shopping cart
-											</h2>
+											<h2 class="text-lg font-medium text-gray-900">Shopping cart</h2>
 											<div class="ml-3 h-7 flex items-center">
 												<button
 													type="button"
@@ -101,7 +106,7 @@ export default component$(() => {
 												<p>Subtotal</p>
 												<p>
 													<CartPrice
-														forcedClassName={"subTotalWithTax"}
+														forcedClassName={'subTotalWithTax'}
 														amount={state.cart?.totalWithTax}
 													/>
 												</p>
@@ -110,8 +115,7 @@ export default component$(() => {
 												Shipping will be calculated at checkout.
 											</p>
 											<div className="mt-6">
-												<button
-													className="disabled flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 w-full">
+												<button className="disabled flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 w-full">
 													Checkout
 												</button>
 											</div>
