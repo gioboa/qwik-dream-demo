@@ -1,6 +1,9 @@
 {
   "name": "qwik-dream-demo",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=18"
+  },
   "description": "Qwik dream demo",
   "private": true,
   "scripts": {
