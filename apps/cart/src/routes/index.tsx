@@ -91,7 +91,7 @@ export default component$(() => {
 											</div>
 										</div>
 										<div className="mt-8">
-											{!!state.cart?.totalQuantity ? (
+											{state.cart?.totalQuantity ? (
 												<CartContents cart={state.cart} />
 											) : (
 												<div className="flex items-center justify-center h-48 text-xl text-gray-400">
