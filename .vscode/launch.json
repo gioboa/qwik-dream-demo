@@ -13,5 +13,15 @@
         "action": "debugWithChrome"
       }
     },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome",
+      "url": "http://localhost:5001/",
+      "runtimeArgs": [
+        "--disable-web-security"
+      ],
+      "webRoot": "${workspaceRoot}"
+    }
   ]
 }

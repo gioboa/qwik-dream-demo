@@ -24,6 +24,7 @@
 	},
 	"devDependencies": {
 		"@builder.io/qwik": "^0.15.2",
-		"@builder.io/qwik-city": "^0.0.128"
+		"@builder.io/qwik-city": "^0.0.128",
+		"@builder.io/sdk-qwik": "^0.0.36"
 	}
 }

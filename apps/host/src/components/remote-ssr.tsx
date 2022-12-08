@@ -1,12 +1,15 @@
 import { component$, SSRStream, SSRStreamBlock } from '@builder.io/qwik';
+import { useLocation } from '@builder.io/qwik-city';
 import type { RemoteData } from '../../../../libs/shared/remotes';
 
 export interface Props {
 	remote: RemoteData;
 }
 
-export default component$((props: Props) => {
-	const { url, seamsColor, extraStyles, hideLabel } = props.remote;
+export default component$(({ remote }: Props) => {
+	const localtion = useLocation();
+	const { seamsColor, extraStyles, hideLabel } = remote;
+	const url = `${remote.url}${localtion.query[remote.name] || remote.defaultQueryParam || ''}`;
 	const decoder = new TextDecoder();
 	return (
 		<SSRStreamBlock>

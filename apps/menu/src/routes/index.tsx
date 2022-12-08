@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { component$, Resource, useClientEffect$ } from '@builder.io/qwik';
+import { component$, Resource } from '@builder.io/qwik';
 import { useEndpoint } from '@builder.io/qwik-city';
 import QwikIcon from '~/components/icons/QwikIcon';
 import { arrayToTree } from '~/utils/array-to-tree';
