@@ -56,14 +56,14 @@ export default component$(() => {
 	return (
 		<div>
 			{!state.isOpen ? (
-				<div className="fixed z-50" style="right: 20px;top: -60px;position: absolute;">
+				<div class="fixed z-50" style="right: 20px;top: -60px;position: absolute;">
 					<button
-						className="w-9 h-9 bg-white bg-opacity-20 rounded text-white p-1"
+						class="w-9 h-9 bg-white bg-opacity-20 rounded text-white p-1"
 						onClick$={toggleMenu}
 					>
 						<ShoppingBagIcon />
 						{!!state.cart?.totalQuantity && (
-							<div className="absolute rounded-full -top-2 -right-2 bg-primary-600 w-6 h-6">
+							<div class="absolute rounded-full -top-2 -right-2 bg-primary-600 w-6 h-6">
 								{state.cart?.totalQuantity}
 							</div>
 						)}
@@ -90,32 +90,32 @@ export default component$(() => {
 												</button>
 											</div>
 										</div>
-										<div className="mt-8">
+										<div class="mt-8">
 											{state.cart?.totalQuantity ? (
 												<CartContents cart={state.cart} />
 											) : (
-												<div className="flex items-center justify-center h-48 text-xl text-gray-400">
+												<div class="flex items-center justify-center h-48 text-xl text-gray-400">
 													Your cart is empty
 												</div>
 											)}
 										</div>
 									</div>
 									{!!state.cart?.totalQuantity && (
-										<div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-											<div className="flex justify-between text-base font-medium text-gray-900">
+										<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+											<div class="flex justify-between text-base font-medium text-gray-900">
 												<p>Subtotal</p>
 												<p>
 													<CartPrice
-														forcedClassName={'subTotalWithTax'}
+														forcedClass={'subTotalWithTax'}
 														amount={state.cart?.totalWithTax}
 													/>
 												</p>
 											</div>
-											<p className="mt-0.5 text-sm text-gray-500">
+											<p class="mt-0.5 text-sm text-gray-500">
 												Shipping will be calculated at checkout.
 											</p>
-											<div className="mt-6">
-												<button className="disabled flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 w-full">
+											<div class="mt-6">
+												<button class="disabled flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 w-full">
 													Checkout
 												</button>
 											</div>
