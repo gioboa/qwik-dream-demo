@@ -7,13 +7,8 @@ import { type RemoteData } from './remotes';
 export const customDefineConfig = ({ name }: RemoteData) =>
 	defineConfig(() => {
 		return {
-			basePathName: `/${name}/build`,
-			server: { host: true, cors: false },
+			server: { host: true, cors: false, fs: { allow: ['../../node_modules', '.'] } },
 			ssr: { target: 'webworker' },
-			plugins: [
-				qwikCity({ basePathname: `/${name}/` }),
-				qwikVite(),
-				tsconfigPaths(),
-			],
+			plugins: [qwikCity({ basePathname: `/${name}/` }), qwikVite(), tsconfigPaths()],
 		};
 	});

@@ -10,10 +10,6 @@ import { forcedDelay } from "../../../../libs/shared/utils";
 
 export default component$(() => {
 	const menuData = useEndpoint<typeof onGet>();
-	useClientEffect$(() => {
-		console.log("menu is working");
-	});
-
 	return (
 		<>
 			<header
