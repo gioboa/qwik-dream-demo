@@ -21,6 +21,11 @@ export default function (opts: RenderToStreamOptions) {
 		manifest,
 		base,
 		...opts,
+		// Use container attributes to set attributes on the html tag.
+		containerAttributes: {
+			lang: 'en-us',
+			...opts.containerAttributes,
+		},
 		prefetchStrategy: {
 			implementation: {
 				linkInsert: null,

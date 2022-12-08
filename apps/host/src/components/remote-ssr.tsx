@@ -18,7 +18,7 @@ export default component$((props: Props) => {
 				)}
 				<SSRStream>
 					{async stream => {
-						const fragment = await fetch(url);
+						const fragment = await fetch(url, { headers: { accept: 'text/html' } });
 						const reader = fragment.body!.getReader();
 						let fragmentChunk = await reader.read();
 						while (!fragmentChunk.done) {

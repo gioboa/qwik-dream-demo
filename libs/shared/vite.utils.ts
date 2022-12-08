@@ -8,12 +8,12 @@ export const customDefineConfig = ({ name }: RemoteData) =>
 	defineConfig(() => {
 		return {
 			basePathName: `/${name}/build`,
-			server: { host: true, cors: false },
+			server: {
+				host: true,
+				cors: false,
+				fs: { allow: ['../..'] },
+			},
 			ssr: { target: 'webworker' },
-			plugins: [
-				qwikCity({ basePathname: `/${name}/` }),
-				qwikVite(),
-				tsconfigPaths(),
-			],
+			plugins: [qwikCity({ basePathname: `/${name}/` }), qwikVite(), tsconfigPaths()],
 		};
 	});
