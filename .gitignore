@@ -3,3 +3,4 @@ node_modules
 **/server/**/*
 .idea
 pnpm-lock.yaml
+.history
