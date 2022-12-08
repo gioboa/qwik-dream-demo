@@ -11,14 +11,14 @@ export default component$<Props>(({ remote }) => {
 
 	return (
 		<div
-			window:onScroll$={async e => {
+			window:onScroll$={async () => {
 				if (!isLoaded.value && elementRef.value) {
 					const rect = elementRef.value.getBoundingClientRect();
 					const DELTA = 150;
 					const isGoingToBeVisible =
 						rect.top >= 0 &&
 						rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + DELTA;
-					if (!!isGoingToBeVisible) {
+					if (isGoingToBeVisible) {
 						isLoaded.value = true;
 						const response = await fetch(`/${remote.name}/`);
 						if (response.ok && !!elementRef.value) {

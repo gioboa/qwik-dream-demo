@@ -2,14 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "chrome",
+      "name": "Qwik: debug full stack",
+      "type": "node-terminal",
       "request": "launch",
-      "name": "Launch Chrome",
-      "url": "http://localhost:5173/",
-      "runtimeArgs": [
-        "--disable-web-security"
-      ],
-      "webRoot": "${workspaceRoot}"
-    }
+      "command": "npm run preview",
+      "cwd": "${workspaceFolder}/apps/hero",
+      "serverReadyAction": {
+        "pattern": "started server on .+, url: (https?://.+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      }
+    },
   ]
 }

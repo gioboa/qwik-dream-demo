@@ -1,14 +1,16 @@
 import { component$, useStyles$ } from '@builder.io/qwik';
-import { QwikCity, RouterOutlet } from '@builder.io/qwik-city';
+import { QwikCityProvider, RouterOutlet } from '@builder.io/qwik-city';
 
-import styles from './global.css?inline';
+import globalStyles from './global.css?inline';
 
 export default component$(() => {
-	useStyles$(styles);
+	useStyles$(globalStyles);
 	return (
-		<QwikCity>
+		<QwikCityProvider>
 			<div />
-			<RouterOutlet />
-		</QwikCity>
+			<body lang="en">
+				<RouterOutlet />
+			</body>
+		</QwikCityProvider>
 	);
 });

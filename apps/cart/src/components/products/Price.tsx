@@ -3,34 +3,23 @@ import { formatPrice } from '~/utils';
 
 export default component$<{
 	priceWithTax: number | undefined;
-	forcedClassName?: string;
-}>(({ priceWithTax, forcedClassName }: any) => {
-	if (priceWithTax == null) {
-		return <div></div>;
-	}
-	if (typeof priceWithTax === 'number') {
-		return (
-			<div className={forcedClassName}>{formatPrice(priceWithTax, 'USD')}</div>
-		);
-	}
-	if ('value' in priceWithTax) {
-		return (
-			<div className={forcedClassName}>
-				{formatPrice(priceWithTax.value, 'USD')}
-			</div>
-		);
-	}
-	if (priceWithTax.min === priceWithTax.max) {
-		return (
-			<div className={forcedClassName}>
-				{formatPrice(priceWithTax.min, 'USD')}
-			</div>
-		);
-	}
+	forcedClass?: string;
+}>(({ priceWithTax, forcedClass }: any) => {
+	const currencyCode = 'USD';
 	return (
-		<div className={forcedClassName}>
-			{formatPrice(priceWithTax.min, 'USD')} -{' '}
-			{formatPrice(priceWithTax.max, 'USD')}
+		<div>
+			{typeof priceWithTax === 'number' ? (
+				<div class={forcedClass}>{formatPrice(priceWithTax, currencyCode)}</div>
+			) : 'value' in priceWithTax ? (
+				<div class={forcedClass}>{formatPrice(priceWithTax.value, currencyCode)}</div>
+			) : priceWithTax.min === priceWithTax.max ? (
+				<div class={forcedClass}>{formatPrice(priceWithTax.min, currencyCode)}</div>
+			) : (
+				<div class={forcedClass}>
+					{formatPrice(priceWithTax.min, currencyCode)} -{' '}
+					{formatPrice(priceWithTax.max, currencyCode)}
+				</div>
+			)}
 		</div>
 	);
 });

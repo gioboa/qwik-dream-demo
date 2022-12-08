@@ -22,5 +22,8 @@
 		"start": "vite --open --mode ssr --port 5006",
 		"qwik": "qwik"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"@builder.io/qwik": "^0.15.2",
+		"@builder.io/qwik-city": "^0.0.128"
+	}
 }

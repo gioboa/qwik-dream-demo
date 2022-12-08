@@ -1,37 +1,36 @@
 /* eslint-disable no-console */
-import { component$, Resource, useClientEffect$ } from "@builder.io/qwik";
-import { useEndpoint } from "@builder.io/qwik-city";
-import QwikIcon from "~/components/icons/QwikIcon";
-import { arrayToTree } from "~/utils/array-to-tree";
-import { graphQlQuery } from "../../../../libs/shared/graphql-client";
-import { remotes } from "../../../../libs/shared/remotes";
-import { forcedDelay } from "../../../../libs/shared/utils";
-
+import { component$, Resource, useClientEffect$ } from '@builder.io/qwik';
+import { useEndpoint } from '@builder.io/qwik-city';
+import QwikIcon from '~/components/icons/QwikIcon';
+import { arrayToTree } from '~/utils/array-to-tree';
+import { graphQlQuery } from '../../../../libs/shared/graphql-client';
+import { remotes } from '../../../../libs/shared/remotes';
+import { forcedDelay } from '../../../../libs/shared/utils';
 
 export default component$(() => {
 	const menuData = useEndpoint<typeof onGet>();
 	return (
-		<>
+		<div>
 			<header
 				class={`bg-gradient-to-r from-blue-700 to-indigo-900 shadow-lg transform shadow-xl sticky top-0 -z-[1] animate-dropIn`}
 			>
-				<div className="max-w-6xl mx-auto p-4 flex items-center space-x-4">
-					<h1 className="text-white w-10">
+				<div class="max-w-6xl mx-auto p-4 flex items-center space-x-4">
+					<h1 class="text-white w-10">
 						<a href="/">
 							<QwikIcon />
 						</a>
 					</h1>
 					<Resource
 						value={menuData}
-						// onPending={() => <>Loading...</>}
-						onRejected={(error) => <>Error: {error.message}</>}
-						onResolved={(root) => (
-							<div className="flex space-x-4 hidden sm:block">
-								{root.children.map((item) => (
+						onPending={() => <div>Loading...</div>}
+						onRejected={error => <div>Error: {error.message}</div>}
+						onResolved={root => (
+							<div class="flex space-x-4 hidden sm:block">
+								{root.children.map(item => (
 									<div class="group inline-block relative">
 										<a
 											class="text-gray-200 hover:text-white py-2 px-4 inline-flex items-center"
-											href={"/collections/" + item.slug}
+											href={'/collections/' + item.slug}
 										>
 											{item.name}
 											{!!item.children?.length && (
@@ -49,13 +48,9 @@ export default component$(() => {
 												item.children.map((subItem, i, list) => (
 													<a
 														class={`${
-															i === 0
-																? "rounded-t"
-																: i === list.length - 1
-																	? "rounded-b"
-																	: ""
+															i === 0 ? 'rounded-t' : i === list.length - 1 ? 'rounded-b' : ''
 														} bg-blue-700 hover:bg-indigo-900 py-2 px-4 block whitespace-no-wrap`}
-														href={"/collections/" + subItem.slug}
+														href={'/collections/' + subItem.slug}
 													>
 														{subItem.name}
 													</a>
@@ -66,10 +61,10 @@ export default component$(() => {
 							</div>
 						)}
 					/>
-					<div className="flex-1 md:pr-8">{/* <SearchBar /> */}</div>
+					<div class="flex-1 md:pr-8">{/* <SearchBar /> */}</div>
 				</div>
 			</header>
-		</>
+		</div>
 	);
 });
 
@@ -89,6 +84,5 @@ export const onGet = async () => {
 			     }
 			   }
 			 }`);
-	return arrayToTree<{ id: string; name: string; slug: string; }>(response.data.collections.items);
+	return arrayToTree<{ id: string; name: string; slug: string }>(response.data.collections.items);
 };
-

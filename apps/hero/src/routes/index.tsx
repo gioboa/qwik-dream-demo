@@ -17,10 +17,10 @@ export default component$(() => {
 	return (
 		<Resource
 			value={heroData}
-			// onPending={() => <>Loading...</>}
-			onRejected={(error) => <>Error: {error.message}</>}
-			onResolved={(slides) => (
-				<div class='py-8'>
+			onPending={() => <div>Loading...</div>}
+			onRejected={error => <div>Error: {error.message}</div>}
+			onResolved={slides => (
+				<div class="py-8">
 					<Hero slides={slides} />
 				</div>
 			)}
@@ -28,11 +28,9 @@ export default component$(() => {
 	);
 });
 
-export const onGet: RequestHandler<HeroSlide[]> = async ({}) => {
+export const onGet: RequestHandler<HeroSlide[]> = async () => {
 	const endPoint = 'https://mocki.io/v1/d69531ee-0548-4a9d-a554-7fa0df3c237d';
 	await forcedDelay(remotes.hero.secondsOfDelay);
 	const response = await fetch(endPoint);
-	return response.ok
-		? await response.json()
-		: [{ name: 'fetch error', slug: 'error' }];
+	return response.ok ? await response.json() : [{ name: 'fetch error', slug: 'error' }];
 };
