@@ -63,7 +63,7 @@ export default component$(() => {
 	);
 });
 
-export const onGet: RequestHandler<Review[]> = async ({}) => {
+export const onGet: RequestHandler<Review[]> = async () => {
 	const endPoint = 'https://mocki.io/v1/9eeeec1a-4494-428d-81da-0db85e6b5b37';
 	await forcedDelay(remotes.reviews.secondsOfDelay);
 	const response = await fetch(endPoint);
