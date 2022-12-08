@@ -6,15 +6,13 @@ import { remotes } from '../../../../libs/shared/remotes';
 
 export default component$(() => {
 	return (
-		<div>
-			<main>
-				<RemoteSsr remote={remotes.menu} />
-				<RemoteSsr remote={remotes.cart} />
-				<RemoteSsr remote={remotes.hero} />
-				<RemoteSsr remote={remotes.product} />
-				<ComponentLoader remote={remotes.reviews} />
-			</main>
-		</div>
+		<main>
+			<RemoteSsr remote={remotes.menu} />
+			<RemoteSsr remote={remotes.cart} />
+			<RemoteSsr remote={remotes.hero} />
+			<RemoteSsr remote={remotes.product} />
+			<ComponentLoader remote={remotes.reviews} />
+		</main>
 	);
 });
 

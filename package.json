@@ -7,6 +7,7 @@
 	"description": "Qwik dream demo",
 	"private": true,
 	"scripts": {
+		"install:deps": "npm i && npm install --prefix ./apps/cart && npm install --prefix ./apps/hero && npm install --prefix ./apps/host && npm install --prefix ./apps/menu && npm install --prefix ./apps/product && npm install --prefix ./apps/reviews",
 		"cloudflare:deploy:cart": "cd ./apps/cart && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-cart",
 		"cloudflare:deploy:hero": "cd ./apps/hero && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-hero",
 		"cloudflare:deploy:host": "cd ./apps/host && npm run build && CLOUDFLARE_ACCOUNT_ID=XXX npx wrangler pages publish dist --project-name=qwik-dream-demo",
