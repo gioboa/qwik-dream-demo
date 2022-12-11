@@ -1,8 +1,5 @@
 import { type RemoteData } from './remotes';
 
 export const getTargetUrl = (request, remote: RemoteData) => {
-	return (
-		remote.url.replace(`${remote.name}/`, '') +
-		request.url.split(`/${remote.name}/`)[1]
-	);
+	return remote.url + request.url.split(`/${remote.name}/`)[1];
 };
