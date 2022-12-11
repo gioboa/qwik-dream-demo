@@ -6,9 +6,7 @@ import { remotes } from '../../libs/shared/remotes';
 
 let proxy: ServerOptions['proxy'] = {};
 Object.values(remotes).forEach(({ name, url }) => {
-	proxy![`^/${name}/.*`] = {
-		target: url.replace(`/${name}/`, ''),
-	};
+	proxy![`^/${name}/.*`] = { target: url.replace(`${name}/`, '') };
 });
 
 export default defineConfig(() => {
