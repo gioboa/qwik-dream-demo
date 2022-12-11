@@ -27,20 +27,22 @@ export default component$(({ remote }: Props) => {
 						let base: string = '';
 						while (!fragmentChunk.done) {
 							let rawHtml = decoder.decode(fragmentChunk.value);
-							// TODO: These regexes are a hack to work around the fact that the streamed content is failing to prefix base path.
-							rawHtml = rawHtml.replace(/q:base="\/(\w+)\/build\/"/gm, (match, child) => {
-								base = '/' + child;
-								console.log('FOUND', base);
-								return match;
-							});
-							rawHtml = rawHtml.replace(/="(\/src\/([^"]+))"/gm, (match, path) => {
-								console.log('REPLACE', path);
-								return '="' + base + path + '"';
-							});
-							rawHtml = rawHtml.replace(/"\\u0002(\/src\/([^"]+))"/gm, (match, path) => {
-								console.log('REPLACE', path);
-								return '"\\u0002' + base + path + '"';
-							});
+							if (import.meta.env.DEV) {
+								// TODO: These regexes are a hack to work around the fact that the streamed content is failing to prefix base path.
+								rawHtml = rawHtml.replace(/q:base="\/(\w+)\/build\/"/gm, (match, child) => {
+									base = '/' + child;
+									console.log('FOUND', base);
+									return match;
+								});
+								rawHtml = rawHtml.replace(/="(\/src\/([^"]+))"/gm, (match, path) => {
+									console.log('REPLACE', path);
+									return '="' + base + path + '"';
+								});
+								rawHtml = rawHtml.replace(/"\\u0002(\/src\/([^"]+))"/gm, (match, path) => {
+									console.log('REPLACE', path);
+									return '"\\u0002' + base + path + '"';
+								});
+							}
 							stream.write(rawHtml);
 							fragmentChunk = await reader.read();
 						}
