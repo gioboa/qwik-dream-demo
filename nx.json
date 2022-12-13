@@ -1,42 +1,64 @@
 {
-	"$schema": "./node_modules/nx/schemas/nx-schema.json",
-	"npmScope": "qwikdream",
-	"workspaceLayout": {
-		"appsDir": "apps",
-		"libsDir": "libs"
-	},
-	"tasksRunnerOptions": {
-		"default": {
-			"runner": "@nrwl/nx-cloud",
-			"options": {
-				"cacheableOperations": [
-					"build",
-					"build.client",
-					"build.preview",
-					"build.types",
-					"dev",
-					"dev.debug",
-					"fmt",
-					"fmt.check",
-					"lint",
-					"preview",
-					"qwik"
-				],
-				"accessToken": "MGM1NzhjYWEtMjgxMi00ZTgwLTk4M2YtNzVmYzdmMmM3YzE1fHJlYWQtd3JpdGU="
-			}
-		}
-	},
-	"targetDefaults": {
-		"build": {
-			"dependsOn": ["^build"]
-		}
-	},
-	"affected": {
-		"defaultBase": "main"
-	},
-	"namedInputs": {
-		"default": ["{projectRoot}/**/*", "sharedGlobals"],
-		"sharedGlobals": [],
-		"production": ["default"]
-	}
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "npmScope": "qwikdream",
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "libs"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "build.client",
+          "build.preview",
+          "build.types",
+          "dev",
+          "dev.debug",
+          "fmt",
+          "fmt.check",
+          "lint",
+          "preview",
+          "qwik"
+        ],
+        "accessToken": "MGM1NzhjYWEtMjgxMi00ZTgwLTk4M2YtNzVmYzdmMmM3YzE1fHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "test": {
+      "inputs": [
+        "default",
+        "^production"
+      ]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json"
+      ]
+    }
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "sharedGlobals": [],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/.eslintrc.json"
+    ]
+  }
 }

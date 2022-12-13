@@ -1,6 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import RemoteMfe from '~/components/remote-mfe/remote-mfe';
+import RemoteMfe from '../components/remote-mfe/remote-mfe';
 import { remotes } from '../../../../libs/shared/remotes';
 
 export default component$(() => {

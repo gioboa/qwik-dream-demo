@@ -1,5 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-import { formatPrice } from '~/utils';
+import { formatPrice } from '../../utils';
 
 export default component$<{
 	priceWithTax: number | undefined;

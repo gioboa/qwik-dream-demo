@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { qwikCity } from '@builder.io/qwik-city/vite';
 import { qwikVite } from '@builder.io/qwik/optimizer';
 import { defineConfig, ServerOptions } from 'vite';
@@ -9,9 +11,36 @@ Object.values(remotes).forEach(({ name, url }) => {
 	proxy![`^/${name}/.*`] = { target: url.replace(`${name}/`, '') };
 });
 
-export default defineConfig(() => {
-	return {
-		server: { proxy },
-		plugins: [qwikCity(), qwikVite(), tsconfigPaths()],
-	};
+export default defineConfig({
+	plugins: [
+		qwikCity(),
+		qwikVite({
+			client: {
+				outDir: '../../dist/apps/host/client',
+			},
+			ssr: {
+				outDir: '../../dist/apps/host/server',
+			},
+		}),
+		tsconfigPaths(),
+	],
+	preview: {
+		headers: {
+			'Cache-Control': 'public, max-age=600',
+		},
+	},
+	server: {
+		proxy,
+	},
+	test: {
+		globals: true,
+		cache: {
+			dir: '../../node_modules/.vitest',
+		},
+		environment: 'node',
+		include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+		coverage: {
+			reportsDirectory: '../../coverage/apps/host',
+		},
+	},
 });

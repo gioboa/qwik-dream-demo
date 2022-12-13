@@ -1,4 +1,77 @@
 {
-	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"name": "menu"
+  "name": "menu",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/menu/src",
+  "targets": {
+    "build": {
+      "options": {
+        "outputPath": "dist/apps/menu"
+      },
+      "executor": "@nrwl/vite:build"
+    },
+    "build-ssr": {
+      "defaultConfiguration": "preview",
+      "options": {
+        "outputPath": "dist/apps/menu"
+      },
+      "configurations": {
+        "preview": {
+          "ssr": "src/entry.preview.tsx"
+        },
+        "cloudflare-pages": {
+          "ssr": "entry.cloudflare-pages.tsx"
+        }
+      },
+      "executor": "@nrwl/vite:build",
+      "dependsOn": ["build"]
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vite preview --port 5003",
+        "cwd": "apps/menu"
+      },
+      "dependsOn": ["build-ssr"]
+    },
+    "serve": {
+      "executor": "@nrwl/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "menu:build",
+        "mode": "ssr"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "menu:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "menu:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "test": {
+      "executor": "@nrwl/vite:test",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/menu/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    }
+  },
+  "tags": []
 }

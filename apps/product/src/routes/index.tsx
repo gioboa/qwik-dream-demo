@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { component$, Resource } from '@builder.io/qwik';
 import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
-import { ProductType } from '~/types';
+import { ProductType } from '../types';
 import { PRODUCT_DETAIL_FRAGMENT } from '../../../../libs/shared/fragments.graphql';
 import { graphQlQuery } from '../../../../libs/shared/graphql-client';
 import { remotes } from '../../../../libs/shared/remotes';

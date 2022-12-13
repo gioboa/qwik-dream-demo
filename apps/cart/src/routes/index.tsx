@@ -1,9 +1,9 @@
-import { $, component$, useClientEffect$, useOnDocument, useStore } from '@builder.io/qwik';
-import CartContents from '~/components/cart-contents/CartContents';
-import CartPrice from '~/components/cart-totals/CartPrice';
-import CloseIcon from '~/components/icons/CloseIcon';
-import ShoppingBagIcon from '~/components/icons/ShoppingBagIcon';
-import { ACTIVE_ORDER } from '~/routes/cart.graphql';
+import { $, component$, useClientEffect$, useOnDocument, useStore } from "@builder.io/qwik";
+import CartContents from "../components/cart-contents/CartContents";
+import CartPrice from "../components/cart-totals/CartPrice";
+import CloseIcon from "../components/icons/CloseIcon";
+import ShoppingBagIcon from "../components/icons/ShoppingBagIcon";
+import { ACTIVE_ORDER } from "../routes/cart.graphql";
 import {
 	dispatchCartQuantitiesChangedEvent,
 	ORDER_CHANGE_EVENT,
