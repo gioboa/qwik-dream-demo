@@ -1,6 +1,6 @@
 import { $, component$, useClientEffect$, useOnDocument, useStore } from '@builder.io/qwik';
-import { ADD_ITEM_TO_ORDER } from '~/components/product/Product.graphql';
-import { ProductType } from '~/types';
+import { ADD_ITEM_TO_ORDER } from '../../components/product/Product.graphql';
+import { ProductType } from '../../types';
 import {
 	CART_QUANTITIES_CHANGED_EVENT,
 	dispatchOrderChangeEvent,

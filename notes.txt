@@ -1,0 +1,20 @@
+Problem:
+1. "configurePreviewServer" in qwikVite doesn't use "outDir" path from the config, instead it uses "rootDir + 'server'", which works only for default outDir
+2. vite preview provides the following environment viteEnv: { mode: 'production', command: 'serve', ssrBuild: false },
+because of this qwik-vite plugin processes params for "client", not "ssr" build, which points to the "client" outDir, not server. If "build: {ssr: true}," is explicitly specified in vite.config, preview will work properly. This is the problem on the qwik-vite's side.
+
+Possible options:
+1. qwik-vite plugin should resolve ssr's outDir in the config for "configurePreviewServer"
+2. use "outDir" in qwik-vite's  "configurePreviewServer" function
+
+
+Problem:
+Cannot pass --ssr flag for the nrwl/vite:build executor
+
+
+Feature:
+scaffold multiple micro frontends simultaneously from the host
+
+
+Feature:
+verbose flag should set "debug: true"
