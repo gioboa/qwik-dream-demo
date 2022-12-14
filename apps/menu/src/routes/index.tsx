@@ -11,7 +11,7 @@ export default component$(() => {
 	const menuData = useEndpoint<typeof onGet>();
 	return (
 		<div>
-			<header class="bg-gradient-to-r from-blue-700 to-indigo-900 shadow-lg transform shadow-xl top-0 -z-[1] animate-dropIn">
+			<header class="bg-gradient-to-r from-blue-700 to-indigo-900 shadow-lg transform shadow-xl top-0 mb-20 animate-dropIn">
 				<div class="max-w-6xl mx-auto p-4 flex items-center space-x-4">
 					<h1 class="text-white w-10">
 						<a href="/">

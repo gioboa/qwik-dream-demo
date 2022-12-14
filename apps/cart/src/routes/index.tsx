@@ -56,7 +56,7 @@ export default component$(() => {
 	return (
 		<div>
 			{!state.isOpen ? (
-				<div class="fixed z-50" style="right: 20px;top: -60px;position: absolute;">
+				<div class="absolute z-50 top-5 right-5">
 					<button
 						class="w-9 h-9 bg-white bg-opacity-20 rounded text-white p-1"
 						onClick$={toggleMenu}
