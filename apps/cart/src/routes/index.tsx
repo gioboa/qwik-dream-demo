@@ -5,9 +5,9 @@ import CloseIcon from '~/components/icons/CloseIcon';
 import ShoppingBagIcon from '~/components/icons/ShoppingBagIcon';
 import { ACTIVE_ORDER } from '~/routes/cart.graphql';
 import {
-	cartQuantitiesChangedEventId,
-	orderChangeEventId,
-	sessionTokenReceivedEventId,
+	dispatchCartQuantitiesChangedEvent,
+	ORDER_CHANGE_EVENT,
+	SESSION_TOKEN_RECEIVED_EVENT,
 } from '../../../../libs/shared/custom-events';
 import { graphQlQuery, setSessionToken } from '../../../../libs/shared/graphql-client';
 
@@ -21,9 +21,7 @@ export function updateActiveOrder(state: { cart: any }) {
 			}),
 			{},
 		);
-		document.dispatchEvent(
-			new CustomEvent(cartQuantitiesChangedEventId, { detail: productVariantQuantities }),
-		);
+		dispatchCartQuantitiesChangedEvent(productVariantQuantities);
 	});
 }
 
@@ -37,13 +35,13 @@ export default component$(() => {
 		updateActiveOrder(state);
 	});
 	useOnDocument(
-		sessionTokenReceivedEventId,
+		SESSION_TOKEN_RECEIVED_EVENT,
 		$(event => {
 			setSessionToken((event as any).detail.sessionToken);
 		}),
 	);
 	useOnDocument(
-		orderChangeEventId,
+		ORDER_CHANGE_EVENT,
 		$(() => {
 			updateActiveOrder(state);
 		}),

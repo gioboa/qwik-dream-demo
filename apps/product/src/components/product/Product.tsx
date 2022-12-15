@@ -2,8 +2,8 @@ import { $, component$, useClientEffect$, useOnDocument, useStore } from '@build
 import { ADD_ITEM_TO_ORDER } from '~/components/product/Product.graphql';
 import { ProductType } from '~/types';
 import {
-	cartQuantitiesChangedEventId,
-	orderChangeEventId,
+	CART_QUANTITIES_CHANGED_EVENT,
+	dispatchOrderChangeEvent,
 } from '../../../../../libs/shared/custom-events';
 import { graphQlQuery } from '../../../../../libs/shared/graphql-client';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
@@ -26,7 +26,7 @@ export default component$(({ product }: { product: ProductType }) => {
 	});
 
 	useOnDocument(
-		cartQuantitiesChangedEventId,
+		CART_QUANTITIES_CHANGED_EVENT,
 		$(event => {
 			state.cartQuantities = (event as CustomEvent).detail;
 		}),
@@ -40,7 +40,7 @@ export default component$(({ product }: { product: ProductType }) => {
 			quantity: 1,
 		}).then(() => {
 			console.log(`dispatching orderChangeEvent`);
-			document.dispatchEvent(new CustomEvent(orderChangeEventId));
+			dispatchOrderChangeEvent();
 		}),
 	);
 	return (
