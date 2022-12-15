@@ -11,6 +11,7 @@
 }
 
 .remote-component>.remote-label {
+  display: none;
   position: absolute;
   opacity: 0;
   top: 0;
@@ -22,7 +23,6 @@
   background-color: #fff;
   color: var(--seams-color);
   outline: 1px solid currentColor;
-  transition: opacity 200ms linear;
   cursor: pointer;
 }
 
@@ -31,5 +31,13 @@
 }
 
 [data-seams]>main>.remote-component>.remote-label {
+  display: block;
   opacity: 1;
+  animation: remoteLabelFadeIn 200ms linear forwards;
+}
+
+@keyframes remoteLabelFadeIn {
+  0% { opacity: 0; display: none; }
+  1% { opacity: 0; display: block; }
+  100% { opacity: 1; display: block; }
 }
