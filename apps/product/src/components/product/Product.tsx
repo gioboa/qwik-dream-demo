@@ -3,7 +3,7 @@ import { ADD_ITEM_TO_ORDER } from '~/components/product/Product.graphql';
 import { ProductType } from '~/types';
 import {
 	CART_QUANTITIES_CHANGED_EVENT,
-	orderChangeEvent,
+	dispatchOrderChangeEvent,
 } from '../../../../../libs/shared/custom-events';
 import { graphQlQuery } from '../../../../../libs/shared/graphql-client';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
@@ -40,7 +40,7 @@ export default component$(({ product }: { product: ProductType }) => {
 			quantity: 1,
 		}).then(() => {
 			console.log(`dispatching orderChangeEvent`);
-			document.dispatchEvent(orderChangeEvent());
+			dispatchOrderChangeEvent();
 		}),
 	);
 	return (

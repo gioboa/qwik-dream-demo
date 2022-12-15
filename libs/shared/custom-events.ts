@@ -3,10 +3,17 @@ export const ORDER_CHANGE_EVENT = 'ORDER_CHANGE_EVENT';
 export const CART_QUANTITIES_CHANGED_EVENT = 'CART_QUANTITIES_CHANGED_EVENT';
 export const SESSION_TOKEN_RECEIVED_EVENT = 'SESSION_TOKEN_RECEIVED_EVENT';
 
-export const cartQuantitiesChangedEvent = (productVariantQuantities: Record<number, number>) =>
-	new CustomEvent(CART_QUANTITIES_CHANGED_EVENT, { detail: productVariantQuantities });
+export const dispatchCartQuantitiesChangedEvent = (
+	productVariantQuantities: Record<number, number>,
+) =>
+	document.dispatchEvent(
+		new CustomEvent(CART_QUANTITIES_CHANGED_EVENT, { detail: productVariantQuantities }),
+	);
 
-export const sessionTokenReceivedEvent = (sessionToken: string) =>
-	new CustomEvent(SESSION_TOKEN_RECEIVED_EVENT, { detail: { sessionToken } });
+export const dispatchSessionTokenReceivedEvent = (sessionToken: string) =>
+	document.dispatchEvent(
+		new CustomEvent(SESSION_TOKEN_RECEIVED_EVENT, { detail: { sessionToken } }),
+	);
 
-export const orderChangeEvent = () => new CustomEvent(ORDER_CHANGE_EVENT);
+export const dispatchOrderChangeEvent = () =>
+	document.dispatchEvent(new CustomEvent(ORDER_CHANGE_EVENT));

@@ -5,7 +5,7 @@ import CloseIcon from '~/components/icons/CloseIcon';
 import ShoppingBagIcon from '~/components/icons/ShoppingBagIcon';
 import { ACTIVE_ORDER } from '~/routes/cart.graphql';
 import {
-	cartQuantitiesChangedEvent,
+	dispatchCartQuantitiesChangedEvent,
 	ORDER_CHANGE_EVENT,
 	SESSION_TOKEN_RECEIVED_EVENT,
 } from '../../../../libs/shared/custom-events';
@@ -21,7 +21,7 @@ export function updateActiveOrder(state: { cart: any }) {
 			}),
 			{},
 		);
-		document.dispatchEvent(cartQuantitiesChangedEvent(productVariantQuantities));
+		dispatchCartQuantitiesChangedEvent(productVariantQuantities);
 	});
 }
 

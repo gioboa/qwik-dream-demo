@@ -1,4 +1,4 @@
-import { sessionTokenReceivedEvent, SESSION_TOKEN_KEY } from './custom-events';
+import { dispatchSessionTokenReceivedEvent, SESSION_TOKEN_KEY } from './custom-events';
 let _sessionToken: string | undefined;
 
 export function setSessionToken(value: string) {
@@ -34,7 +34,7 @@ export function graphQlQuery(
 			const sessionToken = res.headers.get('vendure-auth-token');
 			if (sessionToken) {
 				console.log(`dispatching session token event`, sessionToken);
-				document.dispatchEvent(sessionTokenReceivedEvent(sessionToken));
+				dispatchSessionTokenReceivedEvent(sessionToken);
 				_sessionToken = sessionToken;
 				await new Promise(resolve => setTimeout(resolve, 50));
 			}
