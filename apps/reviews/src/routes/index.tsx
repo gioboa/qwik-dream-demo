@@ -3,8 +3,8 @@ import { component$, Resource } from '@builder.io/qwik';
 import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
 import StarIcon from '../components/icons/StarIcon';
 import { Review } from '../types';
-import { remotes } from '../../../../libs/shared/remotes';
-import { forcedDelay } from '../../../../libs/shared/utils';
+import { remotes } from "@qwikdream/shared";
+import { forcedDelay } from "@qwikdream/shared";
 
 export default component$(() => {
 	const reviewsData = useEndpoint<typeof onGet>();

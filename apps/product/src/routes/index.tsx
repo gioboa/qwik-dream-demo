@@ -2,10 +2,10 @@
 import { component$, Resource } from '@builder.io/qwik';
 import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
 import { ProductType } from '../types';
-import { PRODUCT_DETAIL_FRAGMENT } from '../../../../libs/shared/fragments.graphql';
-import { graphQlQuery } from '../../../../libs/shared/graphql-client';
-import { remotes } from '../../../../libs/shared/remotes';
-import { forcedDelay } from '../../../../libs/shared/utils';
+import { PRODUCT_DETAIL_FRAGMENT } from "@qwikdream/shared";
+import { graphQlQuery } from "@qwikdream/shared";
+import { remotes } from "@qwikdream/shared";
+import { forcedDelay } from "@qwikdream/shared";
 import Product from '../components/product/Product';
 
 export default component$(() => {

@@ -39,7 +39,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "menu:build",
-        "mode": "ssr"
+        "mode": "ssr",
+        "port": 5003
       },
       "configurations": {
         "development": {

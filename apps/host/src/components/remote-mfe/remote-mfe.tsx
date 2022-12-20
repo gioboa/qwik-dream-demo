@@ -7,7 +7,7 @@ import {
 	useSignal,
 } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
-import type { RemoteData } from '../../../../../libs/shared/remotes';
+import type { RemoteData } from "@qwikdream/shared";
 
 export interface Props {
 	remote: RemoteData;

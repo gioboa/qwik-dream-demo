@@ -4,8 +4,8 @@ import { ProductType } from '../../types';
 import {
 	CART_QUANTITIES_CHANGED_EVENT,
 	dispatchOrderChangeEvent,
-} from '../../../../../libs/shared/custom-events';
-import { graphQlQuery } from '../../../../../libs/shared/graphql-client';
+} from "@qwikdream/shared";
+import { graphQlQuery } from "@qwikdream/shared";
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import CheckIcon from '../icons/CheckIcon';
 import HeartIcon from '../icons/HeartIcon';

@@ -9,7 +9,7 @@ export const RouterHead = component$(() => {
 	const loc = useLocation();
 
 	return (
-		<div>
+		<>
 			<title>{head.title}</title>
 
 			<link rel="canonical" href={loc.href} />
@@ -38,6 +38,6 @@ export const RouterHead = component$(() => {
 			{head.styles.map(s => (
 				<style {...s.props} dangerouslySetInnerHTML={s.style} />
 			))}
-		</div>
+		</>
 	);
 });

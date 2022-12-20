@@ -40,7 +40,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "host:build",
-        "mode": "ssr"
+        "mode": "ssr",
+        "port": 5001
       },
       "configurations": {
         "development": {
