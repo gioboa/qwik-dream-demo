@@ -8,8 +8,8 @@ import {
 	dispatchCartQuantitiesChangedEvent,
 	ORDER_CHANGE_EVENT,
 	SESSION_TOKEN_RECEIVED_EVENT,
-} from '../../../../libs/shared/custom-events';
-import { graphQlQuery, setSessionToken } from '../../../../libs/shared/graphql-client';
+} from "@qwikdream/shared";
+import { graphQlQuery, setSessionToken } from "@qwikdream/shared";
 
 export function updateActiveOrder(state: { cart: any }) {
 	return graphQlQuery(ACTIVE_ORDER).then(({ data }) => {

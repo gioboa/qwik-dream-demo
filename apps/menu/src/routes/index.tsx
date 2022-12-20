@@ -3,9 +3,8 @@ import { component$, Resource } from '@builder.io/qwik';
 import { useEndpoint } from '@builder.io/qwik-city';
 import QwikIcon from '../components/icons/QwikIcon';
 import { arrayToTree } from '../utils/array-to-tree';
-import { graphQlQuery } from '../../../../libs/shared/graphql-client';
-import { remotes } from '../../../../libs/shared/remotes';
-import { forcedDelay } from '../../../../libs/shared/utils';
+import { graphQlQuery } from "@qwikdream/shared";
+import { remotes, forcedDelay } from '@qwikdream/shared';
 
 export default component$(() => {
 	const menuData = useEndpoint<typeof onGet>();

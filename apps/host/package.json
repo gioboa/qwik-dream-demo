@@ -1,3 +1,7 @@
 {
-    "name": "host"
+    "name": "host",
+    "scripts": {
+        "dev": "vite --mode ssr --port 5001",
+        "preview": "vite preview --port 5001"
+    }
 }

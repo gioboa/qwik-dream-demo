@@ -40,7 +40,8 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "cart:build",
-        "mode": "ssr"
+        "mode": "ssr",
+        "port": 5006
       },
       "configurations": {
         "development": {
