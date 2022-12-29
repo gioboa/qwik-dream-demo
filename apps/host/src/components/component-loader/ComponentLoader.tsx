@@ -1,4 +1,4 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { component$, useClientEffect$, useSignal } from '@builder.io/qwik';
 import { RemoteData } from '../../../../../libs/shared/remotes';
 
 export interface Props {
@@ -7,27 +7,26 @@ export interface Props {
 
 export default component$<Props>(({ remote }) => {
 	const elementRef = useSignal<Element>();
-	const isLoaded = useSignal<boolean>(false);
+
+	useClientEffect$(() => {
+			const observer = new IntersectionObserver(
+				async ([element]) => {
+					if (element.isIntersecting) {
+						const response = await fetch(`/${remote.name}/`);
+						if (response.ok) {
+							const rawHtml = await response.text();
+							elementRef.value!.innerHTML = rawHtml;
+							observer.disconnect();
+						}
+					}
+				},
+				{ rootMargin: '150px' }
+			)
+			observer.observe(elementRef.value!)
+	})
 
 	return (
 		<div
-			window:onScroll$={async () => {
-				if (!isLoaded.value && elementRef.value) {
-					const rect = elementRef.value.getBoundingClientRect();
-					const DELTA = 150;
-					const isGoingToBeVisible =
-						rect.top >= 0 &&
-						rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) + DELTA;
-					if (isGoingToBeVisible) {
-						isLoaded.value = true;
-						const response = await fetch(`/${remote.name}/`);
-						if (response.ok && !!elementRef.value) {
-							const rawHtml = await response.text();
-							elementRef.value.innerHTML = rawHtml;
-						}
-					}
-				}
-			}}
 			class="remote-component"
 		>
 			<p class="remote-label">{remote.url}</p>
