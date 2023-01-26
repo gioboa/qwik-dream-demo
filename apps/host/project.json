@@ -21,11 +21,13 @@
           "ssr": "src/entry.preview.tsx"
         },
         "cloudflare-pages": {
-          "ssr": "entry.cloudflare-pages.tsx"
+          "configFile": "apps/host/adaptors/cloudflare-pages/vite.config.ts"
         }
       },
       "executor": "@nrwl/vite:build",
-      "dependsOn": ["build"]
+      "dependsOn": [
+        "build"
+      ]
     },
     "preview": {
       "executor": "nx:run-commands",
@@ -33,7 +35,9 @@
         "command": "vite preview --port 5001",
         "cwd": "apps/host"
       },
-      "dependsOn": ["build-ssr"]
+      "dependsOn": [
+        "build-ssr"
+      ]
     },
     "serve": {
       "executor": "@nrwl/vite:dev-server",
@@ -110,6 +114,56 @@
 					}
         ],
         "parallel": true
+      }
+    },
+    "serve-all": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx serve cart",
+            "color": "blue",
+            "prefix": "CART    |"
+          },
+          {
+            "command": "nx serve hero",
+            "color": "cyan",
+            "prefix": "HERO    |"
+          },
+          {
+            "command": "nx serve host",
+            "color": "green",
+            "prefix": "HOST    |"
+          },
+          {
+            "command": "nx serve menu",
+            "color": "magenta",
+            "prefix": "MENU    |"
+          },
+          {
+            "command": "nx serve product",
+            "color": "red",
+            "prefix": "PRODUCT |"
+          },
+          {
+            "command": "nx serve reviews",
+            "color": "yellow",
+            "prefix": "REVIEWS |"
+          }
+        ],
+        "parallel": true
+      }
+    },
+    "deploy": {
+      "executor": "@k11r/nx-cloudflare-wrangler:deploy-page",
+      "options": {
+        "dist": "dist/apps/host/client"
+      }
+    },
+    "preview-cloudflare-pages": {
+      "executor": "@k11r/nx-cloudflare-wrangler:serve-page",
+      "options": {
+        "dist": "dist/apps/host/client"
       }
     }
   },
