@@ -5,7 +5,7 @@ import { qwikVite } from '@builder.io/qwik/optimizer';
 import { defineConfig, ServerOptions } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 // import { remotes } from '@qwikdream/shared';
-import { remotes } from '../../libs/shared/remotes';
+import { remotes } from '../../libs/shared/src/lib/remotes';
 
 let proxy: ServerOptions['proxy'] = {};
 Object.values(remotes).forEach(({ name, url }) => {

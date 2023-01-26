@@ -20,11 +20,13 @@
           "ssr": "src/entry.preview.tsx"
         },
         "cloudflare-pages": {
-          "ssr": "entry.cloudflare-pages.tsx"
+          "configFile": "apps/hero/adaptors/cloudflare-pages/vite.config.ts"
         }
       },
       "executor": "@nrwl/vite:build",
-      "dependsOn": ["build"]
+      "dependsOn": [
+        "build"
+      ]
     },
     "preview": {
       "executor": "nx:run-commands",
@@ -32,7 +34,9 @@
         "command": "vite preview --port 5002",
         "cwd": "apps/hero"
       },
-      "dependsOn": ["build-ssr"]
+      "dependsOn": [
+        "build-ssr"
+      ]
     },
     "serve": {
       "executor": "@nrwl/vite:dev-server",
@@ -71,6 +75,18 @@
         "lintFilePatterns": [
           "apps/hero/**/*.{ts,tsx,js,jsx}"
         ]
+      }
+    },
+    "deploy": {
+      "executor": "@k11r/nx-cloudflare-wrangler:deploy-page",
+      "options": {
+        "dist": "dist/apps/hero/client"
+      }
+    },
+    "preview-cloudflare-pages": {
+      "executor": "@k11r/nx-cloudflare-wrangler:serve-page",
+      "options": {
+        "dist": "dist/apps/hero/client"
       }
     }
   },
