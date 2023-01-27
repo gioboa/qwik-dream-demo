@@ -157,13 +157,34 @@
     "deploy": {
       "executor": "@k11r/nx-cloudflare-wrangler:deploy-page",
       "options": {
-        "dist": "dist/apps/host/client"
+        "dist": "dist/apps/host/client",
+        "projectName": "qwik-dream-demo"
       }
     },
     "preview-cloudflare-pages": {
       "executor": "@k11r/nx-cloudflare-wrangler:serve-page",
       "options": {
         "dist": "dist/apps/host/client"
+      }
+    },
+    "build-preview-cf": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx nx run host:build-ssr:cloudflare-pages",
+          "npx nx run host:preview-cloudflare-pages"
+        ],
+        "parallel": false
+      }
+    },
+    "build-deploy-cf": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx nx run host:build-ssr:cloudflare-pages",
+          "npx nx run host:deploy"
+        ],
+        "parallel": false
       }
     }
   },
