@@ -81,13 +81,34 @@
     "deploy": {
       "executor": "@k11r/nx-cloudflare-wrangler:deploy-page",
       "options": {
-        "dist": "dist/apps/reviews/client"
+        "dist": "dist/apps/reviews/client",
+        "projectName": "qwik-dream-reviews"
       }
     },
     "preview-cloudflare-pages": {
       "executor": "@k11r/nx-cloudflare-wrangler:serve-page",
       "options": {
         "dist": "dist/apps/reviews/client"
+      }
+    },
+    "build-preview-cf": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx nx run reviews:build-ssr:cloudflare-pages",
+          "npx nx run reviews:preview-cloudflare-pages"
+        ],
+        "parallel": false
+      }
+    },
+    "build-deploy-cf": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx nx run reviews:build-ssr:cloudflare-pages",
+          "npx nx run reviews:deploy"
+        ],
+        "parallel": false
       }
     }
   },

@@ -80,13 +80,34 @@
     "deploy": {
       "executor": "@k11r/nx-cloudflare-wrangler:deploy-page",
       "options": {
-        "dist": "dist/apps/hero/client"
+        "dist": "dist/apps/hero/client",
+        "projectName": "qwik-dream-hero"
       }
     },
     "preview-cloudflare-pages": {
       "executor": "@k11r/nx-cloudflare-wrangler:serve-page",
       "options": {
         "dist": "dist/apps/hero/client"
+      }
+    },
+    "build-preview-cf": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx nx run hero:build-ssr:cloudflare-pages",
+          "npx nx run hero:preview-cloudflare-pages"
+        ],
+        "parallel": false
+      }
+    },
+    "build-deploy-cf": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx nx run hero:build-ssr:cloudflare-pages",
+          "npx nx run hero:deploy"
+        ],
+        "parallel": false
       }
     }
   },

@@ -6,7 +6,12 @@
   },
   "description": "Qwik dream demo",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "nx": "nx",
+    "dev": "nx run host:serve-all",
+		"preview": "nx run host:preview-all",
+		"deploy": "nx run-many --target=build-deploy-cf --all"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gioboa/qwik-dream-demo.git"
