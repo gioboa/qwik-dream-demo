@@ -24,7 +24,12 @@ export default defineConfig({
       'Cache-Control': 'public, max-age=600',
     },
   },
-  server: { host: true, cors: false }, // TODO
+  server: {
+    fs: {
+      // Allow serving files from the project root
+      allow: ['../../'],
+    },
+  },
   ssr: { target: 'webworker' },
    test: {
     globals: true,

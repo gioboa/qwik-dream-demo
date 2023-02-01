@@ -23,7 +23,13 @@ export default defineConfig({
     headers: {
       'Cache-Control': 'public, max-age=600',
     },
-  }, // TODO: server opts?
+  }, 
+  server: {
+    fs: {
+      // Allow serving files from the project root
+      allow: ['../../'],
+    },
+  },
    test: {
     globals: true,
     cache: {
