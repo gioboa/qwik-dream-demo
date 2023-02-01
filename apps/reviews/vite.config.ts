@@ -24,6 +24,12 @@ export default defineConfig({
       'Cache-Control': 'public, max-age=600',
     },
   },
+  server: {
+    fs: {
+      // Allow serving files from the project root
+      allow: ['../../'],
+    },
+  },
    test: {
     globals: true,
     cache: {

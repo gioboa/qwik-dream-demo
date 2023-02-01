@@ -32,7 +32,11 @@ export default defineConfig({
 	},
 	server: {
 		proxy,
-	},
+		fs: {
+		  // Allow serving files from the project root
+		  allow: ['../../'],
+		},
+	  },
 	test: {
 		globals: true,
 		cache: {

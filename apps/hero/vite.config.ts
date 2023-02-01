@@ -25,6 +25,10 @@ export default defineConfig({
     },
   },
   server: {
+    fs: {
+      // Allow serving files from the project root
+      allow: ['../../'],
+    },
   },
    test: {
     globals: true,
