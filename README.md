@@ -1,4 +1,4 @@
-# Qwik dream demo
+# Microfrontend with Qwik - Qwik dream demo
 
 node v18.10.0 required
 
