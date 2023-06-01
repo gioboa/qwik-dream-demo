@@ -1,5 +1,7 @@
 # Microfrontend with Qwik - Qwik dream demo
 
+## ⚠️ Here https://github.com/gioboa/qwik-microfrontends an example with more functionality
+
 node v18.10.0 required
 
 ## Startup project
