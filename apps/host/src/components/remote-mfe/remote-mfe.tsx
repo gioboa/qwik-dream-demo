@@ -22,7 +22,7 @@ export default component$(({ remote, fetchOnScroll }: Props) => {
 	const scrollElementRef = useFetchOnScroll(!!fetchOnScroll, url);
 
 	return (
-		<div class="remote-component" style={{ '--seams-color': seamsColor, ...(extraStyles ?? {}) }}>
+		<div class="remote-component mb-4" style={{ '--seams-color': seamsColor, ...(extraStyles ?? {}) }}>
 			{!hideLabel && (
 				<a target="blank" href={url} class="remote-label">
 					{url}

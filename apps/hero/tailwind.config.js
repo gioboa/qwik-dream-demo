@@ -8,7 +8,6 @@ module.exports = {
       __dirname,
       'src/**/*!(*.stories|*.spec).{ts,tsx,html}'
     ),
-    // ...createGlobPatternsForDependencies(__dirname), // TODO
   ],
   theme: {
     extend: {},
