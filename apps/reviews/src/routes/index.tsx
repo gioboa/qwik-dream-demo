@@ -6,7 +6,6 @@ import { Review } from '../types';
 
 export const useReviewsData = routeLoader$(async () => {
 	const endPoint = 'https://mocki.io/v1/9eeeec1a-4494-428d-81da-0db85e6b5b37';
-
 	const response = await fetch(endPoint);
 	return (await response.json()) as Review[];
 });
