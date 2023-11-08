@@ -1,32 +1,11 @@
 /* eslint-disable no-console */
-import { component$, Resource } from '@builder.io/qwik';
-import { RequestHandler, useEndpoint } from '@builder.io/qwik-city';
-import { ProductType } from '../types';
-import { PRODUCT_DETAIL_FRAGMENT } from "@qwikdream/shared";
-import { graphQlQuery } from "@qwikdream/shared";
-import { remotes } from "@qwikdream/shared";
-import { forcedDelay } from "@qwikdream/shared";
+import { component$ } from '@builder.io/qwik';
+import { routeLoader$ } from '@builder.io/qwik-city';
+import { graphQlQuery, PRODUCT_DETAIL_FRAGMENT } from '@qwikdream/shared';
 import Product from '../components/product/Product';
+import { ProductType } from '../types';
 
-export default component$(() => {
-	const productData = useEndpoint<typeof onGet>();
-
-	return (
-		<Resource
-			value={productData}
-			onPending={() => <div>Loading...</div>}
-			onRejected={error => <div>Error: {error.message}</div>}
-			onResolved={product => (
-				<div class="px-16">
-					<Product product={product} />
-				</div>
-			)}
-		/>
-	);
-});
-
-export const onGet: RequestHandler<ProductType> = async () => {
-	await forcedDelay(remotes.product.secondsOfDelay);
+export const useProductData = routeLoader$(async () => {;
 	const response = await graphQlQuery(
 		`
 		  query product($slug: String, $id: ID) {
@@ -36,7 +15,16 @@ export const onGet: RequestHandler<ProductType> = async () => {
   }
 	${PRODUCT_DETAIL_FRAGMENT}
 	`,
-		{ slug: 'runx-running-shoe' },
+		{ slug: 'grey-fabric-sofa' },
 	);
-	return response.data.product;
-};
+	return response.data.product as ProductType;
+});
+
+export default component$(() => {
+	const productDataSig = useProductData();
+	return (
+		<div class="px-16">
+			<Product product={productDataSig.value} />
+		</div>
+	);
+});

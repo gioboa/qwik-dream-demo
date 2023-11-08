@@ -1,4 +1,4 @@
-import { $, component$, useClientEffect$, useOnDocument, useStore } from "@builder.io/qwik";
+import { $, component$, useVisibleTask$, useOnDocument, useStore } from "@builder.io/qwik";
 import CartContents from "../components/cart-contents/CartContents";
 import CartPrice from "../components/cart-totals/CartPrice";
 import CloseIcon from "../components/icons/CloseIcon";
@@ -30,7 +30,7 @@ export default component$(() => {
 		isOpen: false,
 		cart: undefined as any,
 	});
-	useClientEffect$(() => {
+	useVisibleTask$(() => {
 		// Fetch the active order on resume
 		updateActiveOrder(state);
 	});

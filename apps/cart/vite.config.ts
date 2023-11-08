@@ -7,7 +7,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
-    qwikCity({ basePathname: `/cart/` }),
+    qwikCity({ basePathname: `/cart/` } as any),
 		qwikVite({
 			client: {
 				outDir: '../../dist/apps/cart/client',

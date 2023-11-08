@@ -8,7 +8,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
-    qwikCity({ basePathname: `/menu/` }),
+    qwikCity({ basePathname: `/menu/` } as any),
 		qwikVite({
 			client: {
 				outDir: '../../dist/apps/menu/client',

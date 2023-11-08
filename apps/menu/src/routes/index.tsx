@@ -1,16 +1,36 @@
 /* eslint-disable no-console */
-import { component$, Resource } from '@builder.io/qwik';
-import { useEndpoint } from '@builder.io/qwik-city';
+import { Resource, component$ } from '@builder.io/qwik';
+import { routeLoader$ } from '@builder.io/qwik-city';
+import { graphQlQuery } from '@qwikdream/shared';
 import QwikIcon from '../components/icons/QwikIcon';
 import { arrayToTree } from '../utils/array-to-tree';
-import { graphQlQuery } from "@qwikdream/shared";
-import { remotes, forcedDelay } from '@qwikdream/shared';
+
+export const useMenuData = routeLoader$(async () => {
+	const response = await graphQlQuery(`
+			query collections {
+			   collections {
+			     items {
+			       id
+			       name
+			       slug
+			       parent {
+			         id
+			         name
+			       }
+			     }
+			   }
+			 }`);
+	const abc = arrayToTree<{ id: string; name: string; slug: string }>(
+		response.data.collections.items,
+	);
+	return abc;
+});
 
 export default component$(() => {
-	const menuData = useEndpoint<typeof onGet>();
+	const menuDataSig = useMenuData();
 	return (
 		<div>
-			<header class="bg-gradient-to-r from-blue-700 to-indigo-900 shadow-lg transform shadow-xl top-0 mb-20 animate-dropIn">
+			<header class="bg-gradient-to-r from-blue-700 to-indigo-900 transform shadow-xl top-0 mb-12 animate-dropIn">
 				<div class="max-w-6xl mx-auto p-4 flex items-center space-x-4">
 					<h1 class="text-white w-10">
 						<a href="/">
@@ -18,13 +38,13 @@ export default component$(() => {
 						</a>
 					</h1>
 					<Resource
-						value={menuData}
+						value={menuDataSig}
 						onPending={() => <div>Loading...</div>}
 						onRejected={error => <div>Error: {error.message}</div>}
 						onResolved={root => (
-							<div class="flex space-x-4 hidden sm:block">
-								{root.children.map(item => (
-									<div class="group inline-block relative">
+							<div class="space-x-4 hidden sm:block">
+								{root.children.map((item, key) => (
+									<div key={key} class="group inline-block relative">
 										<a
 											class="text-gray-200 hover:text-white py-2 px-4 inline-flex items-center"
 											href={'/collections/' + item.slug}
@@ -44,6 +64,7 @@ export default component$(() => {
 											{!!item.children?.length &&
 												item.children.map((subItem, i, list) => (
 													<a
+														key={i}
 														class={`${
 															i === 0 ? 'rounded-t' : i === list.length - 1 ? 'rounded-b' : ''
 														} bg-blue-700 hover:bg-indigo-900 py-2 px-4 block whitespace-no-wrap`}
@@ -64,22 +85,3 @@ export default component$(() => {
 		</div>
 	);
 });
-
-export const onGet = async () => {
-	await forcedDelay(remotes.menu.secondsOfDelay);
-	const response = await graphQlQuery(`
-			query collections {
-			   collections {
-			     items {
-			       id
-			       name
-			       slug
-			       parent {
-			         id
-			         name
-			       }
-			     }
-			   }
-			 }`);
-	return arrayToTree<{ id: string; name: string; slug: string }>(response.data.collections.items);
-};

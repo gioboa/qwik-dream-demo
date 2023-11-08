@@ -1,4 +1,4 @@
-import { $, component$, useClientEffect$, useOnDocument, useStore } from '@builder.io/qwik';
+import { $, component$, useVisibleTask$, useOnDocument, useStore } from '@builder.io/qwik';
 import { ADD_ITEM_TO_ORDER } from '../../components/product/Product.graphql';
 import { ProductType } from '../../types';
 import {
@@ -21,7 +21,7 @@ export default component$(({ product }: { product: ProductType }) => {
 		cartQuantities: {},
 	});
 
-	useClientEffect$(async () => {
+	useVisibleTask$(async () => {
 		window.scrollTo(0, 0);
 	});
 
@@ -59,7 +59,8 @@ export default component$(({ product }: { product: ProductType }) => {
 								src={product.featuredAsset.preview + '?w=600'}
 								alt={product.name}
 								class="w-full h-96 object-center object-cover rounded-lg"
-								width="800"
+								width="600"
+								height="600"
 							/>
 						</div>
 					</span>
@@ -75,7 +76,7 @@ export default component$(({ product }: { product: ProductType }) => {
 							<select
 								class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
 								value={state.selectedVariantId}
-								onChange$={(e: any) => (state.selectedVariantId = e.target.value)}
+								onChange$={(e) => (state.selectedVariantId = e.target.value)}
 							>
 								{product.variants.map(variant => (
 									<option

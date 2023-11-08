@@ -1,7 +1,7 @@
-import { createContext } from "@builder.io/qwik";
+import { createContextId } from '@builder.io/qwik';
 
 export interface AppState {
-  showSeams: boolean
+	showSeams: boolean;
 }
 
-export const GlobalAppState = createContext<AppState>("AppState");
+export const GlobalAppState = createContextId<AppState>('AppState');

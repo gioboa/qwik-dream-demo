@@ -21,7 +21,7 @@
           "ssr": "src/entry.preview.tsx"
         },
         "cloudflare-pages": {
-          "configFile": "apps/host/adaptors/cloudflare-pages/vite.config.ts"
+          "configFile": "apps/host/adapters/cloudflare-pages/vite.config.ts"
         }
       },
       "executor": "@nrwl/vite:build",

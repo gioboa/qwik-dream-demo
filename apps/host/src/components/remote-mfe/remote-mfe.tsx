@@ -3,7 +3,7 @@ import {
 	SSRStream,
 	SSRStreamBlock,
 	StreamWriter,
-	useClientEffect$,
+	useVisibleTask$,
 	useSignal,
 } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
@@ -17,7 +17,7 @@ export interface Props {
 export default component$(({ remote, fetchOnScroll }: Props) => {
 	const location = useLocation();
 	const { seamsColor, extraStyles, hideLabel } = remote;
-	const url = `${remote.url}${location.query[remote.name] || remote.defaultQueryParam || ''}`;
+	const url = `${remote.url}${location.url.searchParams.get(remote.name) || remote.defaultQueryParam || ''}`;
 
 	const scrollElementRef = useFetchOnScroll(!!fetchOnScroll, url);
 
@@ -42,7 +42,7 @@ export default component$(({ remote, fetchOnScroll }: Props) => {
 export function useFetchOnScroll(enabled: boolean, url: string) {
 	const scrollElementRef = useSignal<Element>();
 
-	useClientEffect$(({ track }) => {
+	useVisibleTask$(({ track }) => {
 		track(() => scrollElementRef.value);
 
 		if (scrollElementRef.value && enabled) {

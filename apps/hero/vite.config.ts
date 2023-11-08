@@ -8,7 +8,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
-		qwikCity({ basePathname: `/hero/` }),
+		qwikCity({ basePathname: `/hero/` } as any),
 		qwikVite({
 			client: {
 				outDir: '../../dist/apps/hero/client',

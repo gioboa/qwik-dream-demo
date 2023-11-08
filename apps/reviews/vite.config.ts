@@ -8,7 +8,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [
-    qwikCity({ basePathname: `/reviews/` }),
+    qwikCity({ basePathname: `/reviews/` } as any),
 		qwikVite({
 			client: {
 				outDir: '../../dist/apps/reviews/client',
