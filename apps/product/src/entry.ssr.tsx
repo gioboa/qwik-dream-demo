@@ -33,7 +33,7 @@ export default function (opts: RenderToStreamOptions) {
 				prefetchEvent: 'always',
 			},
 		},
-		containerTagName: 'html',
+		containerTagName: 'div',
 		qwikLoader: {
 			include: 'never',
 		},

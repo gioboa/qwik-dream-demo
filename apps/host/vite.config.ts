@@ -9,7 +9,11 @@ import { remotes } from '../../libs/shared/src/lib/remotes';
 
 let proxy: ServerOptions['proxy'] = {};
 Object.values(remotes).forEach(({ name, url }) => {
-	proxy![`^/${name}/.*`] = { target: url.replace(`${name}/`, '') };
+	proxy![`^/${name}/.*`] = {
+		target: url.replace(`${name}/`, ''),
+		changeOrigin: true,
+		rewrite: path => path.replace(`/${name}`, ''),
+	};
 });
 
 export default defineConfig({
@@ -31,12 +35,12 @@ export default defineConfig({
 		},
 	},
 	server: {
-		proxy,
 		fs: {
-		  // Allow serving files from the project root
-		  allow: ['../../'],
+			// Allow serving files from the project root
+			allow: ['../../'],
 		},
-	  },
+		proxy,
+	},
 	test: {
 		globals: true,
 		cache: {

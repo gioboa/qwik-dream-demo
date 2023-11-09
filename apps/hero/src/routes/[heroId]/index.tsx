@@ -1,6 +1,7 @@
 import { component$ } from '@builder.io/qwik';
 import { routeLoader$ } from '@builder.io/qwik-city';
-import { getContent, RenderContent, getBuilderSearchParams } from '@builder.io/sdk-qwik';
+import { RenderContent, getBuilderSearchParams, getContent } from '@builder.io/sdk-qwik';
+import { Base64 } from 'js-base64';
 
 export const BUILDER_MODEL = 'page';
 
@@ -25,11 +26,23 @@ export const useBuilderContent = routeLoader$(async ({ url, error }) => {
 	return builderContent;
 });
 
+export const useUser = routeLoader$(async ({ request }) => {
+	const user = request.headers.get('user');
+	return Base64.decode(user || '');
+});
+
 export default component$(() => {
+	const userSig = useUser();
 	const builderContentRsrcSig = useBuilderContent();
 
 	return (
-		<div class="my-4 mx-auto">
+		<div>
+			<div class="flex flex-col w-full items-center">
+				<div class="text-[50px] text-blue-600 mb-2">Welcome back {userSig.value}!</div>
+				<div class="text-2xl text-gray-700 mb-6">
+					Based on your orders, we selected a special product per you.
+				</div>
+			</div>
 			<RenderContent
 				model="page"
 				content={builderContentRsrcSig.value}

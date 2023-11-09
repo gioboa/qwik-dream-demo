@@ -10,6 +10,7 @@ export default component$(() => {
 			<RemoteMfe remote={remotes.menu} />
 			<RemoteMfe remote={remotes.hero} />
 			<RemoteMfe remote={remotes.product} />
+			<div class="h-40" />
 			<RemoteMfe remote={remotes.reviews} fetchOnScroll={true} />
 		</main>
 	);

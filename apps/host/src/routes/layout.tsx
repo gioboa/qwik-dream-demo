@@ -1,15 +1,21 @@
 import { component$, Slot, useContextProvider, useStore } from '@builder.io/qwik';
+import { RequestHandler, routeLoader$ } from '@builder.io/qwik-city';
 import { AppState, GlobalAppState } from '../store';
-import { RequestHandler } from '@builder.io/qwik-city';
 import { setCookie } from '../utils/cookie';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
 	cacheControl({ staleWhileRevalidate: 60 * 60 * 24 * 7, maxAge: 5 });
 };
 
+export const useUser = routeLoader$(({ cookie }) => {
+	const user: string = cookie.get('USER')?.value || '';
+	return user;
+});
+
 export default component$(() => {
 	const store = useStore<AppState>({
 		showSeams: false,
+		user: useUser()
 	});
 	useContextProvider(GlobalAppState, store);
 	return (

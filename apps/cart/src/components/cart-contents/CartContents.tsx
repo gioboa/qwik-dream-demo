@@ -7,13 +7,15 @@ export default component$<{
 	return (
 		<div class="flow-root">
 			<ul class="-my-6 divide-y divide-gray-200">
-				{(cart?.lines || []).map((line: any) => (
-					<li class="py-6 flex">
+				{(cart?.lines || []).map((line: any, key: number) => (
+					<li key={key} class="py-6 flex">
 						<div class="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
 							<img
 								src={line.featuredAsset.preview + '?preset=thumb'}
 								alt="Hi-Top Basketball Shoe"
 								class="w-full h-full object-center object-cover"
+								width={80}
+								height={80}
 							/>
 						</div>
 

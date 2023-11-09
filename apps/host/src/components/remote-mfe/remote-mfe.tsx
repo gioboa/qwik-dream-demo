@@ -1,13 +1,17 @@
 import {
-	component$,
 	SSRStream,
 	SSRStreamBlock,
+	Signal,
 	StreamWriter,
-	useVisibleTask$,
+	component$,
+	useContext,
 	useSignal,
+	useVisibleTask$,
 } from '@builder.io/qwik';
 import { useLocation } from '@builder.io/qwik-city';
-import type { RemoteData } from "@qwikdream/shared";
+import type { RemoteData } from '@qwikdream/shared';
+import { Base64 } from 'js-base64';
+import { GlobalAppState } from '../../store';
 
 export interface Props {
 	remote: RemoteData;
@@ -16,30 +20,40 @@ export interface Props {
 
 export default component$(({ remote, fetchOnScroll }: Props) => {
 	const location = useLocation();
-	const { seamsColor, extraStyles, hideLabel } = remote;
-	const url = `${remote.url}${location.url.searchParams.get(remote.name) || remote.defaultQueryParam || ''}`;
+	const store = useContext(GlobalAppState);
+	const { extraStyles, hideLabel } = remote;
+	const url = `${remote.url}${
+		remote.defaultQueryParam
+			? location.url.searchParams.get('query') || remote.defaultQueryParam || ''
+			: ''
+	}`;
 
-	const scrollElementRef = useFetchOnScroll(!!fetchOnScroll, url);
+	const scrollElementRef = useFetchOnScroll(!!fetchOnScroll, url, store.user);
 
 	return (
-		<div class="remote-component mb-4" style={{ '--seams-color': seamsColor, ...(extraStyles ?? {}) }}>
+		<div
+			class="remote-component mb-4"
+			style={{ '--seams-color': '#000000', ...(extraStyles ?? {}) }}
+		>
 			{!hideLabel && (
 				<a target="blank" href={url} class="remote-label">
 					{url}
 				</a>
 			)}
 			{fetchOnScroll ? (
-				<div ref={scrollElementRef}>loading...</div>
+				<div ref={scrollElementRef} class="text-center text-3xl font-bold">
+					Loading...
+				</div>
 			) : (
 				<SSRStreamBlock>
-					<SSRStream>{getSSRStreamFunction(url)}</SSRStream>
+					<SSRStream>{getSSRStreamFunction(url, store.user)}</SSRStream>
 				</SSRStreamBlock>
 			)}
 		</div>
 	);
 });
 
-export function useFetchOnScroll(enabled: boolean, url: string) {
+export function useFetchOnScroll(enabled: boolean, url: string, user: Readonly<Signal<string>>) {
 	const scrollElementRef = useSignal<Element>();
 
 	useVisibleTask$(({ track }) => {
@@ -49,7 +63,7 @@ export function useFetchOnScroll(enabled: boolean, url: string) {
 			const observer = new IntersectionObserver(
 				async ([element]) => {
 					if (element.isIntersecting) {
-						const response = await fetchRemote(url);
+						const response = await fetchRemote(url, user);
 						if (response.ok) {
 							const rawHtml = await response.text();
 							const { html } = fixRemoteHTMLInDevMode(rawHtml);
@@ -70,15 +84,15 @@ export function useFetchOnScroll(enabled: boolean, url: string) {
 	return scrollElementRef;
 }
 
-export function fetchRemote(url: string): Promise<Response> {
-	return fetch(url, { headers: { accept: 'text/html' } });
+export function fetchRemote(url: string, user: Readonly<Signal<string>>): Promise<Response> {
+	return fetch(url, { headers: { accept: 'text/html', user: Base64.btoa(user.value) } });
 }
 
-export function getSSRStreamFunction(remoteUrl: string) {
+export function getSSRStreamFunction(remoteUrl: string, user: Readonly<Signal<string>>) {
 	const decoder = new TextDecoder();
 
 	return async (stream: StreamWriter) => {
-		const reader = (await fetchRemote(remoteUrl)).body!.getReader();
+		const reader = (await fetchRemote(remoteUrl, user)).body!.getReader();
 		let fragmentChunk = await reader.read();
 		let base = '';
 		while (!fragmentChunk.done) {
@@ -99,15 +113,15 @@ export function fixRemoteHTMLInDevMode(rawHtml: string, base = ''): { html: stri
 	if (import.meta.env.DEV) {
 		html = html.replace(/q:base="\/(\w+)\/build\/"/gm, (match, child) => {
 			base = '/' + child;
-			console.log('FOUND', base);
+			// console.log('FOUND', base);
 			return match;
 		});
 		html = html.replace(/="(\/src\/([^"]+))"/gm, (match, path) => {
-			console.log('REPLACE', path);
+			// console.log('REPLACE', path);
 			return '="' + base + path + '"';
 		});
 		html = html.replace(/"\\u0002(\/src\/([^"]+))"/gm, (match, path) => {
-			console.log('REPLACE', path);
+			// console.log('REPLACE', path);
 			return '"\\u0002' + base + path + '"';
 		});
 	}
