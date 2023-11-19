@@ -38,7 +38,7 @@ export default component$(() => {
 	return (
 		<div>
 			<div class="flex flex-col w-full items-center">
-				<div class="text-[50px] text-blue-600 mb-2">Welcome back {userSig.value}!</div>
+				<div class="text-[50px] text-blue-600 mb-2">Welcome back {userSig.value || 'user'}!</div>
 				<div class="text-2xl text-gray-700 mb-6">
 					Based on your orders, we selected a special product per you.
 				</div>

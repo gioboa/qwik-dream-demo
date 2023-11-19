@@ -13,7 +13,7 @@ devDependencies:
     version: file:../qwik/packages/qwik-city/lib(@types/node@20.9.0)
   '@builder.io/sdk-qwik':
     specifier: 0.7.1-2
-    version: 0.7.1-2(@builder.io/qwik@1.2.17-dev20231108234732)(undici@5.27.2)
+    version: 0.7.1-2(@builder.io/qwik@1.2.18-dev20231116215713)(undici@5.27.2)
   '@fastify/busboy':
     specifier: ^2.0.0
     version: 2.0.0
@@ -1413,7 +1413,7 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@builder.io/sdk-qwik@0.7.1-2(@builder.io/qwik@1.2.17-dev20231108234732)(undici@5.27.2):
+  /@builder.io/sdk-qwik@0.7.1-2(@builder.io/qwik@1.2.18-dev20231116215713)(undici@5.27.2):
     resolution: {integrity: sha512-yLlZxI+u4dHkhws9LC+Alp2vUnxlf7J7N8/j7w/WN7WWB9SIQ2ip/re9Ji6umlL6nkHYHz1lnHVLcS+gax+NCw==}
     peerDependencies:
       '@builder.io/qwik': '>=1.0.0'

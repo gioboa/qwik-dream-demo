@@ -21,7 +21,7 @@ export interface Props {
 export default component$(({ remote, fetchOnScroll }: Props) => {
 	const location = useLocation();
 	const store = useContext(GlobalAppState);
-	const { extraStyles, hideLabel } = remote;
+	const { hideLabel } = remote;
 	const url = `${remote.url}${
 		remote.defaultQueryParam
 			? location.url.searchParams.get('query') || remote.defaultQueryParam || ''
@@ -32,8 +32,8 @@ export default component$(({ remote, fetchOnScroll }: Props) => {
 
 	return (
 		<div
-			class="remote-component mb-4"
-			style={{ '--seams-color': '#000000', ...(extraStyles ?? {}) }}
+			class={{ 'remote-component mb-4': true, 'z-10': remote.name === 'cart' }}
+			style={{ '--seams-color': '#000000' }}
 		>
 			{!hideLabel && (
 				<a target="blank" href={url} class="remote-label">
@@ -85,7 +85,11 @@ export function useFetchOnScroll(enabled: boolean, url: string, user: Readonly<S
 }
 
 export function fetchRemote(url: string, user: Readonly<Signal<string>>): Promise<Response> {
-	return fetch(url, { headers: { accept: 'text/html', user: Base64.btoa(user.value) } });
+	const remoteUrl = new URL(url);
+	if (remoteUrl) {
+		remoteUrl.searchParams.append('loader', 'false');
+	}
+	return fetch(remoteUrl, { headers: { accept: 'text/html', user: Base64.btoa(user.value) } });
 }
 
 export function getSSRStreamFunction(remoteUrl: string, user: Readonly<Signal<string>>) {

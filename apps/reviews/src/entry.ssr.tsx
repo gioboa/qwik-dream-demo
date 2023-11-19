@@ -17,6 +17,7 @@ import Root from './root';
 const base = '/reviews/build/';
 
 export default function (opts: RenderToStreamOptions) {
+	const url = new URL(opts.serverData!.url);
 	return renderToStream(<Root />, {
 		manifest,
 		base,
@@ -26,16 +27,16 @@ export default function (opts: RenderToStreamOptions) {
 			lang: 'en-us',
 			...opts.containerAttributes,
 		},
-		prefetchStrategy: {
-			implementation: {
-				linkInsert: null,
-				workerFetchInsert: null,
-				prefetchEvent: 'always',
-			},
-		},
-		containerTagName: 'div',
-		qwikLoader: {
-			include: 'never',
-		},
+    prefetchStrategy: {
+      implementation: {
+        linkInsert: null,
+        workerFetchInsert: null,
+        prefetchEvent: 'always',
+      },
+    },
+    containerTagName: 'div',
+    qwikLoader: {
+      include: url.searchParams.get('loader') ? 'never' : 'auto',
+    },
 	});
 }

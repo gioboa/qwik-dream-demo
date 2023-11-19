@@ -1,15 +1,15 @@
-import { $, component$, useVisibleTask$, useOnDocument, useStore } from "@builder.io/qwik";
-import CartContents from "../components/cart-contents/CartContents";
-import CartPrice from "../components/cart-totals/CartPrice";
-import CloseIcon from "../components/icons/CloseIcon";
-import ShoppingBagIcon from "../components/icons/ShoppingBagIcon";
-import { ACTIVE_ORDER } from "../routes/cart.graphql";
+import { $, component$, useVisibleTask$, useOnDocument, useStore } from '@builder.io/qwik';
+import CartContents from '../components/cart-contents/CartContents';
+import CartPrice from '../components/cart-totals/CartPrice';
+import CloseIcon from '../components/icons/CloseIcon';
+import ShoppingBagIcon from '../components/icons/ShoppingBagIcon';
+import { ACTIVE_ORDER } from '../routes/cart.graphql';
 import {
 	dispatchCartQuantitiesChangedEvent,
 	ORDER_CHANGE_EVENT,
 	SESSION_TOKEN_RECEIVED_EVENT,
-} from "@qwikdream/shared";
-import { graphQlQuery, setSessionToken } from "@qwikdream/shared";
+} from '@qwikdream/shared';
+import { graphQlQuery, setSessionToken } from '@qwikdream/shared';
 
 export function updateActiveOrder(state: { cart: any }) {
 	return graphQlQuery(ACTIVE_ORDER).then(({ data }) => {
@@ -52,7 +52,7 @@ export default component$(() => {
 	});
 
 	return (
-		<div>
+		<div class="bg-blue-700 w-[10%] float-left h-20">
 			{!state.isOpen ? (
 				<div class="absolute z-50 top-5 right-5">
 					<button

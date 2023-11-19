@@ -3,7 +3,6 @@ export interface RemoteData {
 	url: string;
 	secondsOfDelay: number;
 	seamsColor: string;
-	extraStyles?: Record<string, string | number>;
 	hideLabel?: true;
 	defaultQueryParam?: string;
 }
@@ -39,7 +38,6 @@ export const remotes: Record<string, RemoteData> = {
 		url: 'http://localhost:5006/cart/',
 		secondsOfDelay: 0,
 		seamsColor: '',
-		extraStyles: { 'z-index': 10 },
 		hideLabel: true,
 	},
 };
