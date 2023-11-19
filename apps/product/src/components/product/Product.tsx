@@ -1,8 +1,7 @@
-import { $, component$, useVisibleTask$, useOnDocument, useStore } from '@builder.io/qwik';
+import { $, component$, useOnDocument, useStore } from '@builder.io/qwik';
+import { CART_QUANTITIES_CHANGED_EVENT, dispatchOrderChangeEvent, graphQlQuery } from '@qwikdream/shared';
 import { ADD_ITEM_TO_ORDER } from '../../components/product/Product.graphql';
 import { ProductType } from '../../types';
-import { CART_QUANTITIES_CHANGED_EVENT, dispatchOrderChangeEvent } from '@qwikdream/shared';
-import { graphQlQuery } from '@qwikdream/shared';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import CheckIcon from '../icons/CheckIcon';
 import HeartIcon from '../icons/HeartIcon';
@@ -16,10 +15,6 @@ export default component$(({ product }: { product: ProductType }) => {
 	}>({
 		selectedVariantId: product.variants[0].id,
 		cartQuantities: {},
-	});
-
-	useVisibleTask$(async () => {
-		window.scrollTo(0, 0);
 	});
 
 	useOnDocument(
