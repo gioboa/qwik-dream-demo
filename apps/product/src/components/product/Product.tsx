@@ -1,5 +1,9 @@
 import { $, component$, useOnDocument, useStore } from '@builder.io/qwik';
-import { CART_QUANTITIES_CHANGED_EVENT, dispatchOrderChangeEvent, graphQlQuery } from '@qwikdream/shared';
+import {
+	CART_QUANTITIES_CHANGED_EVENT,
+	dispatchOrderChangeEvent,
+	graphQlQuery,
+} from '@qwikdream/shared';
 import { ADD_ITEM_TO_ORDER } from '../../components/product/Product.graphql';
 import { ProductType } from '../../types';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
@@ -36,7 +40,7 @@ export default component$(({ product }: { product: ProductType }) => {
 	);
 	return (
 		<div>
-			<h2 class="text-3xl sm:text-5xl font-light tracking-tight text-gray-900 my-8">
+			<h2 class="tracking-tight text-gray-900 my-8 text-3xl font-bold">
 				{product.name}
 			</h2>
 			<Breadcrumbs

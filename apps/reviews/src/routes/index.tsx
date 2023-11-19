@@ -15,7 +15,7 @@ export default component$(() => {
 
 	return (
 		<div class="p-16">
-			<h2 class="text-lg font-medium text-gray-900">Recent reviews</h2>
+			<h2 class="text-center text-3xl font-bold">Recent reviews</h2>
 			<div class="mt-6 pb-10 border-t border-gray-200 divide-y divide-gray-200 space-y-10">
 				{reviewsData.value.map(review => (
 					<div key={review.id} class="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8">

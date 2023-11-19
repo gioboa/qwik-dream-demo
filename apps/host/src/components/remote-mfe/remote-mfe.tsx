@@ -65,13 +65,9 @@ export function useFetchOnScroll(enabled: boolean, url: string, user: Readonly<S
 	useVisibleTask$(({ track }) => {
 		track(() => scrollElementRef.value);
 
-		console.log('--1111---', url);
 		if (scrollElementRef.value && enabled) {
-			console.log('--222---', url);
 			const observer = new IntersectionObserver(async ([element]) => {
-				console.log('-----', url);
 				if (element.isIntersecting) {
-					console.log('123123', url);
 					const response = await fetchRemote(url, user);
 					if (response.ok) {
 						const rawHtml = await response.text();
@@ -97,7 +93,7 @@ export function fetchRemote(url: string, user: Readonly<Signal<string>>): Promis
 		remoteUrl.searchParams.append('loader', 'false');
 		remoteUrl.searchParams.append('user', user.value);
 	}
-	return fetch(remoteUrl, { headers: { accept: 'text/html' } });
+	return fetch(remoteUrl, { headers: { accept: 'text/html', 'Access-Control-Allow-Origin': '*' } });
 }
 
 export function getSSRStreamFunction(remoteUrl: string, user: Readonly<Signal<string>>) {
