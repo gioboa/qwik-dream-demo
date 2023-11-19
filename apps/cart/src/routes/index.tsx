@@ -61,7 +61,7 @@ export default component$(() => {
 					>
 						<ShoppingBagIcon />
 						{!!state.cart?.totalQuantity && (
-							<div class="absolute rounded-full -top-2 -right-2 bg-primary-600 w-6 h-6">
+							<div class="absolute rounded-full -top-2 -right-2 bg-gray-100 text-black w-6 h-6">
 								{state.cart?.totalQuantity}
 							</div>
 						)}
@@ -113,7 +113,7 @@ export default component$(() => {
 												Shipping will be calculated at checkout.
 											</p>
 											<div class="mt-6">
-												<button class="disabled flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700 w-full">
+												<button class="disabled flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 w-full">
 													Checkout
 												</button>
 											</div>

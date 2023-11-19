@@ -6,14 +6,14 @@ settings:
 
 devDependencies:
   '@builder.io/qwik':
-    specifier: file:../qwik/packages/qwik/dist/
-    version: file:../qwik/packages/qwik/dist(@types/node@20.9.0)(undici@5.27.2)
+    specifier: 1.2.11
+    version: 1.2.11(undici@5.27.2)
   '@builder.io/qwik-city':
-    specifier: file:../qwik/packages/qwik-city/lib/
-    version: file:../qwik/packages/qwik-city/lib(@types/node@20.9.0)
+    specifier: 1.2.11
+    version: 1.2.11
   '@builder.io/sdk-qwik':
     specifier: 0.7.1-2
-    version: 0.7.1-2(@builder.io/qwik@1.2.18-dev20231116215713)(undici@5.27.2)
+    version: 0.7.1-2(@builder.io/qwik@1.2.11)(undici@5.27.2)
   '@fastify/busboy':
     specifier: ^2.0.0
     version: 2.0.0
@@ -78,8 +78,8 @@ devDependencies:
     specifier: 9.0.0
     version: 9.0.0(eslint@8.53.0)
   eslint-plugin-qwik:
-    specifier: 1.2.17
-    version: 1.2.17(eslint@8.53.0)
+    specifier: 1.2.11
+    version: 1.2.11(eslint@8.53.0)
   jest:
     specifier: 29.7.0
     version: 29.7.0(@types/node@20.9.0)(ts-node@10.9.1)
@@ -1413,13 +1413,40 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@builder.io/sdk-qwik@0.7.1-2(@builder.io/qwik@1.2.18-dev20231116215713)(undici@5.27.2):
+  /@builder.io/qwik-city@1.2.11:
+    resolution: {integrity: sha512-meeApo5czwGsn7bywtu2P4bBdRTprwtfjcwE06APvhRF2Y5xK0bv7vW9vGbRvPy/w6o5Izc+CauLepryOcXiGg==}
+    engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
+    dependencies:
+      '@mdx-js/mdx': 2.3.0
+      '@types/mdx': 2.0.5
+      source-map: 0.7.4
+      svgo: 3.0.2
+      vfile: 6.0.1
+      vite-imagetools: 5.1.2
+      zod: 3.22.4
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
+  /@builder.io/qwik@1.2.11(undici@5.27.2):
+    resolution: {integrity: sha512-C0umHmXhKdMu2dP/UTBEvuoSC1pfYSPC43jzYiF6dMXpQasgyDXIQML8yzrAsxnimr7OfKfn2vNyn2t5e9BG8A==}
+    engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
+    hasBin: true
+    peerDependencies:
+      undici: ^5.14.0
+    dependencies:
+      csstype: 3.1.2
+      undici: 5.27.2
+    dev: true
+
+  /@builder.io/sdk-qwik@0.7.1-2(@builder.io/qwik@1.2.11)(undici@5.27.2):
     resolution: {integrity: sha512-yLlZxI+u4dHkhws9LC+Alp2vUnxlf7J7N8/j7w/WN7WWB9SIQ2ip/re9Ji6umlL6nkHYHz1lnHVLcS+gax+NCw==}
     peerDependencies:
       '@builder.io/qwik': '>=1.0.0'
       undici: ^5.14.0
     dependencies:
-      '@builder.io/qwik': file:../qwik/packages/qwik/dist(@types/node@20.9.0)(undici@5.27.2)
+      '@builder.io/qwik': 1.2.11(undici@5.27.2)
       undici: 5.27.2
     dev: true
 
@@ -3374,6 +3401,10 @@ packages:
     resolution: {integrity: sha512-Rllzc5KHk0Al5/WANwgSPl1/CwjqCy+AZrGd78zuK+jO9aDM6ffblZ+zIjgPNAaEBmlO0RYDvLNh7wD0zKVgEg==}
     dev: true
 
+  /@types/mdx@2.0.5:
+    resolution: {integrity: sha512-76CqzuD6Q7LC+AtbPqrvD9AqsN0k8bsYo2bM2J8pmNldP1aIPAbzUQ7QbobyXL4eLr1wK5x8FZFe8eF/ubRuBg==}
+    dev: true
+
   /@types/ms@0.7.34:
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
     dev: true
@@ -5092,8 +5123,8 @@ packages:
       eslint: 8.53.0
     dev: true
 
-  /eslint-plugin-qwik@1.2.17(eslint@8.53.0):
-    resolution: {integrity: sha512-Q6gwahd8np5s7/SwWrgvhzAgymqHmiuXdgUvIgnDt0N0fZvdEJQUYQtTOpwMpRj8+E53oKLVk3vogeRki6QbFw==}
+  /eslint-plugin-qwik@1.2.11(eslint@8.53.0):
+    resolution: {integrity: sha512-F4h4waCC9g8cXREVgHLhUzlbPkKJ7TpuUd1xmFQ0D+vYXvKk7RYYC1azBZMXqcc09b8XXz1UuvR2HLMrf/JblQ==}
     engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
     peerDependencies:
       eslint: ^8.45.0
@@ -9845,53 +9876,4 @@ packages:
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
-    dev: true
-
-  file:../qwik/packages/qwik-city/lib(@types/node@20.9.0):
-    resolution: {directory: ../qwik/packages/qwik-city/lib, type: directory}
-    id: file:../qwik/packages/qwik-city/lib
-    name: '@builder.io/qwik-city'
-    engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
-    dependencies:
-      '@mdx-js/mdx': 2.3.0
-      '@types/mdx': 2.0.10
-      source-map: 0.7.4
-      svgo: 3.0.2
-      undici: 5.27.2
-      vfile: 6.0.1
-      vite: 4.5.0(@types/node@20.9.0)
-      vite-imagetools: 5.1.2
-      zod: 3.22.4
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - lightningcss
-      - rollup
-      - sass
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-    dev: true
-
-  file:../qwik/packages/qwik/dist(@types/node@20.9.0)(undici@5.27.2):
-    resolution: {directory: ../qwik/packages/qwik/dist, type: directory}
-    id: file:../qwik/packages/qwik/dist
-    name: '@builder.io/qwik'
-    engines: {node: '>=16.8.0 <18.0.0 || >=18.11'}
-    hasBin: true
-    peerDependencies:
-      undici: ^5.14.0
-    dependencies:
-      csstype: 3.1.2
-      undici: 5.27.2
-      vite: 4.5.0(@types/node@20.9.0)
-    transitivePeerDependencies:
-      - '@types/node'
-      - less
-      - lightningcss
-      - sass
-      - stylus
-      - sugarss
-      - terser
     dev: true

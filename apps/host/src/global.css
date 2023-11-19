@@ -3,45 +3,50 @@
 @tailwind utilities;
 
 .remote-component {
-  position: relative;
-  outline: 2px dashed transparent;
-  outline-offset: -2px;
-  isolation: isolate;
+	position: relative;
+	outline: 2px dashed transparent;
+	outline-offset: -2px;
+	isolation: isolate;
 }
 
-[data-seams]>main>.remote-component {
-  --seams-color: #bc0000;
-  outline-color: var(--seams-color);
+[data-seams] > main > .remote-component {
+	--seams-color: #bc0000;
+	outline-color: var(--seams-color);
 }
 
-.remote-component>.remote-label {
-  display: none;
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: .7rem;
-  transform: translateY(-50%);
-  z-index: 15;
-  font-size: 2rem;
-  padding: .25rem .5rem;
-  background-color: #fff;
-  color: var(--seams-color);
-  outline: 1px solid currentColor;
-  cursor: pointer;
+.remote-component > .remote-label {
+	display: none;
+	position: absolute;
+	opacity: 0;
+	transform: translateY(-50%);
+	font-size: 1rem;
+	padding: 0.25rem 0.5rem;
+	background-color: #fff;
+	outline: 1px solid currentColor;
+	cursor: pointer;
 }
 
-.remote-component>.remote-label:hover {
-  text-decoration: underline;
+.remote-component > .remote-label:hover {
+	text-decoration: underline;
 }
 
-[data-seams]>main>.remote-component>.remote-label {
-  display: block;
-  opacity: 1;
-  animation: remoteLabelFadeIn 200ms linear forwards;
+[data-seams] > main > .remote-component > .remote-label {
+	display: block;
+	opacity: 1;
+	animation: remoteLabelFadeIn 200ms linear forwards;
 }
 
 @keyframes remoteLabelFadeIn {
-  0% { opacity: 0; display: none; }
-  1% { opacity: 0; display: block; }
-  100% { opacity: 1; display: block; }
+	0% {
+		opacity: 0;
+		display: none;
+	}
+	1% {
+		opacity: 0;
+		display: block;
+	}
+	100% {
+		opacity: 1;
+		display: block;
+	}
 }

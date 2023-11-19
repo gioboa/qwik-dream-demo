@@ -32,7 +32,11 @@ export default component$(({ remote, fetchOnScroll }: Props) => {
 
 	return (
 		<div
-			class={{ 'remote-component mb-4': true, 'z-10': remote.name === 'cart' }}
+			class={{
+				'remote-component mb-6': true,
+				'z-10': remote.name === 'cart',
+				'pb-2': remote.name !== 'cart' && remote.name !== 'menu',
+			}}
 			style={{ '--seams-color': '#000000' }}
 		>
 			{!hideLabel && (

@@ -1,11 +1,8 @@
 import { $, component$, useVisibleTask$, useOnDocument, useStore } from '@builder.io/qwik';
 import { ADD_ITEM_TO_ORDER } from '../../components/product/Product.graphql';
 import { ProductType } from '../../types';
-import {
-	CART_QUANTITIES_CHANGED_EVENT,
-	dispatchOrderChangeEvent,
-} from "@qwikdream/shared";
-import { graphQlQuery } from "@qwikdream/shared";
+import { CART_QUANTITIES_CHANGED_EVENT, dispatchOrderChangeEvent } from '@qwikdream/shared';
+import { graphQlQuery } from '@qwikdream/shared';
 import Breadcrumbs from '../breadcrumbs/Breadcrumbs';
 import CheckIcon from '../icons/CheckIcon';
 import HeartIcon from '../icons/HeartIcon';
@@ -74,9 +71,9 @@ export default component$(({ product }: { product: ProductType }) => {
 						<div class="mt-4">
 							<label class="block text-sm font-medium text-gray-700">Select option</label>
 							<select
-								class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm rounded-md"
+								class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
 								value={state.selectedVariantId}
-								onChange$={(e) => (state.selectedVariantId = e.target.value)}
+								onChange$={e => (state.selectedVariantId = e.target.value)}
 							>
 								{product.variants.map(variant => (
 									<option
@@ -97,15 +94,9 @@ export default component$(({ product }: { product: ProductType }) => {
 						></Price>
 						<div class="flex sm:flex-col1 align-baseline">
 							<button
-								class={`max-w-xs flex-1 ${
-									state.cartQuantities[state.selectedVariantId] > 7
-										? 'bg-gray-600 cursor-not-allowed'
-										: state.cartQuantities[state.selectedVariantId] === 0
-										? 'bg-primary-600 hover:bg-primary-700'
-										: 'bg-green-600 active:bg-green-700 hover:bg-green-700'
-								} transition-colors border border-transparent rounded-md py-3 px-8 flex items-center 
-									justify-center text-base font-medium text-white focus:outline-none 
-									focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-primary-500 sm:w-full`}
+								class={`max-w-xs flex-1 bg-green-600 active:bg-green-700 hover:bg-green-700 transition-colors border 
+								  border-transparent rounded-md py-3 px-8 flex items-center 
+									justify-center text-base font-medium text-white focus:outline-none sm:w-full`}
 								onClick$={() => addItemToOrder()}
 							>
 								{state.cartQuantities[state.selectedVariantId] ? (
