@@ -1,14 +1,13 @@
 import { $, component$, Slot, useContextProvider, useStore } from '@builder.io/qwik';
-import { RequestHandler, routeLoader$, useLocation, useNavigate } from '@builder.io/qwik-city';
+import { RequestHandler, routeLoader$ } from '@builder.io/qwik-city';
 import { AppState, GlobalAppState } from '../store';
-import { setCookie } from '../utils/cookie';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
 	cacheControl({ staleWhileRevalidate: 60 * 60 * 24 * 7, maxAge: 5 });
 };
 
-export const useUser = routeLoader$(({ cookie }) => {
-	const user: string = cookie.get('USER')?.value || '';
+export const useUser = routeLoader$(({ url }) => {
+	const user: string = url.searchParams.get('user') || '';
 	return user;
 });
 
@@ -20,28 +19,29 @@ export default component$(() => {
 	useContextProvider(GlobalAppState, store);
 
 	const setUser = $((user: string) => {
-		setCookie('USER', user);
 		localStorage.clear();
-		location.reload()
+		const url = new URL(location.href);
+		url.searchParams.set('user', user);
+		location.href = url.href;
 	});
 
 	return (
 		<div data-seams={store.showSeams}>
-			<div class="flex gap-3 mb-4">
+			<div class="flex gap-3 mt-6 mb-4 ml-3">
 				<button
-					class="flex mt-3 ml-3 p-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+					class="flex p-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
 					onClick$={() => (store.showSeams = !store.showSeams)}
 				>
 					Show Worker URLs
 				</button>
 				<button
-					class="flex mt-3 p-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+					class="flex p-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
 					onClick$={() => setUser('Giorgio')}
 				>
 					User Giorgio
 				</button>
 				<button
-					class="flex mt-3 p-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+					class="flex p-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
 					onClick$={() => setUser('Miško')}
 				>
 					User Miško

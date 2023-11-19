@@ -36,7 +36,6 @@ export default component$(({ product }: { product: ProductType }) => {
 			productVariantId: state.selectedVariantId,
 			quantity: 1,
 		}).then(() => {
-			console.log(`dispatching orderChangeEvent`);
 			dispatchOrderChangeEvent();
 		}),
 	);

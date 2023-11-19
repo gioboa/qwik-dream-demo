@@ -8,10 +8,9 @@ import {
 	useSignal,
 	useVisibleTask$,
 } from '@builder.io/qwik';
-import { useLocation } from '@builder.io/qwik-city';
 import type { RemoteData } from '@qwikdream/shared';
-import { Base64 } from 'js-base64';
 import { GlobalAppState } from '../../store';
+import { useLocation } from '@builder.io/qwik-city';
 
 export interface Props {
 	remote: RemoteData;
@@ -22,13 +21,16 @@ export default component$(({ remote, fetchOnScroll }: Props) => {
 	const location = useLocation();
 	const store = useContext(GlobalAppState);
 	const { hideLabel } = remote;
-	const url = `${remote.url}${
-		remote.defaultQueryParam
-			? location.url.searchParams.get('query') || remote.defaultQueryParam || ''
-			: ''
-	}`;
 
-	const scrollElementRef = useFetchOnScroll(!!fetchOnScroll, url, store.user);
+	const url = new URL(
+		remote.url +
+			(remote.queryParam ? (store.user.value === 'Giorgio' ? '/builder-io' : '/qwik') : ''),
+	);
+	const scrollElementRef = useFetchOnScroll(
+		!!fetchOnScroll,
+		location.url.origin + '/reviews/',
+		store.user,
+	);
 
 	return (
 		<div
@@ -40,8 +42,8 @@ export default component$(({ remote, fetchOnScroll }: Props) => {
 			style={{ '--seams-color': '#000000' }}
 		>
 			{!hideLabel && (
-				<a target="blank" href={url} class="remote-label">
-					{url}
+				<a target="blank" href={url.href} class="remote-label">
+					{url.href}
 				</a>
 			)}
 			{fetchOnScroll ? (
@@ -50,7 +52,7 @@ export default component$(({ remote, fetchOnScroll }: Props) => {
 				</div>
 			) : (
 				<SSRStreamBlock>
-					<SSRStream>{getSSRStreamFunction(url, store.user)}</SSRStream>
+					<SSRStream>{getSSRStreamFunction(url.href, store.user)}</SSRStream>
 				</SSRStreamBlock>
 			)}
 		</div>
@@ -63,21 +65,22 @@ export function useFetchOnScroll(enabled: boolean, url: string, user: Readonly<S
 	useVisibleTask$(({ track }) => {
 		track(() => scrollElementRef.value);
 
+		console.log('--1111---', url);
 		if (scrollElementRef.value && enabled) {
-			const observer = new IntersectionObserver(
-				async ([element]) => {
-					if (element.isIntersecting) {
-						const response = await fetchRemote(url, user);
-						if (response.ok) {
-							const rawHtml = await response.text();
-							const { html } = fixRemoteHTMLInDevMode(rawHtml);
-							scrollElementRef.value!.innerHTML = html;
-							observer.disconnect();
-						}
+			console.log('--222---', url);
+			const observer = new IntersectionObserver(async ([element]) => {
+				console.log('-----', url);
+				if (element.isIntersecting) {
+					console.log('123123', url);
+					const response = await fetchRemote(url, user);
+					if (response.ok) {
+						const rawHtml = await response.text();
+						const { html } = fixRemoteHTMLInDevMode(rawHtml);
+						scrollElementRef.value!.innerHTML = html;
+						observer.disconnect();
 					}
-				},
-				{ rootMargin: '150px' },
-			);
+				}
+			});
 			observer.observe(scrollElementRef.value!);
 			return () => {
 				observer.unobserve(scrollElementRef.value!);
@@ -92,8 +95,9 @@ export function fetchRemote(url: string, user: Readonly<Signal<string>>): Promis
 	const remoteUrl = new URL(url);
 	if (remoteUrl) {
 		remoteUrl.searchParams.append('loader', 'false');
+		remoteUrl.searchParams.append('user', user.value);
 	}
-	return fetch(remoteUrl, { headers: { accept: 'text/html', user: Base64.btoa(user.value) } });
+	return fetch(remoteUrl, { headers: { accept: 'text/html' } });
 }
 
 export function getSSRStreamFunction(remoteUrl: string, user: Readonly<Signal<string>>) {

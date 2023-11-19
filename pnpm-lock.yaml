@@ -86,9 +86,6 @@ devDependencies:
   jest-environment-jsdom:
     specifier: 29.7.0
     version: 29.7.0
-  js-base64:
-    specifier: ^3.7.5
-    version: 3.7.5
   jsdom:
     specifier: ~22.1.0
     version: 22.1.0
@@ -6626,10 +6623,6 @@ packages:
   /jiti@1.21.0:
     resolution: {integrity: sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==}
     hasBin: true
-    dev: true
-
-  /js-base64@3.7.5:
-    resolution: {integrity: sha512-3MEt5DTINKqfScXKfJFrRbxkrnk2AxPWGBL/ycjz4dK8iqiSJ06UxD8jh8xuh6p10TX4t2+7FsBYVxxQbMg+qA==}
     dev: true
 
   /js-tokens@4.0.0:

@@ -1,7 +1,6 @@
 import { component$ } from '@builder.io/qwik';
 import { routeLoader$ } from '@builder.io/qwik-city';
 import { RenderContent, getBuilderSearchParams, getContent } from '@builder.io/sdk-qwik';
-import { Base64 } from 'js-base64';
 
 export const BUILDER_MODEL = 'page';
 
@@ -26,9 +25,9 @@ export const useBuilderContent = routeLoader$(async ({ url, error }) => {
 	return builderContent;
 });
 
-export const useUser = routeLoader$(async ({ request }) => {
-	const user = request.headers.get('user');
-	return Base64.decode(user || '');
+export const useUser = routeLoader$(async ({ url }) => {
+	const user = url.searchParams.get('user');
+	return user || '';
 });
 
 export default component$(() => {
