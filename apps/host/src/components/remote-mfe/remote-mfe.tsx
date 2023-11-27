@@ -1,16 +1,15 @@
 import {
 	SSRStream,
 	SSRStreamBlock,
-	Signal,
 	StreamWriter,
 	component$,
 	useContext,
 	useSignal,
 	useVisibleTask$,
 } from '@builder.io/qwik';
+import { server$ } from '@builder.io/qwik-city';
 import type { RemoteData } from '@qwikdream/shared';
 import { GlobalAppState } from '../../store';
-import { useLocation } from '@builder.io/qwik-city';
 
 export interface Props {
 	remote: RemoteData;
@@ -18,19 +17,13 @@ export interface Props {
 }
 
 export default component$(({ remote, fetchOnScroll }: Props) => {
-	const location = useLocation();
 	const store = useContext(GlobalAppState);
 	const { hideLabel } = remote;
 
 	const url = new URL(
-		remote.url +
-			(remote.queryParam ? (store.user.value === 'Giorgio' ? '/builder-io' : '/qwik') : ''),
+		remote.url + (remote.queryParam ? (store.user === 'Giorgio' ? '/builder-io' : '/qwik') : ''),
 	);
-	const scrollElementRef = useFetchOnScroll(
-		!!fetchOnScroll,
-		location.url.origin + '/reviews/',
-		store.user,
-	);
+	const scrollElementRef = useFetchOnScroll(!!fetchOnScroll, remote.url, store.user);
 
 	return (
 		<div
@@ -59,7 +52,7 @@ export default component$(({ remote, fetchOnScroll }: Props) => {
 	);
 });
 
-export function useFetchOnScroll(enabled: boolean, url: string, user: Readonly<Signal<string>>) {
+const useFetchOnScroll = (enabled: boolean, url: string, user: string) => {
 	const scrollElementRef = useSignal<Element>();
 
 	useVisibleTask$(({ track }) => {
@@ -68,13 +61,10 @@ export function useFetchOnScroll(enabled: boolean, url: string, user: Readonly<S
 		if (scrollElementRef.value && enabled) {
 			const observer = new IntersectionObserver(async ([element]) => {
 				if (element.isIntersecting) {
-					const response = await fetchRemote(url, user);
-					if (response.ok) {
-						const rawHtml = await response.text();
-						const { html } = fixRemoteHTMLInDevMode(rawHtml);
-						scrollElementRef.value!.innerHTML = html;
-						observer.disconnect();
-					}
+					const rawHtml = await fetchRemoteOnScroll(url, user);
+					const { html } = fixRemoteHTMLInDevMode(rawHtml);
+					scrollElementRef.value!.innerHTML = html;
+					observer.disconnect();
 				}
 			});
 			observer.observe(scrollElementRef.value!);
@@ -85,18 +75,28 @@ export function useFetchOnScroll(enabled: boolean, url: string, user: Readonly<S
 	});
 
 	return scrollElementRef;
-}
+};
 
-export function fetchRemote(url: string, user: Readonly<Signal<string>>): Promise<Response> {
+const fetchRemoteOnScroll = server$(async (url: string, user: string): Promise<string> => {
+	const response = await fetchRemote(url, user);
+	return response.ok ? await response.text() : '';
+});
+
+const fetchRemote = server$((url: string, user: string) => {
 	const remoteUrl = new URL(url);
 	if (remoteUrl) {
 		remoteUrl.searchParams.append('loader', 'false');
-		remoteUrl.searchParams.append('user', user.value);
 	}
-	return fetch(remoteUrl, { headers: { accept: 'text/html', 'Access-Control-Allow-Origin': '*' } });
-}
+	return fetch(remoteUrl, {
+		headers: {
+			accept: 'text/html',
+			'Access-Control-Allow-Origin': '*',
+			cookie: 'user=' + user,
+		},
+	});
+});
 
-export function getSSRStreamFunction(remoteUrl: string, user: Readonly<Signal<string>>) {
+const getSSRStreamFunction = (remoteUrl: string, user: string) => {
 	const decoder = new TextDecoder();
 
 	return async (stream: StreamWriter) => {
@@ -111,12 +111,12 @@ export function getSSRStreamFunction(remoteUrl: string, user: Readonly<Signal<st
 			fragmentChunk = await reader.read();
 		}
 	};
-}
+};
 
 /**
  * This function is a hack to work around the fact that in dev mode the remote html is failing to prefix the base path.
  */
-export function fixRemoteHTMLInDevMode(rawHtml: string, base = ''): { html: string; base: string } {
+const fixRemoteHTMLInDevMode = (rawHtml: string, base = ''): { html: string; base: string } => {
 	let html = rawHtml;
 	if (import.meta.env.DEV) {
 		html = html.replace(/q:base="\/(\w+)\/build\/"/gm, (match, child) => {
@@ -134,4 +134,4 @@ export function fixRemoteHTMLInDevMode(rawHtml: string, base = ''): { html: stri
 		});
 	}
 	return { html, base };
-}
+};

@@ -1,8 +1,8 @@
-import { Signal, createContextId } from '@builder.io/qwik';
+import { createContextId } from '@builder.io/qwik';
 
 export interface AppState {
 	showSeams: boolean;
-	user: Readonly<Signal<string>>;
+	user: string;
 }
 
 export const GlobalAppState = createContextId<AppState>('AppState');

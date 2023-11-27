@@ -25,10 +25,7 @@ export const useBuilderContent = routeLoader$(async ({ url, error }) => {
 	return builderContent;
 });
 
-export const useUser = routeLoader$(async ({ url }) => {
-	const user = url.searchParams.get('user');
-	return user || '';
-});
+export const useUser = routeLoader$(async ({ cookie }) => cookie.get('user')?.value || '');
 
 export default component$(() => {
 	const userSig = useUser();
@@ -37,7 +34,7 @@ export default component$(() => {
 	return (
 		<div class="px-10">
 			<div class="flex flex-col w-full items-center">
-				<div class="text-[50px] text-blue-600 mb-2">Welcome back {userSig.value || 'user'}!</div>
+				<div class="text-[50px] text-blue-600 mb-2">Welcome back {userSig.value}!</div>
 				<div class="text-2xl text-gray-700 mb-6">
 					Based on your orders, we selected a special product per you.
 				</div>

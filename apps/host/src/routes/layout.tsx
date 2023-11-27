@@ -1,28 +1,28 @@
 import { $, component$, Slot, useContextProvider, useStore } from '@builder.io/qwik';
-import { RequestHandler, routeLoader$ } from '@builder.io/qwik-city';
+import { RequestHandler, routeLoader$, useLocation, useNavigate } from '@builder.io/qwik-city';
 import { AppState, GlobalAppState } from '../store';
+import { setCookie } from '../utils/cookie';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
 	cacheControl({ staleWhileRevalidate: 60 * 60 * 24 * 7, maxAge: 5 });
 };
 
-export const useUser = routeLoader$(({ url }) => {
-	const user: string = url.searchParams.get('user') || '';
-	return user;
-});
+export const useUser = routeLoader$(({ cookie }) => cookie.get('user')?.value || 'user');
 
 export default component$(() => {
 	const store = useStore<AppState>({
 		showSeams: false,
-		user: useUser(),
+		user: useUser().value,
 	});
 	useContextProvider(GlobalAppState, store);
 
 	const setUser = $((user: string) => {
 		localStorage.clear();
-		const url = new URL(location.href);
-		url.searchParams.set('user', user);
-		location.href = url.href;
+		setCookie('user', user);
+		store.user = user;
+		const newUrl = new URL(location.origin);
+		newUrl.searchParams.append('t', new Date().getTime().toString())
+		location.href = newUrl.href
 	});
 
 	return (

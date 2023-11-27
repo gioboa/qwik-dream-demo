@@ -5,8 +5,8 @@ import { graphQlQuery, PRODUCT_DETAIL_FRAGMENT } from '@qwikdream/shared';
 import Product from '../components/product/Product';
 import { ProductType } from '../types';
 
-export const useProductData = routeLoader$(async ({ url }) => {
-	const user = url.searchParams.get('user') || '';
+export const useProductData = routeLoader$(async ({ cookie }) => {
+	const user = cookie.get('user')?.value || '';
 	const response = await graphQlQuery(
 		` query product($slug: String, $id: ID) {
    		  product(slug: $slug, id: $id) {
