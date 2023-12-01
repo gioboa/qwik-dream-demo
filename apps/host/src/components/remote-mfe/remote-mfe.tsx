@@ -86,6 +86,7 @@ const fetchRemote = server$((url: string, user: string) => {
 	const remoteUrl = new URL(url);
 	if (remoteUrl) {
 		remoteUrl.searchParams.append('loader', 'false');
+		remoteUrl.searchParams.append('t', new Date().getTime().toString());
 	}
 	return fetch(remoteUrl, {
 		headers: {
