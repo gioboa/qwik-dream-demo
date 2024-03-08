@@ -1,45 +1,54 @@
-
 /// <reference types="vitest" />
 
-import { qwikVite } from '@builder.io/qwik/optimizer';
 import { qwikCity } from '@builder.io/qwik-city/vite';
-import { defineConfig } from 'vite';
+import { qwikVite } from '@builder.io/qwik/optimizer';
+import { UserConfig, defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import pkg from './package.json';
 
-export default defineConfig({
-  plugins: [
-		qwikCity({ basePathname: `/hero/` } as any),
-		qwikVite({
-			client: {
-				outDir: '../../dist/apps/hero/client',
+const { dependencies = {}, devDependencies = {} } = pkg as any as {
+	dependencies: Record<string, string>;
+	devDependencies: Record<string, string>;
+	[key: string]: unknown;
+};
+
+export default defineConfig(({ command, mode }): UserConfig => {
+	return {
+		plugins: [
+			qwikCity({ basePathname: `/hero/` } as any),
+			qwikVite({
+				client: {
+					outDir: '../../dist/apps/hero/client',
+				},
+				ssr: {
+					outDir: '../../dist/apps/hero/server',
+				},
+			}),
+			tsconfigPaths(),
+		],
+		optimizeDeps: {
+			exclude: [],
+		},
+		ssr:
+			command === 'build' && mode === 'production'
+				? {
+						noExternal: Object.keys(devDependencies),
+						external: Object.keys(dependencies),
+				  }
+				: undefined,
+		server: {
+			fs: {
+				// Allow serving files from the project root
+				allow: ['../../'],
 			},
-			ssr: {
-				outDir: '../../dist/apps/hero/server',
+			headers: {
+				'Cache-Control': 'public, max-age=0',
 			},
-		}),
-		tsconfigPaths(),
-	],
-  preview: {
-    headers: {
-      'Cache-Control': 'public, max-age=600',
-    },
-  },
-  server: {
-    fs: {
-      // Allow serving files from the project root
-      allow: ['../../'],
-    },
-  },
-   test: {
-    globals: true,
-    cache: {
-      dir: '../../node_modules/.vitest',
-    },
-    environment: 'node',
-    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    coverage: {
-      reportsDirectory: '../../coverage/apps/hero'
-    }
-  }
-  
+		},
+		preview: {
+			headers: {
+				'Cache-Control': 'public, max-age=600',
+			},
+		},
+	};
 });

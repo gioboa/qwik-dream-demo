@@ -1,5 +1,5 @@
-import { $, component$, Slot, useContextProvider, useStore } from '@builder.io/qwik';
-import { RequestHandler, routeLoader$, useLocation, useNavigate } from '@builder.io/qwik-city';
+import { $, component$, PrefetchGraph, PrefetchServiceWorker, Slot, useContextProvider, useStore } from '@builder.io/qwik';
+import { RequestHandler, routeLoader$ } from '@builder.io/qwik-city';
 import { AppState, GlobalAppState } from '../store';
 import { setCookie } from '../utils/cookie';
 
@@ -48,6 +48,8 @@ export default component$(() => {
 				</button>
 			</div>
 			<Slot />
+			<PrefetchGraph />
+			<PrefetchServiceWorker />
 		</div>
 	);
 });
