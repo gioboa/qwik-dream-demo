@@ -6,8 +6,10 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 };
 
 export default component$(() => {
-	return <>
-		<Slot />
-		<PrefetchGraph base="/reviews/build/" />
-	</>;
+	return (
+		<>
+			<Slot />
+			<PrefetchGraph base="/reviews/build/" />
+		</>
+	);
 });

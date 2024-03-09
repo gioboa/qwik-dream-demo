@@ -1,4 +1,12 @@
-import { $, component$, PrefetchGraph, PrefetchServiceWorker, Slot, useContextProvider, useStore } from '@builder.io/qwik';
+import {
+	$,
+	component$,
+	PrefetchGraph,
+	PrefetchServiceWorker,
+	Slot,
+	useContextProvider,
+	useStore,
+} from '@builder.io/qwik';
 import { RequestHandler, routeLoader$ } from '@builder.io/qwik-city';
 import { AppState, GlobalAppState } from '../store';
 import { setCookie } from '../utils/cookie';
@@ -21,8 +29,8 @@ export default component$(() => {
 		setCookie('user', user);
 		store.user = user;
 		const newUrl = new URL(location.origin);
-		newUrl.searchParams.append('t', new Date().getTime().toString())
-		location.href = newUrl.href
+		newUrl.searchParams.append('t', new Date().getTime().toString());
+		location.href = newUrl.href;
 	});
 
 	return (
@@ -48,8 +56,8 @@ export default component$(() => {
 				</button>
 			</div>
 			<Slot />
-			<PrefetchGraph />
 			<PrefetchServiceWorker />
+			<PrefetchGraph />
 		</div>
 	);
 });
