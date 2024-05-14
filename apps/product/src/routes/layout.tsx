@@ -1,4 +1,4 @@
-import { component$, Slot } from '@builder.io/qwik';
+import { component$, PrefetchGraph, Slot } from '@builder.io/qwik';
 import { RequestHandler } from '@builder.io/qwik-city';
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
@@ -9,7 +9,7 @@ export default component$(() => {
 	return (
 		<>
 			<Slot />
-			{/* <PrefetchGraph base="/product/build/" /> */}
+			<PrefetchGraph base="/product/build/" />
 		</>
 	);
 });
