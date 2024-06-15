@@ -10,7 +10,16 @@ export default component$(() => {
 			<RemoteMfe remote={remotes.cart} />
 			<div class="h-40" />
 			<RemoteMfe remote={remotes.hero} />
-			<RemoteMfe remote={remotes.product} />
+			<div id="my-child">
+				<template shadowRootMode="open">
+					<RemoteMfe remote={remotes.product} />
+				</template>
+				<div
+					dangerouslySetInnerHTML={`
+					(window.qwikevents || window.qwikevents=[]).push(getElementById('my-child').shadowRoot);
+				`}
+				></div>
+			</div>
 			<div class="h-40" />
 			<RemoteMfe remote={remotes.reviews} fetchOnScroll={true} />
 		</main>
