@@ -22,8 +22,8 @@
 	},
 	"homepage": "https://github.com/gioboa/qwik-dream-demo#readme",
 	"devDependencies": {
-		"@builder.io/qwik": "1.5.7",
-		"@builder.io/qwik-city": "1.5.7",
+		"@builder.io/qwik": "https://pkg.pr.new/@builder.io/qwik@77b0827",
+		"@builder.io/qwik-city": "https://pkg.pr.new/@builder.io/qwik-city@77b0827",
 		"@builder.io/sdk-qwik": "0.7.1-2",
 		"@fastify/busboy": "^2.1.1",
 		"@k11r/nx-cloudflare-wrangler": "^2.9.1",
