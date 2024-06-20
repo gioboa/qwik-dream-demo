@@ -21,7 +21,7 @@ export default component$(({ remote, fetchOnScroll }: Props) => {
 	const { hideLabel } = remote;
 
 	const url = new URL(
-		remote.url + (remote.queryParam ? (store.user === 'Giorgio' ? '/builder-io' : '/qwik') : ''),
+		remote.url + (remote.queryParam ? (store.user === 'Giorgio' ? 'builder-io' : 'qwik') : ''),
 	);
 	const scrollElementRef = useFetchOnScroll(!!fetchOnScroll, remote.url, store.user);
 
